@@ -6,6 +6,8 @@ const proofStrip = document.querySelector(".proof-strip");
 const qrBox = document.querySelector(".qr-box");
 const areaImage = document.querySelector(".area-inner img");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const coarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+const enableParallax = !reduceMotion && !coarsePointer;
 
 const updateHeader = () => {
   if (!header) return;
@@ -53,7 +55,7 @@ if (reduceMotion) {
 } else {
   targets.forEach((target, index) => {
     target.classList.add("reveal");
-    target.style.setProperty("--reveal-delay", `${(index % 6) * 70}ms`);
+    target.style.setProperty("--reveal-delay", `${(index % 6) * (coarsePointer ? 36 : 70)}ms`);
   });
 
   const revealObserver = new IntersectionObserver((entries) => {
@@ -74,7 +76,7 @@ let ticking = false;
 
 const updateParallax = () => {
   ticking = false;
-  if (reduceMotion) return;
+  if (!enableParallax) return;
 
   const scrollY = window.scrollY;
   if (heroBg) heroBg.style.setProperty("--hero-bg-y", `${scrollY * 0.12}px`);
@@ -101,7 +103,7 @@ window.addEventListener("scroll", requestParallax, { passive: true });
 window.addEventListener("resize", requestParallax);
 requestParallax();
 
-if (!reduceMotion) {
+if (!reduceMotion && !coarsePointer) {
   document.querySelectorAll(".price-board").forEach((card) => {
     card.addEventListener("pointermove", (event) => {
       const rect = card.getBoundingClientRect();
