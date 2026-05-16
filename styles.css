@@ -599,33 +599,29 @@ h3 {
 .price-board {
   position: relative;
   z-index: 1;
-  max-width: var(--max);
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0;
   border-radius: var(--radius);
-  background: var(--white);
-  box-shadow: var(--shadow);
+  background: transparent;
+  box-shadow: none;
   transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
   transition: transform 0.32s ease, box-shadow 0.32s ease;
   will-change: transform;
 }
 
 .price-board::before {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  border: 1px solid rgba(81, 170, 224, 0.16);
-  border-radius: 6px;
-  pointer-events: none;
+  display: none;
 }
 
 .price-board:hover {
-  box-shadow: 0 30px 70px rgba(74, 159, 190, 0.22);
+  filter: drop-shadow(0 30px 42px rgba(74, 159, 190, 0.2));
 }
 
 .price-board img {
   width: 100%;
-  border-radius: 6px;
+  border-radius: 18px;
+  filter: drop-shadow(0 22px 38px rgba(74, 159, 190, 0.2));
 }
 
 .mobile-price-list {
@@ -709,6 +705,37 @@ h3 {
   margin: 0;
   aspect-ratio: 4 / 5;
   overflow: hidden;
+}
+
+.before-after figure:nth-child(2)::before {
+  content: "CLEAR";
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  min-height: 26px;
+  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--coral);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 18px rgba(34, 34, 34, 0.12);
+}
+
+.before-after figure:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  inset: -18% auto -18% -55%;
+  z-index: 1;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.72), transparent);
+  transform: skewX(-18deg);
+  animation: afterShine 3.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .before-after img {
@@ -1231,6 +1258,24 @@ h3 {
   }
 }
 
+@keyframes afterShine {
+  0%,
+  42% {
+    left: -55%;
+    opacity: 0;
+  }
+
+  52% {
+    opacity: 1;
+  }
+
+  82%,
+  100% {
+    left: 122%;
+    opacity: 0;
+  }
+}
+
 @media (max-width: 960px) {
   .reasons {
     background-attachment: scroll;
@@ -1534,6 +1579,10 @@ h3 {
     font-size: 16px;
   }
 
+  .mobile-price-table:nth-child(2) h3 {
+    background: var(--coral);
+  }
+
   .mobile-price-table dl {
     margin: 0;
   }
@@ -1564,6 +1613,10 @@ h3 {
     color: var(--deep);
     font-size: 18px;
     line-height: 1.25;
+  }
+
+  .mobile-price-table:first-child strong {
+    color: var(--coral);
   }
 
   .mobile-price-table span {
@@ -1603,6 +1656,14 @@ h3 {
     min-height: 24px;
     padding: 2px 8px;
     font-size: 10px;
+  }
+
+  .before-after figure:nth-child(2)::before {
+    right: 8px;
+    bottom: 8px;
+    min-height: 22px;
+    padding: 2px 8px;
+    font-size: 9px;
   }
 
   .work-body {
