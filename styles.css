@@ -1056,6 +1056,11 @@ h3 {
   will-change: transform;
 }
 
+.area-inner .area-visual {
+  object-fit: contain;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(220, 238, 249, 0.86));
+}
+
 .faq {
   background: var(--mint-soft);
 }
