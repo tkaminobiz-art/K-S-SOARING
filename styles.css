@@ -144,6 +144,7 @@ h3 {
 
 .tel-link,
 .line-link,
+.plan-b-link,
 .primary-cta,
 .secondary-cta,
 .sticky-cta a {
@@ -172,8 +173,18 @@ h3 {
   animation: ctaBreath 2.6s ease-in-out infinite;
 }
 
+.plan-b-link {
+  color: var(--deep);
+  background: var(--white);
+  border: 1px solid rgba(74, 159, 190, 0.32);
+  padding: 0 14px;
+  font-size: 14px;
+  box-shadow: 0 8px 20px rgba(74, 159, 190, 0.12);
+}
+
 .tel-link:hover,
 .line-link:hover,
+.plan-b-link:hover,
 .primary-cta:hover,
 .secondary-cta:hover,
 .sticky-cta a:hover {
@@ -1373,7 +1384,8 @@ h3 {
   }
 
   .tel-link,
-  .line-link {
+  .line-link,
+  .plan-b-link {
     min-height: 36px;
     padding: 0 10px;
     font-size: 11px;
