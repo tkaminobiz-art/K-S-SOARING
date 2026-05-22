@@ -188,7 +188,7 @@ h3 {
 
 .hero {
   position: relative;
-  min-height: 700px;
+  min-height: 760px;
   overflow: hidden;
   background: #eaf8ff;
   isolation: isolate;
@@ -240,7 +240,7 @@ h3 {
 .hero-inner {
   max-width: 1080px;
   margin: 0 auto;
-  min-height: 700px;
+  min-height: 760px;
   padding: 0;
   position: relative;
   z-index: 3;
@@ -370,11 +370,11 @@ h3 {
 .hero-zero {
   display: block;
   position: absolute;
-  top: 240px;
-  right: 54px;
-  z-index: 2;
+  top: 330px;
+  right: 96px;
+  z-index: 3;
   color: var(--red);
-  font-size: clamp(82px, 9.4vw, 140px);
+  font-size: clamp(76px, 7.2vw, 108px);
   line-height: 0.82;
   font-weight: 900;
   letter-spacing: 0;
@@ -388,39 +388,42 @@ h3 {
 
 .hero-burst {
   position: absolute;
-  top: 122px;
-  right: 150px;
-  z-index: 3;
-  width: 190px;
+  top: 170px;
+  right: 245px;
+  z-index: 4;
+  width: 138px;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
   text-align: center;
   color: var(--red);
   background: var(--yellow);
-  clip-path: polygon(50% 0, 58% 19%, 76% 10%, 75% 31%, 97% 27%, 83% 45%, 100% 58%, 78% 63%, 85% 85%, 63% 76%, 51% 100%, 40% 77%, 17% 89%, 24% 65%, 0 59%, 19% 45%, 3% 28%, 26% 31%, 24% 9%, 43% 19%);
-  filter: drop-shadow(7px 9px 0 rgba(0, 79, 173, 0.16));
+  border: 5px solid var(--white);
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px var(--red);
+  filter: drop-shadow(6px 8px 0 rgba(0, 79, 173, 0.14));
   animation: burstPoyon 2.8s ease-in-out infinite;
 }
 
 .hero-burst span {
   color: var(--blue);
-  font-size: 15px;
+  font-size: 11px;
   line-height: 1.15;
   font-weight: 900;
 }
 
 .hero-burst strong {
   display: block;
-  font-size: 38px;
+  font-size: 30px;
   line-height: 1;
   font-weight: 900;
 }
 
 .hero-free {
   position: absolute;
-  left: 306px;
-  bottom: 128px;
+  left: 50%;
+  bottom: 196px;
+  translate: -50% 0;
   width: fit-content;
   margin-top: 0;
   display: flex;
@@ -449,9 +452,10 @@ h3 {
 
 .hero-actions {
   position: absolute;
-  left: 306px;
-  bottom: 42px;
-  justify-content: flex-start;
+  left: 50%;
+  bottom: 112px;
+  translate: -50% 0;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 0;
@@ -474,10 +478,10 @@ h3 {
 
 .hero-mascot {
   position: absolute;
-  left: max(22px, calc((100vw - var(--hero-max)) / 2 + 34px));
-  bottom: -42px;
+  left: max(24px, calc(50% - 500px));
+  bottom: 16px;
   z-index: 2;
-  width: clamp(220px, 18vw, 270px);
+  width: 220px;
   transform-origin: 50% 92%;
   filter: drop-shadow(12px 14px 0 rgba(0, 79, 173, 0.16));
   animation: heroMascotWobble 2.2s both infinite;
@@ -486,7 +490,7 @@ h3 {
 
 .quick-icons {
   max-width: var(--hero-max);
-  margin: -38px auto 0;
+  margin: 0 auto;
   padding: 0 8px;
   position: relative;
   z-index: 4;
@@ -1548,11 +1552,11 @@ footer p {
 
   .hero-mascot {
     left: auto;
-    right: -20px;
+    right: -8px;
     top: auto;
-    bottom: 128px;
+    bottom: 170px;
     z-index: 2;
-    width: 156px;
+    width: 120px;
   }
 
   .hero-art img {
@@ -1608,38 +1612,41 @@ footer p {
   .hero-free {
     left: 16px;
     right: 16px;
-    bottom: 202px;
+    bottom: 210px;
+    translate: none;
   }
 
   .hero-actions {
     left: 16px;
     right: 16px;
     bottom: 66px;
+    translate: none;
     justify-content: center;
   }
 
   .hero-zero {
-    top: 424px;
-    right: 16px;
+    top: 430px;
+    right: 90px;
     left: auto;
-    font-size: 84px;
+    font-size: 72px;
     opacity: 0.95;
   }
 
   .hero-burst {
-    top: 424px;
+    top: 390px;
     right: auto;
-    left: 18px;
-    width: 112px;
+    left: 22px;
+    z-index: 2;
+    width: 84px;
     display: grid;
   }
 
   .hero-burst span {
-    font-size: 12px;
+    font-size: 8px;
   }
 
   .hero-burst strong {
-    font-size: 24px;
+    font-size: 19px;
   }
 
   .hero-free {
@@ -1790,6 +1797,21 @@ footer p {
 
   .hero h1 {
     font-size: 38px;
+  }
+
+  .hero-badges {
+    top: 376px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    z-index: 4;
+  }
+
+  .hero-badges span {
+    min-width: 0;
+    padding: 8px 3px;
+    font-size: 12px;
+    white-space: nowrap;
   }
 
   .hero h1 .desktop-title {
