@@ -416,9 +416,9 @@ h3 {
 .hero-mascot {
   position: absolute;
   left: max(360px, calc((100vw - var(--hero-max)) / 2 + 390px));
-  top: 470px;
+  top: 500px;
   z-index: 3;
-  width: clamp(84px, 6.2vw, 96px);
+  width: clamp(78px, 5.8vw, 90px);
   transform-origin: 50% 92%;
   filter: drop-shadow(8px 10px 0 rgba(0, 79, 173, 0.16));
   animation: heroMascotWobble 2.2s both infinite;
@@ -1461,10 +1461,10 @@ footer p {
 
   .hero-mascot {
     left: auto;
-    right: 8px;
-    top: 380px;
+    right: 10px;
+    top: 398px;
     z-index: 4;
-    width: 76px;
+    width: 64px;
   }
 
   .hero-art img {
@@ -1609,6 +1609,7 @@ footer p {
     gap: 8px;
     width: calc(100vw - 28px);
     max-width: 100%;
+    overflow: hidden;
   }
 
   .tel-btn,
@@ -1617,6 +1618,8 @@ footer p {
     min-height: 42px;
     padding: 0 6px;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
   }
 
   .hero-inner {
