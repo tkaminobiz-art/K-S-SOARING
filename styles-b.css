@@ -1735,11 +1735,13 @@ footer p {
     width: 100%;
     min-width: 0;
     min-height: 0;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 2 / 1;
   }
 
   .cv-visual img {
-    object-position: 28% center;
+    object-fit: contain;
+    object-position: left center;
+    background: #fff;
   }
 
   .cv-content {
