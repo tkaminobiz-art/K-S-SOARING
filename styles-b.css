@@ -796,11 +796,18 @@ h3 {
 }
 
 .works-grid article {
+  position: relative;
   flex: 1;
   padding: 16px;
   background: var(--white);
   border: 5px solid #9ccac7;
   border-radius: 8px;
+  transition: transform 0.34s ease, box-shadow 0.34s ease;
+}
+
+.works-grid article:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 0 rgba(0, 79, 173, 0.12);
 }
 
 .ba {
@@ -811,12 +818,50 @@ h3 {
   flex: 1;
   margin: 0;
   position: relative;
+  overflow: hidden;
 }
 
 .ba img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  transition: transform 0.78s cubic-bezier(0.16, 1, 0.3, 1), filter 0.78s ease;
+}
+
+.works-grid article:hover .ba img {
+  transform: scale(1.045);
+}
+
+.ba figure:nth-child(2)::before {
+  content: "CLEAR";
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  min-height: 28px;
+  padding: 3px 12px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--red);
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid var(--yellow);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 0 rgba(0, 79, 173, 0.12);
+}
+
+.ba figure:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  inset: -24% auto -24% -60%;
+  z-index: 1;
+  width: 46%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.88), transparent);
+  transform: skewX(-18deg);
+  animation: afterShine 3.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .ba figcaption {
@@ -1033,6 +1078,24 @@ footer p {
   font-weight: 900;
 }
 
+@keyframes afterShine {
+  0%,
+  42% {
+    left: -60%;
+    opacity: 0;
+  }
+
+  52% {
+    opacity: 1;
+  }
+
+  82%,
+  100% {
+    left: 122%;
+    opacity: 0;
+  }
+}
+
 @media (max-width: 900px) {
   .topbar-inner {
     grid-template-columns: 1fr;
@@ -1158,6 +1221,14 @@ footer p {
   .works-grid,
   .ba {
     flex-direction: column;
+  }
+
+  .ba figure:nth-child(2)::before {
+    right: 8px;
+    bottom: 8px;
+    min-height: 24px;
+    padding: 2px 9px;
+    font-size: 10px;
   }
 }
 
@@ -1304,5 +1375,17 @@ footer p {
   .fixed-cta a {
     min-height: 52px;
     font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ba figure:nth-child(2)::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+
+  .ba img,
+  .works-grid article {
+    transition-duration: 0.01ms;
   }
 }
