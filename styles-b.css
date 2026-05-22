@@ -50,6 +50,12 @@ a {
   text-decoration: none;
 }
 
+a:focus-visible,
+summary:focus-visible {
+  outline: 4px solid var(--yellow);
+  outline-offset: 4px;
+}
+
 p,
 h1,
 h2,
@@ -767,6 +773,22 @@ h3 {
   max-width: 650px;
   font-size: 17px;
   line-height: 1.5;
+}
+
+.coupon-cta {
+  width: fit-content;
+  min-height: 50px;
+  margin-top: 14px;
+  padding: 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  background: var(--green);
+  border-radius: 999px;
+  font-size: 19px;
+  font-weight: 900;
+  box-shadow: 0 6px 0 rgba(0, 79, 173, 0.18);
 }
 
 .coupon > img {
@@ -1833,7 +1855,6 @@ footer p {
     justify-content: center;
   }
 
-  .quick-icons,
   .cv-band,
   .coupon,
   .buy,
@@ -1842,9 +1863,16 @@ footer p {
     flex-direction: column;
   }
 
+  .quick-icons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 12px;
+  }
+
   .quick-icons div {
     width: 100%;
-    min-height: 86px;
+    min-height: 82px;
     border-radius: 18px;
   }
 
@@ -1908,7 +1936,13 @@ footer p {
 
   .coupon-main {
     width: 100%;
-    padding: 24px 22px 138px;
+    padding: 24px 22px 126px;
+  }
+
+  .coupon-cta {
+    min-height: 48px;
+    padding: 0 20px;
+    font-size: 17px;
   }
 
   .coupon > img {
@@ -1957,9 +1991,13 @@ footer p {
     font-size: 17px;
   }
 
-  .works-grid,
-  .ba {
+  .works-grid {
     flex-direction: column;
+  }
+
+  .ba {
+    flex-direction: row;
+    gap: 8px;
   }
 
   .ba figure:nth-child(2)::before {
@@ -2092,6 +2130,24 @@ footer p {
     font-size: 12px;
   }
 
+  .quick-icons {
+    gap: 8px;
+  }
+
+  .quick-icons div {
+    min-height: 76px;
+    padding: 11px 8px;
+    border-width: 4px;
+  }
+
+  .quick-icons strong {
+    font-size: 21px;
+  }
+
+  .quick-icons span {
+    font-size: 12px;
+  }
+
   .hero-actions {
     width: calc(100vw - 32px);
     max-width: 100%;
@@ -2143,6 +2199,10 @@ footer p {
   .ihin > p {
     padding: 15px 14px;
     font-size: 15px;
+  }
+
+  .ba {
+    gap: 6px;
   }
 
   .flow li {
