@@ -108,21 +108,12 @@ h3 {
   align-items: center;
   gap: 10px;
   color: var(--blue);
-  font-size: 22px;
   font-weight: 900;
 }
 
-.brand-logo {
-  width: clamp(158px, 13vw, 205px);
-  height: auto;
-  max-height: 82px;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 0 rgba(0, 79, 173, 0.14));
-}
-
 .brand-mark {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -130,8 +121,28 @@ h3 {
   background: var(--green);
   border: 4px solid var(--blue);
   box-shadow: 3px 3px 0 var(--yellow);
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1;
+}
+
+.brand-copy {
+  display: grid;
+  gap: 0;
+  color: var(--blue);
+  line-height: 1.04;
+}
+
+.brand-copy strong {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.brand-copy small {
+  color: var(--red);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
 }
 
 .nav {
@@ -196,7 +207,7 @@ h3 {
 
 .hero {
   position: relative;
-  min-height: 760px;
+  min-height: 650px;
   overflow: hidden;
   background: #eaf8ff;
   isolation: isolate;
@@ -220,8 +231,8 @@ h3 {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.9) 31%, rgba(255, 255, 255, 0.48) 52%, rgba(255, 255, 255, 0.04) 74%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 38%, rgba(46, 169, 78, 0.13));
+    linear-gradient(90deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 255, 255, 0.94) 38%, rgba(255, 255, 255, 0.56) 58%, rgba(255, 255, 255, 0.08) 78%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 48%, rgba(46, 169, 78, 0.12));
   pointer-events: none;
 }
 
@@ -246,32 +257,42 @@ h3 {
 }
 
 .hero-inner {
-  max-width: 1080px;
+  max-width: 1160px;
   margin: 0 auto;
-  min-height: 760px;
-  padding: 0;
+  min-height: 650px;
+  padding: 30px 20px 32px;
   position: relative;
   z-index: 3;
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  grid-template-areas:
+    "copy offer"
+    "actions offer";
+  gap: 18px 44px;
+  align-items: center;
   text-align: left;
 }
 
+.hero-copy {
+  grid-area: copy;
+  align-self: end;
+}
+
 .hero-ribbon {
-  position: absolute;
-  top: 28px;
-  left: 0;
+  width: fit-content;
   gap: 0;
-  margin-bottom: 0;
-  transform: rotate(-1deg);
+  margin-bottom: 12px;
   animation: heroItemIn 0.68s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-ribbon span {
-  padding: 9px 17px;
+  padding: 9px 18px 10px;
   color: var(--white);
   background: var(--blue);
   font-size: clamp(17px, 2.2vw, 28px);
   font-weight: 900;
+  line-height: 1.12;
+  white-space: nowrap;
 }
 
 .hero-ribbon span + span {
@@ -279,29 +300,24 @@ h3 {
 }
 
 .hero-service {
-  position: absolute;
-  top: 96px;
-  left: 0;
   width: fit-content;
-  margin-bottom: 0;
-  padding: 7px 18px;
+  margin-bottom: 4px;
+  padding: 7px 19px 8px;
   color: var(--ink);
   background: var(--yellow);
   border: 4px solid var(--ink);
   border-radius: 999px;
-  font-size: clamp(18px, 2.2vw, 30px);
+  font-size: clamp(18px, 2.2vw, 29px);
+  line-height: 1.15;
   font-weight: 900;
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
   animation: heroItemIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
 }
 
 .hero h1 {
-  position: absolute;
-  top: 142px;
-  left: 0;
   max-width: 760px;
   color: var(--red);
-  font-size: clamp(50px, 5.6vw, 74px);
+  font-size: clamp(48px, 5.4vw, 72px);
   line-height: 1.04;
   font-weight: 900;
   letter-spacing: 0;
@@ -324,12 +340,9 @@ h3 {
 }
 
 .hero-lead {
-  position: absolute;
-  top: 314px;
-  left: 0;
   width: fit-content;
   max-width: 660px;
-  margin-top: 0;
+  margin-top: 12px;
   padding: 12px 18px;
   color: var(--ink);
   background: var(--white);
@@ -346,14 +359,11 @@ h3 {
 }
 
 .hero-badges {
-  position: absolute;
-  top: 440px;
-  left: 260px;
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 8px;
   max-width: 500px;
-  margin-top: 0;
+  margin-top: 14px;
   z-index: 2;
   animation: heroItemIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
 }
@@ -375,111 +385,13 @@ h3 {
   box-shadow: 0 7px 0 rgba(0, 79, 173, 0.16);
 }
 
-.hero-zero {
-  display: block;
-  position: absolute;
-  top: 342px;
-  right: 96px;
-  z-index: 3;
-  color: var(--red);
-  padding: 12px 22px 16px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 5px solid var(--yellow);
-  border-radius: 20px;
-  box-shadow: 0 8px 0 rgba(0, 79, 173, 0.14);
-  font-size: clamp(72px, 6.8vw, 98px);
-  line-height: 0.9;
-  font-weight: 900;
-  letter-spacing: 0;
-  transform: rotate(-2deg);
-  text-shadow:
-    4px 4px 0 var(--yellow),
-    0 10px 24px rgba(0, 79, 173, 0.18);
-  animation: heroZeroPop 2.4s ease-in-out infinite;
-}
-
-.hero-burst {
-  position: absolute;
-  top: 304px;
-  right: 145px;
-  z-index: 4;
-  width: 280px;
-  min-height: 42px;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-align: center;
-  color: var(--white);
-  background: var(--green);
-  border: 4px solid var(--white);
-  border-radius: 999px;
-  box-shadow: 0 5px 0 rgba(0, 79, 173, 0.18);
-  filter: none;
-  animation: burstPoyon 2.8s ease-in-out infinite;
-}
-
-.hero-burst span {
-  color: var(--white);
-  font-size: 12px;
-  line-height: 1.15;
-  font-weight: 900;
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.hero-burst strong {
-  display: inline-block;
-  color: var(--yellow);
-  font-size: 28px;
-  line-height: 1;
-  font-weight: 900;
-  flex-shrink: 0;
-  white-space: nowrap;
-  text-shadow: 2px 2px 0 rgba(0, 79, 173, 0.32);
-}
-
-.hero-free {
-  position: absolute;
-  left: 50%;
-  bottom: 196px;
-  translate: -50% 0;
-  width: fit-content;
-  margin-top: 0;
-  display: flex;
-  justify-content: center;
-  transform: rotate(-1deg);
-  animation: heroItemIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both;
-}
-
-.hero-free span {
-  min-width: 132px;
-  padding: 7px 16px 8px;
-  color: var(--ink);
-  background: var(--yellow);
-  border: 4px solid var(--green);
-  border-right: 0;
-  font-size: 19px;
-  line-height: 1;
-  text-align: center;
-  box-shadow: 5px 5px 0 rgba(0, 79, 173, 0.18);
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%, 16px 50%);
-}
-
-.hero-free span:first-child {
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%);
-}
-
 .hero-actions {
-  position: absolute;
-  left: 50%;
-  bottom: 112px;
-  translate: -50% 0;
+  grid-area: actions;
+  align-self: start;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 0;
+  margin-top: 4px;
   z-index: 4;
   animation: heroItemIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.54s both;
 }
@@ -497,15 +409,129 @@ h3 {
   background: var(--red);
 }
 
+.hero-offer {
+  grid-area: offer;
+  align-self: center;
+  position: relative;
+  min-height: 420px;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+}
+
+.price-card {
+  width: min(100%, 430px);
+  position: relative;
+  z-index: 2;
+  padding: 18px 18px 20px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.95);
+  border: 5px solid var(--blue);
+  border-radius: 24px;
+  box-shadow:
+    0 10px 0 rgba(0, 79, 173, 0.18),
+    0 20px 38px rgba(0, 79, 173, 0.18);
+  animation: priceCardPulse 3.6s ease-in-out infinite;
+}
+
+.price-card-discount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 42px;
+  margin: -38px auto 12px;
+  padding: 0 18px;
+  width: min(100%, 320px);
+  color: var(--white);
+  background: var(--green);
+  border: 4px solid var(--white);
+  border-radius: 999px;
+  box-shadow: 0 6px 0 rgba(0, 79, 173, 0.18);
+}
+
+.price-card-discount span {
+  font-size: 13px;
+  line-height: 1.15;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.price-card-discount strong {
+  color: var(--yellow);
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 900;
+  white-space: nowrap;
+  text-shadow: 2px 2px 0 rgba(0, 79, 173, 0.34);
+}
+
+.price-card-main {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 12px 12px 14px;
+  background: linear-gradient(180deg, #fff 0%, #fffce8 100%);
+  border: 4px solid var(--yellow);
+  border-radius: 18px;
+}
+
+.price-card-main span {
+  color: var(--blue);
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.price-card-main strong {
+  color: var(--red);
+  font-size: clamp(70px, 7vw, 104px);
+  line-height: 0.9;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-shadow:
+    4px 4px 0 var(--yellow),
+    0 10px 24px rgba(0, 79, 173, 0.18);
+}
+
+.price-card p {
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 800;
+}
+
+.price-card-chips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.price-card-chips span {
+  min-height: 36px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--yellow);
+  border: 3px solid var(--green);
+  border-radius: 999px;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
 .hero-mascot {
   position: absolute;
-  left: max(24px, calc(50% - 500px));
-  bottom: 16px;
-  z-index: 2;
-  width: 220px;
+  right: -150px;
+  bottom: -10px;
+  z-index: 3;
+  width: 130px;
   transform-origin: 50% 92%;
-  filter: drop-shadow(12px 14px 0 rgba(0, 79, 173, 0.16));
-  animation: heroMascotWobble 2.2s both infinite;
+  filter: drop-shadow(10px 12px 0 rgba(0, 79, 173, 0.16));
+  animation: heroMascotWobble 3s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -1350,41 +1376,25 @@ footer p {
 }
 
 @keyframes heroMascotWobble {
-  50%,
+  0%,
   100% {
-    transform: translateX(0) rotate(0deg);
+    transform: translateX(0);
     transform-origin: 50% 92%;
   }
 
-  15% {
-    transform: translateX(-18px) rotate(-4deg);
-  }
-
-  30% {
-    transform: translateX(12px) rotate(3.6deg);
-  }
-
-  45% {
-    transform: translateX(-10px) rotate(-2deg);
-  }
-
-  60% {
-    transform: translateX(7px) rotate(1.6deg);
-  }
-
-  75% {
-    transform: translateX(-6px) rotate(-1.2deg);
+  50% {
+    transform: translateX(10px);
   }
 }
 
-@keyframes heroZeroPop {
+@keyframes priceCardPulse {
   0%,
   100% {
-    transform: rotate(-2deg) scale(1);
+    transform: scale(1);
   }
 
   50% {
-    transform: rotate(-2deg) scale(1.015);
+    transform: scale(1.012);
   }
 }
 
@@ -1420,12 +1430,12 @@ footer p {
 @keyframes heroItemIn {
   from {
     opacity: 0;
-    transform: translateY(22px) rotate(-1deg);
+    transform: translateY(22px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) rotate(-1deg);
+    transform: translateY(0);
   }
 }
 
@@ -1561,58 +1571,53 @@ footer p {
     width: 100%;
   }
 
-  .brand-logo {
-    width: 172px;
-    max-height: 78px;
-  }
-
   .hero {
-    min-height: 760px;
+    min-height: auto;
   }
 
   .hero:before {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.83) 44%, rgba(255, 255, 255, 0.12) 72%, rgba(255, 255, 255, 0.72) 100%),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.12));
+      linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 45%, rgba(255, 255, 255, 0.72) 68%, rgba(255, 255, 255, 0.9) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.18));
   }
 
   .hero-mascot {
-    left: auto;
-    right: -8px;
-    top: auto;
-    bottom: 170px;
-    z-index: 2;
-    width: 120px;
+    position: absolute;
+    right: -6px;
+    bottom: -10px;
+    z-index: 3;
+    width: 112px;
   }
 
   .hero-art img {
     opacity: 1;
-    object-position: 68% center;
+    object-position: 72% center;
   }
 
   .hero-inner {
-    max-width: 100%;
-    min-height: 760px;
-    padding: 0 16px;
+    max-width: 640px;
+    min-height: auto;
+    padding: 24px 16px 30px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "copy"
+      "offer"
+      "actions";
+    gap: 16px;
   }
 
   .hero-ribbon {
-    top: 24px;
-    left: 16px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-service {
-    top: 84px;
-    left: 20px;
-    right: 20px;
     width: auto;
     text-align: center;
   }
 
   .hero h1 {
-    top: 130px;
-    left: 16px;
-    right: 16px;
     width: auto;
     max-width: 520px;
     margin: 0 auto;
@@ -1620,84 +1625,54 @@ footer p {
   }
 
   .hero-lead {
-    top: 286px;
-    left: 18px;
-    right: 18px;
     width: auto;
     text-align: center;
   }
 
   .hero-badges {
-    top: 356px;
-    left: 16px;
-    right: 16px;
     max-width: none;
     justify-content: center;
   }
 
-  .hero-free {
-    left: 16px;
-    right: 16px;
-    bottom: 210px;
-    translate: none;
+  .hero-offer {
+    min-height: 0;
+    padding-right: 86px;
+    justify-items: stretch;
+  }
+
+  .price-card {
+    width: 100%;
+    padding: 14px 14px 16px;
+    border-width: 4px;
+    border-radius: 20px;
+  }
+
+  .price-card-discount {
+    width: min(100%, 280px);
+    min-height: 34px;
+    margin-top: -30px;
+    margin-bottom: 9px;
+    gap: 7px;
+  }
+
+  .price-card-discount span {
+    font-size: 10px;
+  }
+
+  .price-card-discount strong {
+    font-size: 22px;
+  }
+
+  .price-card-main strong {
+    font-size: 66px;
+  }
+
+  .price-card p {
+    font-size: 14px;
   }
 
   .hero-actions {
-    left: 16px;
-    right: 16px;
-    bottom: 66px;
-    translate: none;
     justify-content: center;
-  }
-
-  .hero-zero {
-    top: 442px;
-    right: 118px;
-    left: 22px;
-    padding: 6px 10px 9px;
-    border-width: 4px;
-    border-radius: 15px;
-    font-size: 58px;
-    text-align: center;
-    opacity: 0.95;
-  }
-
-  .hero-burst {
-    top: 414px;
-    right: 118px;
-    left: 28px;
-    z-index: 2;
-    width: auto;
-    min-height: 30px;
-    padding: 0 8px;
-    gap: 5px;
-    display: flex;
-  }
-
-  .hero-burst span {
-    font-size: 8px;
-  }
-
-  .hero-burst strong {
-    font-size: 18px;
-  }
-
-  .hero-free {
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-
-  .hero-free span,
-  .hero-free span:first-child {
-    flex: 1 1 calc(33.333% - 5px);
-    min-width: 0;
-    padding: 8px 8px 9px;
-    clip-path: none;
-    border-right: 4px solid var(--green);
-    border-radius: 999px;
-    font-size: 15px;
-    white-space: nowrap;
   }
 
   .quick-icons,
@@ -1778,12 +1753,20 @@ footer p {
 
   .brand {
     justify-content: center;
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
     font-size: 20px;
   }
 
-  .brand-logo {
-    width: 166px;
-    max-height: 76px;
+  .brand-copy strong {
+    font-size: 20px;
+  }
+
+  .brand-copy small {
+    font-size: 12px;
   }
 
   .tel-btn,
@@ -1838,18 +1821,7 @@ footer p {
   }
 
   .hero-badges {
-    top: 376px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 5px;
-    z-index: 4;
-  }
-
-  .hero-badges span {
-    min-width: 0;
-    padding: 8px 3px;
-    font-size: 12px;
-    white-space: nowrap;
+    display: none;
   }
 
   .hero h1 .desktop-title {
@@ -1870,14 +1842,29 @@ footer p {
     font-size: 20px;
   }
 
-  .hero-free span,
-  .hero-free span:first-child {
-    padding-left: 5px;
-    padding-right: 5px;
-    font-size: 13px;
+  .hero-offer {
+    padding-right: 104px;
   }
 
-  .hero-free,
+  .hero-mascot {
+    right: 0;
+    bottom: 0;
+    width: 96px;
+  }
+
+  .price-card p {
+    display: none;
+  }
+
+  .price-card-chips {
+    gap: 5px;
+  }
+
+  .price-card-chips span {
+    min-height: 32px;
+    font-size: 12px;
+  }
+
   .hero-actions {
     width: calc(100vw - 32px);
     max-width: 100%;
