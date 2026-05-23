@@ -1958,7 +1958,7 @@ footer p {
 
   .coupon-main {
     width: 100%;
-    padding: 24px 22px 126px;
+    padding: 24px 154px 30px 22px;
   }
 
   .coupon-cta {
@@ -1969,6 +1969,7 @@ footer p {
 
   .coupon > img {
     right: 24px;
+    bottom: -12px;
     width: 124px;
   }
 
@@ -2195,11 +2196,12 @@ footer p {
   }
 
   .coupon-main {
-    padding: 22px 18px 112px;
+    padding: 22px 18px 102px;
   }
 
   .coupon > img {
     right: 18px;
+    bottom: -20px;
     width: 112px;
   }
 
