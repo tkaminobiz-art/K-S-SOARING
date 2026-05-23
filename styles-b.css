@@ -1856,6 +1856,23 @@ footer p {
     font-size: 14px;
   }
 
+  @media (min-width: 561px) {
+    .hero-offer {
+      padding-right: 0;
+      justify-items: center;
+    }
+
+    .price-card {
+      width: min(100%, 520px);
+    }
+
+    .hero-mascot {
+      right: 18px;
+      bottom: 76px;
+      width: 104px;
+    }
+  }
+
   .hero-actions {
     justify-content: center;
   }
