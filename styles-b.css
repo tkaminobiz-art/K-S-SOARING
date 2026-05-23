@@ -826,6 +826,11 @@ h3 {
   font-size: clamp(30px, 4.2vw, 50px);
   line-height: 1.16;
   font-weight: 900;
+  text-wrap: balance;
+}
+
+.section-title h2 span {
+  display: inline-block;
 }
 
 .section-title h2::after {
@@ -2010,6 +2015,10 @@ footer p {
 }
 
 @media (max-width: 560px) {
+  body {
+    padding-bottom: 70px;
+  }
+
   .top-note {
     font-size: 10px;
     line-height: 1.35;
@@ -2163,6 +2172,20 @@ footer p {
     max-width: calc(100vw - 28px);
   }
 
+  .cv-band p {
+    font-size: 22px;
+    line-height: 1.38;
+  }
+
+  .coupon-main {
+    padding: 22px 18px 112px;
+  }
+
+  .coupon > img {
+    right: 18px;
+    width: 112px;
+  }
+
   .main-line,
   .main-tel {
     width: 100%;
@@ -2171,11 +2194,28 @@ footer p {
   }
 
   .section {
-    padding: 40px 14px;
+    padding: 38px 14px;
   }
 
   .section-title h2 {
-    font-size: 29px;
+    font-size: clamp(25px, 6.6vw, 27px);
+    line-height: 1.24;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .section-title h2 span {
+    display: block;
+  }
+
+  .item-cloud {
+    gap: 7px;
+  }
+
+  .item-cloud span {
+    padding: 7px 12px;
+    font-size: 15px;
+    line-height: 1.18;
   }
 
   .ihin-grid {
@@ -2205,6 +2245,30 @@ footer p {
     gap: 6px;
   }
 
+  .works h3 {
+    font-size: 20px;
+    line-height: 1.28;
+    text-wrap: balance;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .caution div {
+    padding: 18px;
+    border-width: 5px;
+  }
+
+  .caution h2 {
+    font-size: 28px;
+    line-height: 1.18;
+    word-break: keep-all;
+  }
+
+  .caution p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
   .flow li {
     grid-template-columns: 54px 1fr;
     border-radius: 18px;
@@ -2221,12 +2285,17 @@ footer p {
   }
 
   .fixed-cta {
-    bottom: 8px;
+    bottom: max(6px, env(safe-area-inset-bottom));
+    width: min(338px, calc(100% - 34px));
+    grid-template-columns: 1.08fr 0.72fr;
+    gap: 8px;
   }
 
   .fixed-cta a {
-    min-height: 52px;
-    font-size: 15px;
+    min-height: 42px;
+    padding: 0 10px;
+    font-size: 13px;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.16);
   }
 }
 
