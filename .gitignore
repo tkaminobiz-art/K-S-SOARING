@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# 一時作業ファイル
+.tmp-archive/
+.tmp-screens/
+
+# 作業中のスクリーンショット（プレビュー記録用）
+b-pattern-*.png
+
+# Claude 設定（プロジェクト固有）
+.claude/
+
+# OS / Editor
+.AppleDouble
+.LSOverride
+Thumbs.db
+*.swp
+*~

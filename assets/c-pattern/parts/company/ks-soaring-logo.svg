@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180" fill="none" role="img" aria-label="K's SOARING">
+  <!-- 六角形フレーム（横長・緑）— 上下に余裕を持たせる -->
+  <polygon
+    points="100,10 180,55 180,125 100,170 20,125 20,55"
+    fill="#ffffff" fill-opacity="0.94"
+    stroke="#0fa64a" stroke-width="4"
+    stroke-linejoin="miter" />
+
+  <!-- 左の K（黒・セリフ）— サイズ控えめにして六角形に収める -->
+  <text x="60" y="108"
+    font-family="'Times New Roman', Georgia, serif"
+    font-size="64" font-weight="900"
+    fill="#0d0d0d"
+    text-anchor="middle"
+    letter-spacing="-2">K</text>
+
+  <!-- 右の K（緑・ミラー） -->
+  <g transform="translate(200,0) scale(-1,1)">
+    <text x="60" y="108"
+      font-family="'Times New Roman', Georgia, serif"
+      font-size="64" font-weight="900"
+      fill="#0fa64a"
+      text-anchor="middle"
+      letter-spacing="-2">K</text>
+  </g>
+
+  <!-- SOARING テキスト — 六角形下半分の余白に収める -->
+  <text x="100" y="142"
+    font-family="'Arial Black', 'Helvetica Neue', sans-serif"
+    font-size="12" font-weight="900"
+    fill="#0fa64a"
+    text-anchor="middle"
+    letter-spacing="2">SOARING</text>
+</svg>
