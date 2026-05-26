@@ -5184,9 +5184,14 @@ button { font-family: inherit; cursor: pointer; }
 .compare-table thead th.us {
   background: #ffd9b3; /* 薄ピーチ */
   border: 3px solid #e85d00; /* 濃いオレンジ */
+  /* border-collapse: collapse 時に隣接セルの黒線と border が共有されて
+     色が薄く見える現象を防ぐため、outline で内側に枠を確実に重ねる */
+  outline: 3px solid #e85d00;
+  outline-offset: -3px;
   color: #1a1a1a;
   padding: 10px 4px;
   vertical-align: middle;
+  position: relative;
 }
 /* セル内のうさぎは削除済み — 装飾は .compare-mascot で表外配置 */
 .compare-table thead th.us .us-badge {
@@ -5232,12 +5237,15 @@ button { font-family: inherit; cursor: pointer; }
   background: linear-gradient(180deg, #f5faff 0%, #e2eff9 100%);
 }
 
-/* us列セル: 薄ピーチ色 + オレンジ太枠 */
+/* us列セル: 薄ピーチ色 + オレンジ太枠（outline で確実に） */
 .compare-table tbody td.us {
   background: #ffe6cc !important; /* 薄ピーチ */
   border: 3px solid #e85d00 !important;
+  outline: 3px solid #e85d00;
+  outline-offset: -3px;
   color: #1a1a1a;
   font-size: 14px !important;
+  position: relative;
 }
 
 /* 「無料」「無し」「最短30分」— 黒太字（漢字スペース風） */
@@ -5321,6 +5329,8 @@ button { font-family: inherit; cursor: pointer; }
   .compare-table thead th.us {
     padding: 18px 8px;
     border-width: 4px;
+    outline-width: 4px;
+    outline-offset: -4px;
   }
   /* PC: うさぎを表より上に大きく */
   .compare-mascot { width: 140px; margin-bottom: -28px; left: -20px; }
@@ -5328,7 +5338,12 @@ button { font-family: inherit; cursor: pointer; }
   .compare-table thead th.us .us-badge { font-size: 15px; padding: 4px 12px; }
   .compare-table tbody th { font-size: 18px !important; padding: 18px 8px !important; }
   .compare-table tbody td { font-size: 19px; }
-  .compare-table tbody td.us { font-size: 21px !important; border-width: 4px !important; }
+  .compare-table tbody td.us {
+    font-size: 21px !important;
+    border-width: 4px !important;
+    outline-width: 4px;
+    outline-offset: -4px;
+  }
   .compare-table td.us b.free,
   .compare-table td.us b { font-size: 26px; }
   .compare-table td.us .us-pack { font-size: 16px; }
