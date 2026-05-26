@@ -2924,16 +2924,19 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ====== 3. CTA前に「↓」装飾矢印 ====== */
+/* ▼を文字に被せず、cv-rabbit-row と cv-now の間の独立した余白に表示 */
 .cv-band .cv-now {
   position: relative;
+  padding-top: 36px; /* ▼ 用の独立スペースを内側に確保 */
 }
 .cv-band .cv-now::before {
   content: "▼";
   position: absolute;
-  top: -22px;
+  top: 4px;     /* cv-now の上内側余白に配置（文字に被らない） */
   left: 50%;
   transform: translateX(-50%);
   font-size: 24px;
+  line-height: 1;
   color: var(--c-red);
   filter: drop-shadow(0 2px 0 rgba(180,0,8,.3));
   animation: arrowBounce 1.4s ease-in-out infinite;
@@ -4318,11 +4321,12 @@ button { font-family: inherit; cursor: pointer; }
     margin-bottom: 28px;  /* 矢印用の余白を確保 */
   }
   .cv-band .cv-now {
-    margin-top: 8px;
+    margin-top: 0;
+    padding-top: 32px; /* スマホ用 ▼スペース */
   }
   .cv-band .cv-now::before {
-    top: -20px;
-    font-size: 20px;  /* 24→20 少し小さく */
+    top: 4px;
+    font-size: 22px;
   }
 }
 
