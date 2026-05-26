@@ -850,11 +850,20 @@ button { font-family: inherit; cursor: pointer; }
   display: grid;
   gap: 8px;
 }
-.price-card-body img {
+.price-card-body img,
+.price-card-body .price-illust {
   width: 100%;
-  max-height: 100px;
+  max-width: 140px;
+  height: auto;
+  max-height: 130px;
   object-fit: contain;
   margin: 0 auto;
+  display: block;
+  /* AI生成画像をくっきり */
+  image-rendering: -webkit-optimize-contrast;
+}
+@media (min-width: 700px) {
+  .price-card-body .price-illust { max-width: 180px; max-height: 160px; }
 }
 .price-was {
   font-size: 12px;
@@ -1169,7 +1178,36 @@ button { font-family: inherit; cursor: pointer; }
   margin: 0 auto;
   text-align: center;
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  justify-items: center;
 }
+.danger-rabbit {
+  width: 140px;
+  height: auto;
+  filter: drop-shadow(2px 4px 0 rgba(180,0,8,0.18));
+  animation: rabbitShake 0.6s ease-in-out infinite;
+}
+@keyframes rabbitShake {
+  0%, 100% { transform: rotate(-2deg) translateX(-1px); }
+  25%      { transform: rotate(2deg) translateX(1px); }
+  50%      { transform: rotate(-2deg) translateX(-1px); }
+  75%      { transform: rotate(2deg) translateX(1px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .danger-rabbit { animation: none; }
+}
+@media (min-width: 700px) {
+  .danger-inner {
+    grid-template-columns: 200px 1fr;
+    text-align: left;
+    align-items: center;
+    gap: 24px;
+  }
+  .danger-rabbit { width: 180px; }
+}
+.danger-text { width: 100%; }
 .danger-tag {
   display: inline-block;
   background: var(--c-red);
@@ -4448,6 +4486,113 @@ button { font-family: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
   .case-item, .case-arrow { animation: none; }
+}
+
+/* お約束カードのイラスト画像（写真ではなくイラスト） */
+.promise-card-image-illust {
+  background: #f6f8fc !important;
+  padding: 16px;
+}
+.promise-card-image-illust img {
+  object-fit: contain !important;
+  max-height: 180px;
+  width: 100%;
+  height: auto !important;
+}
+
+
+/* =============================================================
+   [Phase 5] 比較表 → スマホで縦並びカード化（横スクロール撤廃）
+   HTML 維持、CSS だけで table を card layout に変換
+   ============================================================= */
+@media (max-width: 640px) {
+  .compare-wrap {
+    overflow: visible !important;
+    max-width: none;
+  }
+  .compare-table {
+    display: block;
+    width: 100%;
+    min-width: 0 !important;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .compare-table thead {
+    display: none; /* PC 用ヘッダー行はスマホで非表示。各カード内ラベルで補う */
+  }
+  .compare-table tbody {
+    display: block;
+  }
+  .compare-table tr {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    background: #fff;
+    border: 2px solid var(--c-blue-sky-pale);
+    border-radius: 14px;
+    padding: 14px 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 12px rgba(15, 60, 130, 0.10);
+  }
+  .compare-table tbody th {
+    /* 比較項目（例: 写真だけの見積り）— カード見出し */
+    display: block;
+    background: var(--c-blue-deep) !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    font-weight: 900;
+    padding: 6px 10px !important;
+    border-radius: 8px;
+    text-align: center !important;
+    margin: 0 0 4px;
+  }
+  .compare-table td {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px !important;
+    background: #f6f8fc !important;
+    border: none !important;
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: left;
+    font-weight: 700;
+  }
+  /* 各 td の前に "ラピッド" "他社" "買取店" ラベルを置く */
+  .compare-table td::before {
+    content: attr(data-label);
+    background: #fff;
+    border: 1.5px solid var(--c-line);
+    color: var(--c-text-mute);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    text-align: center;
+  }
+  /* "us"列（ラピッド）を強調 */
+  .compare-table td.us {
+    background: var(--c-yellow-pale) !important;
+    border: 2px solid var(--c-red) !important;
+    font-size: 15px !important;
+    font-weight: 900;
+  }
+  .compare-table td.us::before {
+    content: "ラピッド";
+    background: var(--c-red);
+    color: #fff;
+    border-color: var(--c-red);
+    font-size: 12px;
+  }
+  /* ○△× マーク */
+  .compare-table td b {
+    font-size: 18px !important;
+    margin-right: 4px;
+  }
+  .compare-table td.us b {
+    font-size: 22px !important;
+  }
 }
 
 
