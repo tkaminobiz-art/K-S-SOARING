@@ -4769,32 +4769,21 @@ button { font-family: inherit; cursor: pointer; }
 
 
 /* =============================================================
-   [Phase 9] 比較表 → ビビッド・旭日旗風背景・うさぎマスコット装飾
-   ユーザー要望：もっと派手に、角丸を増やし、コピー元の雰囲気に
+   [Phase 9 retry] 比較表 → エコスポット精密再現
+   - 表本体: シンプル黒線格子、黒太字（赤・傾き・3D影は使わない）
+   - us列: 薄ピーチ色背景 + オレンジ太枠
+   - 見出し部分: 大きな「他社」赤特大 + 黒「と比べて」+ うさぎマスコット
+   - 背景: 旭日旗風放射グラデで派手さを担保
    ============================================================= */
 
-/* セクション背景：旭日旗風 conic gradient (黄色＋濃オレンジ放射) */
 .compare {
   background:
-    /* 中心の濃い円 */
-    radial-gradient(circle at 50% 30%, #ffec3d 0%, #ffd633 25%, #ffb800 60%, transparent 75%),
-    /* 旭日旗風 12本の光線（オレンジ） */
-    conic-gradient(from -15deg at 50% 30%,
-      #ff8b00 0deg, transparent 15deg,
-      #ff8b00 30deg, transparent 45deg,
-      #ff8b00 60deg, transparent 75deg,
-      #ff8b00 90deg, transparent 105deg,
-      #ff8b00 120deg, transparent 135deg,
-      #ff8b00 150deg, transparent 165deg,
-      #ff8b00 180deg, transparent 195deg,
-      #ff8b00 210deg, transparent 225deg,
-      #ff8b00 240deg, transparent 255deg,
-      #ff8b00 270deg, transparent 285deg,
-      #ff8b00 300deg, transparent 315deg,
-      #ff8b00 330deg, transparent 345deg
+    radial-gradient(circle at 50% 30%, #fff4a8 0%, #ffec3d 40%, transparent 75%),
+    repeating-conic-gradient(from 0deg at 50% 30%,
+      #ffb800 0deg, #ffb800 14deg, #ffe066 14deg, #ffe066 30deg
     ),
-    #ffc800;
-  padding: 24px 12px 36px;
+    #ffd633;
+  padding: 22px 12px 40px;
   position: relative;
   overflow: hidden;
 }
@@ -4802,7 +4791,7 @@ button { font-family: inherit; cursor: pointer; }
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.55) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 55%, rgba(255,255,255,0.65) 0%, transparent 70%);
   pointer-events: none;
 }
 .compare > * {
@@ -4810,14 +4799,54 @@ button { font-family: inherit; cursor: pointer; }
   z-index: 1;
 }
 
-/* 見出し下のコピー */
-.compare .compare-lead {
+/* セクションヘッダー：派手にコピー元準拠 */
+.compare-head {
   text-align: center;
+  margin-bottom: 18px;
+  padding: 0 8px;
+}
+.compare-headline {
+  display: inline-block;
   font-weight: 900;
-  font-size: 18px;
+  font-size: 17px;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+  padding: 4px 14px;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 999px;
+  letter-spacing: -0.02em;
+}
+.compare-title {
+  margin: 0;
+  font-size: 0; /* inline-block 並びの調整 */
+  line-height: 1;
+  text-align: center;
+}
+.compare-title-big {
+  display: inline-block;
+  font-size: 56px;
+  font-weight: 900;
   color: var(--c-red);
-  margin: 4px 0 16px;
-  text-shadow: 2px 2px 0 #fff, 3px 3px 0 rgba(0,0,0,0.12);
+  letter-spacing: -0.04em;
+  text-shadow:
+    3px 3px 0 #fff,
+    -3px 3px 0 #fff,
+    3px -3px 0 #fff,
+    -3px -3px 0 #fff,
+    5px 5px 0 rgba(0,0,0,0.15);
+  vertical-align: middle;
+  line-height: 1;
+}
+.compare-title-rest {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 900;
+  color: #1a1a1a;
+  vertical-align: middle;
+  line-height: 1.2;
+  margin-left: 4px;
+  text-shadow: 2px 2px 0 #fff;
 }
 
 /* 表のラッパー */
@@ -4825,139 +4854,116 @@ button { font-family: inherit; cursor: pointer; }
   max-width: var(--c-max);
   margin: 16px auto 0;
   overflow-x: visible;
-  padding: 4px;
+  padding: 0 2px;
 }
 
-/* 表本体：角丸＋濃いオレンジ太枠＋影 */
+/* 表本体：シンプル黒線格子（エコスポット原典準拠） */
 .compare-table {
   width: 100%;
   min-width: 0 !important;
-  border-collapse: separate;
-  border-spacing: 6px;
-  border: 5px solid #e85d00; /* 濃いオレンジ */
-  border-radius: 18px;
+  border-collapse: collapse;
   background: #fff;
   table-layout: fixed;
   font-size: 12px;
-  box-shadow:
-    0 6px 0 #b34300,
-    0 10px 24px rgba(180, 60, 0, 0.35);
-  padding: 8px 6px;
 }
 
-/* セル共通：角丸＋柔らかい影 */
+/* セル共通：黒線格子、シンプル黒文字 */
 .compare-table th,
 .compare-table td {
-  border: none;
+  border: 2px solid #1a1a1a;
   padding: 10px 4px;
   text-align: center;
   vertical-align: middle;
   background: #fff;
   font-weight: 800;
-  border-radius: 10px;
+  color: #1a1a1a;
 }
 
-/* 角セル（左上） */
+/* 角セル（左上）— 灰色 */
 .compare-table .compare-corner {
-  background: transparent;
+  background: #d8d8d8;
 }
 
-/* ヘッダー行：他社（A社/B社）— 紺色＋角丸 */
+/* ヘッダー行：他社（A社/B社） */
 .compare-table thead th {
-  background: var(--c-blue-deep);
-  color: #fff;
+  background: #fff;
+  color: #1a1a1a;
   font-size: 14px;
   padding: 12px 4px;
   letter-spacing: 0.04em;
-  border-radius: 10px;
-  box-shadow: 0 3px 0 rgba(0,0,0,0.18);
 }
 
-/* ヘッダー：us（ラピッド）— 角丸大＋うさぎマスコット用余白 */
+/* ヘッダー：us（ラピッド）— 薄ピーチ色 + オレンジ太枠 + 縦並び */
 .compare-table thead th.us {
-  background: linear-gradient(180deg, #ffec3d 0%, #ffb800 100%);
-  border: 4px solid #e85d00;
-  color: var(--c-red);
-  position: relative;
-  padding: 36px 4px 8px; /* マスコット用の上余白 */
-  border-radius: 14px;
-  box-shadow: 0 4px 0 #b34300, 0 8px 16px rgba(180,60,0,0.25);
-  overflow: visible;
+  background: #ffd9b3; /* 薄ピーチ */
+  border: 3px solid #e85d00; /* 濃いオレンジ */
+  color: #1a1a1a;
+  padding: 8px 4px;
+  vertical-align: middle;
 }
 .compare-table thead th.us .us-mascot {
-  position: absolute;
-  top: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 56px;
+  display: block;
+  margin: 0 auto 4px;  /* セル内縦並び、中央寄せ */
+  width: 64px;
   height: auto;
-  filter: drop-shadow(2px 3px 0 rgba(180,60,0,0.3));
-  z-index: 2;
+  filter: drop-shadow(2px 3px 0 rgba(180,60,0,0.22));
 }
 .compare-table thead th.us .us-badge {
-  display: inline-block;
-  background: #e85d00;
+  display: block;
+  background: var(--c-blue-deep);
   color: #fff;
   font-size: 10px;
-  padding: 3px 8px;
-  border-radius: 999px;
+  padding: 2px 6px;
+  border-radius: 4px;
   margin-bottom: 4px;
-  letter-spacing: -0.02em;
   font-weight: 900;
+  letter-spacing: -0.02em;
 }
 .compare-table thead th.us .us-name {
   display: block;
-  color: var(--c-red);
   font-size: 13px;
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  text-shadow: 1px 1px 0 #fff;
+  color: #1a1a1a;
 }
 
-/* 行ラベル：紺色＋白文字＋角丸 */
+/* 行ラベル：薄灰色 */
 .compare-table tbody th {
-  background: var(--c-blue-deep) !important;
-  color: #fff !important;
+  background: #ececec !important;
+  color: #1a1a1a !important;
   font-size: 12px !important;
   font-weight: 900;
   padding: 10px 4px !important;
   text-align: center !important;
   letter-spacing: -0.02em;
   width: 22%;
-  border-radius: 10px;
-  box-shadow: 0 3px 0 rgba(0,0,0,0.18);
 }
 
-/* 他社セル */
+/* 他社セル: 白＋黒文字 */
 .compare-table tbody td {
-  font-size: 12px;
+  font-size: 13px;
   color: #1a1a1a;
   line-height: 1.3;
   background: #fff;
-  border: 2px solid #e5e5e5;
-  box-shadow: 0 2px 0 rgba(0,0,0,0.06);
 }
 
-/* us（ラピッド）列セル：濃いオレンジ枠＋黄色グラデ＋大きな赤文字 */
+/* us列セル: 薄ピーチ色 + オレンジ太枠 */
 .compare-table tbody td.us {
-  background: linear-gradient(180deg, #fff5b8 0%, #ffd633 100%) !important;
-  border: 4px solid #e85d00 !important;
+  background: #ffe6cc !important; /* 薄ピーチ */
+  border: 3px solid #e85d00 !important;
+  color: #1a1a1a;
   font-size: 14px !important;
-  font-weight: 900;
-  color: var(--c-red);
-  box-shadow: 0 4px 0 #b34300, 0 6px 12px rgba(180,60,0,0.18) !important;
 }
 
-/* 「無料」「無し」「最短30分」— ベルト風バッジ */
-.compare-table td.us b.free {
+/* 「無料」「無し」「最短30分」— 黒太字（漢字スペース風） */
+.compare-table td.us b.free,
+.compare-table td.us b {
   display: inline-block;
-  font-size: 18px;
-  letter-spacing: 0.08em;
-  color: var(--c-red);
+  font-size: 17px;
+  letter-spacing: 0.15em; /* 「無 料」風に字間を空ける */
+  color: #1a1a1a;
   font-weight: 900;
-  text-shadow: 2px 2px 0 #fff, 3px 3px 0 rgba(180,60,0,0.18);
-  transform: rotate(-3deg);
 }
 
 /* 総費用 us */
@@ -4965,84 +4971,83 @@ button { font-family: inherit; cursor: pointer; }
   display: block;
   font-size: 12px;
   margin-bottom: 2px;
-  color: var(--c-red);
+  color: #1a1a1a;
   font-weight: 900;
 }
 .compare-table td.us strong {
   display: block;
-  font-size: 17px;
-  color: var(--c-red);
+  font-size: 15px;
+  color: #1a1a1a;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  text-shadow: 1px 2px 0 #fff;
 }
 
 /* 注釈 */
 .compare-note {
   font-size: 11px;
-  color: #5a5a5a;
+  color: #1a1a1a;
   text-align: center;
-  margin: 16px 12px 0;
+  margin: 14px 8px 0;
   line-height: 1.5;
-  background: rgba(255,255,255,0.7);
-  padding: 8px 14px;
-  border-radius: 8px;
-  display: inline-block;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 /* スマホで更にコンパクト化 */
 @media (max-width: 640px) {
-  .compare { padding: 18px 8px 28px; }
-  .compare-table { font-size: 10.5px; border-spacing: 4px; border-width: 4px; }
+  .compare { padding: 18px 8px 32px; }
+  .compare-headline { font-size: 14px; padding: 3px 12px; }
+  .compare-title-big { font-size: 44px; }
+  .compare-title-rest { font-size: 17px; }
+  .compare-table { font-size: 10.5px; }
   .compare-table th,
-  .compare-table td { padding: 7px 2px; border-radius: 8px; }
-  .compare-table thead th { font-size: 11px; padding: 8px 2px; }
-  .compare-table thead th.us {
-    padding-top: 30px;
-    border-width: 3px;
-  }
-  .compare-table thead th.us .us-mascot { width: 44px; top: -22px; }
-  .compare-table thead th.us .us-name { font-size: 11px; }
-  .compare-table thead th.us .us-badge { font-size: 8.5px; padding: 2px 6px; }
-  .compare-table tbody th { font-size: 10.5px !important; padding: 7px 2px !important; }
-  .compare-table tbody td { font-size: 10.5px; line-height: 1.25; letter-spacing: -0.03em; }
-  .compare-table tbody td.us { font-size: 12.5px !important; border-width: 3px !important; }
-  .compare-table td.us b.free { font-size: 15px; }
+  .compare-table td { padding: 7px 2px; border-width: 1.5px; }
+  .compare-table thead th { font-size: 11.5px; padding: 8px 2px; }
+  .compare-table thead th.us { padding: 6px 2px; border-width: 2.5px; }
+  .compare-table thead th.us .us-mascot { width: 56px; margin-bottom: 3px; }
+  .compare-table thead th.us .us-name { font-size: 11.5px; }
+  .compare-table thead th.us .us-badge { font-size: 9px; padding: 2px 5px; }
+  .compare-table tbody th { font-size: 11px !important; padding: 7px 2px !important; }
+  .compare-table tbody td { font-size: 11px; line-height: 1.25; letter-spacing: -0.03em; }
+  .compare-table tbody td.us { font-size: 12.5px !important; border-width: 2.5px !important; }
+  .compare-table td.us b.free,
+  .compare-table td.us b { font-size: 14px; letter-spacing: 0.12em; }
   .compare-table td.us .us-pack { font-size: 10.5px; }
-  .compare-table td.us strong { font-size: 14px; }
+  .compare-table td.us strong { font-size: 13px; }
 }
 
 @media (max-width: 380px) {
+  .compare-title-big { font-size: 38px; }
+  .compare-title-rest { font-size: 15px; }
   .compare-table { font-size: 9.5px; }
   .compare-table th,
   .compare-table td { padding: 5px 1px; }
-  .compare-table thead th.us .us-mascot { width: 38px; top: -20px; }
+  .compare-table thead th.us { padding: 5px 1px; }
+  .compare-table thead th.us .us-mascot { width: 48px; margin-bottom: 2px; }
 }
 
-/* PC: 派手さは維持しつつ余白を持って */
+/* PC: 大胆な装飾、表は依然シンプル */
 @media (min-width: 700px) {
-  .compare { padding: 36px 16px 48px; }
-  .compare-table { font-size: 17px; border-spacing: 8px; }
+  .compare { padding: 40px 16px 56px; }
+  .compare-headline { font-size: 22px; padding: 6px 22px; }
+  .compare-title-big { font-size: 96px; }
+  .compare-title-rest { font-size: 36px; }
+  .compare-table { font-size: 17px; }
   .compare-table th,
-  .compare-table td { padding: 18px 8px; border-radius: 12px; }
-  .compare-table thead th { font-size: 19px; }
+  .compare-table td { padding: 18px 8px; border-width: 2.5px; }
+  .compare-table thead th { font-size: 20px; padding: 20px 8px; }
   .compare-table thead th.us {
-    padding-top: 60px;
-    border-radius: 18px;
+    padding: 14px 6px;
+    border-width: 4px;
   }
-  .compare-table thead th.us .us-mascot { width: 92px; top: -48px; }
-  .compare-table thead th.us .us-name { font-size: 19px; }
-  .compare-table thead th.us .us-badge { font-size: 14px; padding: 4px 12px; }
-  .compare-table tbody th { font-size: 17px !important; }
-  .compare-table tbody td { font-size: 17px; }
-  .compare-table tbody td.us { font-size: 19px !important; }
-  .compare-table td.us b.free { font-size: 26px; }
+  .compare-table thead th.us .us-mascot { width: 110px; margin-bottom: 6px; }
+  .compare-table thead th.us .us-name { font-size: 22px; }
+  .compare-table thead th.us .us-badge { font-size: 15px; padding: 4px 12px; }
+  .compare-table tbody th { font-size: 18px !important; padding: 18px 8px !important; }
+  .compare-table tbody td { font-size: 19px; }
+  .compare-table tbody td.us { font-size: 21px !important; border-width: 4px !important; }
+  .compare-table td.us b.free,
+  .compare-table td.us b { font-size: 26px; }
   .compare-table td.us .us-pack { font-size: 16px; }
   .compare-table td.us strong { font-size: 24px; }
-  .compare .compare-lead { font-size: 24px; }
 }
 
 
