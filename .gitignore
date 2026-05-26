@@ -18,3 +18,4 @@ b-pattern-*.png
 Thumbs.db
 *.swp
 *~
+.tmp-gen/
