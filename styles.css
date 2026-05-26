@@ -4858,22 +4858,24 @@ button { font-family: inherit; cursor: pointer; }
   position: relative;
 }
 
-/* うさぎマスコット：表外、左上に飛び出す装飾 */
+/* うさぎマスコット：表より完全に上、左寄り（表セル領域には絶対侵入しない） */
 .compare-mascot {
   position: absolute;
-  top: -36px;
-  left: -12px;
-  width: 78px;
+  bottom: 100%;       /* 表本体の上端より上 */
+  left: -8px;
+  margin-bottom: -16px; /* わずかにオーバーラップさせて自然な位置に */
+  width: 80px;
   height: auto;
   z-index: 3;
   filter: drop-shadow(2px 4px 0 rgba(180,60,0,0.25));
   transform: rotate(-8deg);
+  transform-origin: bottom right;
   pointer-events: none;
   animation: rabbitPeek 3.6s ease-in-out infinite;
 }
 @keyframes rabbitPeek {
   0%, 100% { transform: rotate(-8deg) translateY(0); }
-  50%      { transform: rotate(-5deg) translateY(-6px); }
+  50%      { transform: rotate(-12deg) translateY(-4px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .compare-mascot { animation: none; }
@@ -5041,7 +5043,7 @@ button { font-family: inherit; cursor: pointer; }
   .compare-table th,
   .compare-table td { padding: 5px 1px; }
   .compare-table thead th.us { padding: 5px 1px; }
-  .compare-mascot { width: 64px; top: -28px; left: -6px; }
+  .compare-mascot { width: 66px; margin-bottom: -12px; left: -4px; }
 }
 
 /* PC: 大胆な装飾、表は依然シンプル */
@@ -5058,8 +5060,8 @@ button { font-family: inherit; cursor: pointer; }
     padding: 18px 8px;
     border-width: 4px;
   }
-  /* PC: うさぎを表左上に大きく */
-  .compare-mascot { width: 140px; top: -70px; left: -28px; }
+  /* PC: うさぎを表より上に大きく */
+  .compare-mascot { width: 140px; margin-bottom: -28px; left: -20px; }
   .compare-table thead th.us .us-name { font-size: 22px; }
   .compare-table thead th.us .us-badge { font-size: 15px; padding: 4px 12px; }
   .compare-table tbody th { font-size: 18px !important; padding: 18px 8px !important; }
