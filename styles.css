@@ -2966,7 +2966,7 @@ button { font-family: inherit; cursor: pointer; }
 .coupon .coupon-ticket::before {
   content: "期間限定";
   position: absolute;
-  top: -18px; left: -10px;
+  top: -10px; left: 8px;            /* 後ろの四角に被さるが少し内側に：top -18→-10, left -10→8 */
   background: var(--c-yellow);
   color: var(--c-red);
   font-family: var(--c-font-pop), "Mochiy Pop One", sans-serif;
@@ -2976,6 +2976,7 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: 4px;
   border: 2.5px solid var(--c-red);
   transform: rotate(-8deg);
+  transform-origin: top left;
   box-shadow: 0 3px 0 rgba(0,0,0,.15);
   animation: limitedBlink 1.2s ease-in-out infinite;
   z-index: 4;
@@ -4486,6 +4487,101 @@ button { font-family: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
   .case-item, .case-arrow { animation: none; }
+}
+
+/* =============================================================
+   [Phase 7] 抜け項目14件対応
+   ============================================================= */
+
+/* F: 回収品目「おもちゃ」改行回避 → service-grid: letter-spacing 微小縮小 */
+.service-grid li,
+.service-grid a {
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
+/* I: 比較表 PC版「即日回収ラピッド」列強調 (多少はみ出るくらい) */
+@media (min-width: 700px) {
+  .compare-table th.us {
+    font-size: 18px !important;
+    transform: scale(1.05);
+    transform-origin: center bottom;
+    z-index: 2;
+    position: relative;
+  }
+  .compare-table td.us {
+    font-size: 16px !important;
+    font-weight: 900;
+    transform: scale(1.05);
+    transform-origin: center;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(230,0,18,0.18);
+  }
+  .compare-table td.us b {
+    font-size: 28px !important;
+  }
+}
+
+/* G(1): 「なぜ、ラピッドは安いのか？」タイトル1行化＋大きく */
+@media (min-width: 700px) {
+  .reason .sect-h2 {
+    white-space: nowrap;
+    font-size: 42px;
+  }
+}
+@media (max-width: 699px) {
+  .reason .sect-h2 {
+    font-size: 26px;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+  }
+}
+
+/* G(2): 安さの理由 各項目に背景透かしアイコン */
+.reason-grid li {
+  position: relative;
+  overflow: hidden;
+}
+.reason-grid li::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  width: 130px;
+  height: 130px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+.reason-grid li > * { position: relative; z-index: 1; }
+.reason-grid li:nth-child(1)::after {
+  background-image: url("assets/c-pattern/parts/reason/icon-coin.webp");
+}
+.reason-grid li:nth-child(2)::after {
+  background-image: url("assets/c-pattern/parts/reason/icon-recycle.webp");
+}
+.reason-grid li:nth-child(3)::after {
+  background-image: url("assets/c-pattern/parts/reason/icon-warehouse.webp");
+}
+.reason-grid li:nth-child(4)::after {
+  background-image: url("assets/c-pattern/parts/reason/icon-line.webp");
+}
+
+/* H: LINE割クーポン部 さらに極端に拡大 (Phase 6 続き) */
+.coupon-ribbon {
+  font-size: 21px !important;
+  padding: 8px 22px !important;
+  font-weight: 900 !important;
+}
+@media (min-width: 700px) {
+  .coupon-ribbon {
+    font-size: 28px !important;
+    padding: 10px 32px !important;
+  }
 }
 
 /* お約束カードのイラスト画像（写真ではなくイラスト） */
