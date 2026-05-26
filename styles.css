@@ -1075,10 +1075,19 @@ button { font-family: inherit; cursor: pointer; }
 }
 .reason-grid h3 {
   margin: 4px 0 6px;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 900;
   color: var(--c-blue-ink);
   line-height: 1.35;
+  /* スマホで1行強制（font-size で調整、改行回避） */
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+@media (max-width: 380px) {
+  .reason-grid h3 {
+    font-size: 17px;
+    letter-spacing: -0.03em;
+  }
 }
 .reason-grid p { margin: 0; font-size: 14px; }
 
@@ -4549,9 +4558,11 @@ button { font-family: inherit; cursor: pointer; }
    [Phase 7] 抜け項目14件対応
    ============================================================= */
 
-/* F: 回収品目「おもちゃ」改行回避 → service-grid: letter-spacing 微小縮小 */
-.service-grid li,
-.service-grid a {
+/* F: 回収品目「おもちゃ」改行回避 → items-cloud span（タグクラウド）に限定
+   ※ 以前 .service-grid 全体に当ててしまっていたが、それは「対応サービス」セクションで、
+   　 説明文の長文 p が画面右端で切れる事故が発生したため撤回。
+   　 nowrap は単品タグクラウドの個別バブルにのみ適用する。 */
+.items-cloud span {
   letter-spacing: -0.04em;
   white-space: nowrap;
 }
