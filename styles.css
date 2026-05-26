@@ -1780,11 +1780,11 @@ button { font-family: inherit; cursor: pointer; }
 
 .hero-price {
   position: absolute;
-  left: max(474px, calc(50% - 116px));
+  left: max(390px, calc(50% - 200px));
   bottom: 34px;
   z-index: 10;
-  width: 388px;
-  max-width: 30vw;
+  width: 582px;
+  max-width: 45vw;
   filter: drop-shadow(10px 12px 0 color-mix(in srgb, var(--ref-yellow) 90%, transparent)) drop-shadow(14px 15px 0 color-mix(in srgb, var(--ref-blue) 16%, transparent));
   --price-transform: translateZ(0);
   transform: var(--price-transform);
@@ -1980,8 +1980,8 @@ button { font-family: inherit; cursor: pointer; }
     left: 50%;
     right: auto;
     bottom: 44px;
-    width: 43%;
-    max-width: 168px;
+    width: 64%;
+    max-width: 252px;
     --price-transform: translateX(-50%);
   }
 
@@ -2099,9 +2099,9 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-price {
-    left: min(106px, calc((100vw - 178px) / 2));
+    left: min(40px, calc((100vw - 267px) / 2));
     bottom: 86px;
-    width: 178px;
+    width: 267px;
     max-width: none;
     z-index: 11;
     --price-transform: translateZ(0);
@@ -2180,8 +2180,8 @@ button { font-family: inherit; cursor: pointer; }
 
   .hero .hero-price {
     bottom: 80px;
-    left: min(98px, calc((100vw - 164px) / 2));
-    width: 164px;
+    left: min(32px, calc((100vw - 246px) / 2));
+    width: 246px;
   }
 
   .hero .hero-truck-wrap {
@@ -2283,15 +2283,26 @@ button { font-family: inherit; cursor: pointer; }
 
 /* キラキラ: 着地後の twinkle（CODEX 既存 sparkleTwinkle をベースに少し柔らかく） */
 @keyframes heroSparkleIdle {
+  /* キラキラ（opacity + scale + glow）と左右swing（translateX + rotate）を同時 */
   0%, 100% {
-    opacity: 0.78;
-    transform: scale(1) rotate(0deg);
-    filter: drop-shadow(0 0 0 transparent);
+    opacity: 0.82;
+    transform: translateX(-10px) scale(1) rotate(-3deg);
+    filter: drop-shadow(0 0 2px color-mix(in srgb, var(--ref-yellow) 30%, transparent));
+  }
+  25% {
+    opacity: 1;
+    transform: translateX(-4px) scale(1.07) rotate(-1deg);
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--ref-yellow) 75%, transparent));
   }
   50% {
+    opacity: 0.88;
+    transform: translateX(10px) scale(1.02) rotate(3deg);
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--ref-yellow) 50%, transparent));
+  }
+  75% {
     opacity: 1;
-    transform: scale(1.06) rotate(2deg);
-    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--ref-yellow) 70%, transparent));
+    transform: translateX(4px) scale(1.08) rotate(1deg);
+    filter: drop-shadow(0 0 14px color-mix(in srgb, var(--ref-yellow) 80%, transparent));
   }
 }
 
@@ -2304,10 +2315,10 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .hero .hero-sparkle {
-  /* 0.55s 待機 → 1.1s で弾性出現 → そのまま idle twinkle */
+  /* 0.55s 待機 → 1.1s で弾性出現 → そのまま idle: キラキラ＋左右swing 4秒ループ */
   animation:
     heroSparkleAppear 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both,
-    heroSparkleIdle 2.4s ease-in-out 1.85s infinite;
+    heroSparkleIdle 4s ease-in-out 1.85s infinite;
 }
 
 /* 動きを苦手とする人向け */
@@ -2420,45 +2431,45 @@ button { font-family: inherit; cursor: pointer; }
   left: 50%;
   right: auto;
   bottom: 14px;
-  width: 360px;
-  margin-left: -180px;     /* width/2 で水平中央 */
+  width: 180px;
+  margin-left: -90px;      /* width/2 で水平中央（半分サイズ） */
   z-index: 12;             /* 0円(z:10)より前面 */
   transform-origin: center;
 }
 
-/* タブレット 920px以下：0円とほぼ同幅で中央 */
+/* タブレット 920px以下：半分サイズに */
 @media (max-width: 920px) {
   .hero .hero-sparkle {
     left: 50%;
     right: auto;
     bottom: auto;
     top: 32%;
-    width: 64%;
-    max-width: 320px;
-    margin-left: -32%;
+    width: 32%;
+    max-width: 160px;
+    margin-left: -16%;
   }
 }
 
-/* スマホ 640px以下：5%OFF（右上）と被らないよう0円の下半分・左寄りに配置 */
+/* スマホ 640px以下：半分サイズに */
 @media (max-width: 640px) {
   .hero .hero-sparkle {
     left: 4%;
     right: auto;
     bottom: auto;
     top: 52%;
-    width: 56%;
-    max-width: 240px;
+    width: 28%;
+    max-width: 120px;
     margin-left: 0;
   }
 }
 
-/* 最小 380px以下：さらに左下寄り、サイズも縮小 */
+/* 最小 380px以下：さらに半分縮小 */
 @media (max-width: 380px) {
   .hero .hero-sparkle {
     left: 2%;
     top: 54%;
-    width: 58%;
-    max-width: 210px;
+    width: 29%;
+    max-width: 105px;
     margin-left: 0;
   }
 }
