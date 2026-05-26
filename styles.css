@@ -50,7 +50,19 @@
 * { box-sizing: border-box; }
 *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* スマホでの横ぐらつき・誤ピンチズーム防止 */
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100vw;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* iOS Safari: バウンス防止 + 横方向タッチ操作のロック */
+  overscroll-behavior-x: none;
+  touch-action: pan-y pinch-zoom;
+}
 
 body {
   margin: 0;
@@ -63,6 +75,10 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   position: relative;
+  /* 横方向ロック（html と二重に） */
+  width: 100%;
+  max-width: 100vw;
+  overscroll-behavior-x: none;
 }
 
 /* ===========================================================
@@ -2536,11 +2552,11 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 
-/* スマホ 640px以下：0円と一緒に右下へ */
+/* スマホ 640px以下：0円と一緒に右下へ。揺れアニメ ±10px 分を内側にバッファ */
 @media (max-width: 640px) {
   .hero .hero-sparkle {
     left: auto;
-    right: 12px;
+    right: 24px;
     bottom: 70px;
     top: auto;
     width: 28%;
@@ -2549,10 +2565,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 
-/* 最小 380px以下 */
+/* 最小 380px以下：さらに内側にバッファ */
 @media (max-width: 380px) {
   .hero .hero-sparkle {
-    right: 10px;
+    right: 22px;
     bottom: 56px;
     top: auto;
     width: 29%;
