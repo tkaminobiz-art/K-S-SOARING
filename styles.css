@@ -1703,7 +1703,7 @@ button { font-family: inherit; cursor: pointer; }
 .hero-speech {
   position: absolute;
   top: 274px;
-  left: max(220px, calc(50% - 400px));
+  left: max(340px, calc(50% - 280px));
   z-index: 9;
   width: 244px;
   filter: drop-shadow(3px 5px 0 color-mix(in srgb, var(--ref-blue) 18%, transparent));
@@ -2073,7 +2073,7 @@ button { font-family: inherit; cursor: pointer; }
     bottom: 54px;
     width: 130px;
     max-width: none;
-    z-index: 8;
+    z-index: 15; /* 最前面：0円・キラキラ・トラックより前 */
   }
 
   .hero .hero-discount {
@@ -2094,9 +2094,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-price {
-    /* 画面中央配置 (transform を使わずleftで中央化 — アニメーション干渉回避) */
-    left: calc(50% - 133.5px);
-    bottom: 86px;
+    /* 右下に配置 — うさぎの後ろに重なるが rabbit z-index:15 が前面に来る */
+    right: 4px;
+    left: auto;
+    bottom: 60px;
     width: 267px;
     max-width: none;
     z-index: 11;
@@ -2175,8 +2176,9 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-price {
-    bottom: 80px;
-    left: calc(50% - 123px);
+    bottom: 54px;
+    right: 4px;
+    left: auto;
     width: 246px;
   }
 
@@ -2446,24 +2448,25 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 
-/* スマホ 640px以下：半分サイズに */
+/* スマホ 640px以下：0円と一緒に右下へ */
 @media (max-width: 640px) {
   .hero .hero-sparkle {
-    left: 4%;
-    right: auto;
-    bottom: auto;
-    top: 52%;
+    left: auto;
+    right: 12px;
+    bottom: 70px;
+    top: auto;
     width: 28%;
     max-width: 120px;
     margin-left: 0;
   }
 }
 
-/* 最小 380px以下：さらに半分縮小 */
+/* 最小 380px以下 */
 @media (max-width: 380px) {
   .hero .hero-sparkle {
-    left: 2%;
-    top: 54%;
+    right: 10px;
+    bottom: 56px;
+    top: auto;
     width: 29%;
     max-width: 105px;
     margin-left: 0;
