@@ -2097,10 +2097,8 @@ button { font-family: inherit; cursor: pointer; }
 
 .hero-copy img {
   width: 100%;
-  /* 初回 0.2s 待機 → 1.0s で左→右へ reveal → 完了後 shimmer ループ */
-  animation:
-    heroCopyReveal 1.0s cubic-bezier(0.22, 0.9, 0.31, 1) 0.2s both,
-    heroCopyShimmer 5.6s ease-in-out 1.6s infinite;
+  /* 初回ロード時のみ：1.0s で左→右へ reveal、ループなし */
+  animation: heroCopyReveal 1.0s cubic-bezier(0.22, 0.9, 0.31, 1) 0.2s both;
 }
 
 /* 左→右への一発 reveal — clip-path で帯を引く */
@@ -2115,26 +2113,8 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 
-/* 静かな shimmer — 5.6s に1回、軽い光沢の波が左→右に流れる */
-@keyframes heroCopyShimmer {
-  0%, 70%, 100% {
-    filter: brightness(1) saturate(1);
-    mask-image: none;
-  }
-  /* 72-90% の間だけ shimmer 帯が流れる */
-  72% {
-    filter: brightness(1.08) saturate(1.05);
-    mask-image: linear-gradient(100deg, #000 0%, #000 30%, rgba(255,255,255,.55) 45%, #000 60%, #000 100%);
-    mask-size: 220% 100%;
-    mask-position: -100% 0;
-  }
-  90% {
-    filter: brightness(1.08) saturate(1.05);
-    mask-image: linear-gradient(100deg, #000 0%, #000 30%, rgba(255,255,255,.55) 45%, #000 60%, #000 100%);
-    mask-size: 220% 100%;
-    mask-position: 100% 0;
-  }
-}
+/* heroCopyShimmer は削除（mask-image の急変が「気持ち悪い」と
+   ユーザー指摘。reveal のみで十分） */
 
 /* prefers-reduced-motion: アニメ無効化 */
 @media (prefers-reduced-motion: reduce) {
