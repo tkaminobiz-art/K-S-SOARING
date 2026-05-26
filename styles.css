@@ -776,26 +776,13 @@ button { font-family: inherit; cursor: pointer; }
   box-shadow: 0 12px 30px rgba(120, 60, 0, 0.25), 0 4px 0 #d97d00;
 }
 
-/* 期間限定タグ */
-.coupon-period-tag {
-  position: absolute;
-  top: -14px;
-  left: -8px;
-  background: var(--c-red);
-  color: #fff;
-  font-weight: 900;
-  font-size: 14px;
-  padding: 6px 16px;
-  border-radius: 6px;
-  transform: rotate(-8deg);
-  box-shadow: 0 4px 0 var(--c-red-deep);
-  letter-spacing: 0.08em;
-  z-index: 5;
-  animation: tagBlink 1.4s ease-in-out infinite;
-}
-@keyframes tagBlink {
-  0%, 100% { transform: rotate(-8deg) scale(1); }
-  50%      { transform: rotate(-8deg) scale(1.08); filter: brightness(1.1); }
+/* 上半券：1枚画像 */
+.coupon-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px 16px 0 0;
+  background: #fff;
 }
 
 /* ── 上半券：左右分割 ── */
@@ -3250,26 +3237,11 @@ button { font-family: inherit; cursor: pointer; }
   font-weight: 900;
 }
 
-/* ====== 5. 期間限定バッジ（クーポン帯に） ====== */
+/* ====== 5. 期間限定バッジ — 削除済み（画像内に焼き込まれているため） ====== */
 .coupon .coupon-ticket { position: relative; }
 .coupon .coupon-ticket::before {
-  content: "期間限定";
-  position: absolute;
-  top: -10px; left: 8px;            /* 後ろの四角に被さるが少し内側に：top -18→-10, left -10→8 */
-  background: var(--c-yellow);
-  color: var(--c-red);
-  font-family: var(--c-font-pop), "Mochiy Pop One", sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  padding: 5px 14px;
-  border-radius: 4px;
-  border: 2.5px solid var(--c-red);
-  transform: rotate(-8deg);
-  transform-origin: top left;
-  box-shadow: 0 3px 0 rgba(0,0,0,.15);
-  animation: limitedBlink 1.2s ease-in-out infinite;
-  z-index: 4;
-  white-space: nowrap;
+  content: none;
+  display: none;
 }
 @keyframes limitedBlink {
   0%, 100% { transform: rotate(-8deg) scale(1); }
