@@ -1703,7 +1703,7 @@ button { font-family: inherit; cursor: pointer; }
 .hero-speech {
   position: absolute;
   top: 274px;
-  left: max(120px, calc(50% - 480px));
+  left: max(220px, calc(50% - 400px));
   z-index: 9;
   width: 244px;
   filter: drop-shadow(3px 5px 0 color-mix(in srgb, var(--ref-blue) 18%, transparent));
@@ -1749,13 +1749,8 @@ button { font-family: inherit; cursor: pointer; }
 .truck-door-logo { display: none; }
 
 .hero-rabbit-small {
-  position: absolute;
-  right: 292px;
-  bottom: 33px;
-  z-index: 8;
-  width: 91px;
-  filter: drop-shadow(4px 7px 0 color-mix(in srgb, var(--ref-blue) 18%, transparent));
-  animation: rabbitHop 2.8s ease-in-out infinite;
+  /* PC・スマホ両方で非表示（ユーザー指示） */
+  display: none;
 }
 
 .hero-discount {
@@ -1780,7 +1775,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .hero-price {
   position: absolute;
-  left: max(540px, calc(50% - 50px));
+  left: max(540px, calc(50% - 40px));
   bottom: 14px;
   z-index: 10;
   width: 582px;
@@ -2066,8 +2061,8 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-speech {
-    top: 216px;
-    left: 18px;
+    top: 168px;
+    left: 12px;
     width: 122px;
     min-width: 0;
     filter: drop-shadow(2px 4px 0 color-mix(in srgb, var(--ref-blue) 16%, transparent));
@@ -2099,7 +2094,8 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-price {
-    left: min(40px, calc((100vw - 267px) / 2));
+    /* 画面中央配置 (transform を使わずleftで中央化 — アニメーション干渉回避) */
+    left: calc(50% - 133.5px);
     bottom: 86px;
     width: 267px;
     max-width: none;
@@ -2180,7 +2176,7 @@ button { font-family: inherit; cursor: pointer; }
 
   .hero .hero-price {
     bottom: 80px;
-    left: min(32px, calc((100vw - 246px) / 2));
+    left: calc(50% - 123px);
     width: 246px;
   }
 
@@ -2349,21 +2345,21 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 
-/* スマホ 640px以下: 137px → 164px (+20%) */
+/* スマホ 640px以下: 15%縮小 164px → 139px */
 @media (max-width: 640px) {
   .hero .hero-discount {
     top: 178px;
-    width: 164px;
-    left: min(204px, calc(100vw - 176px));
+    width: 139px;
+    left: min(228px, calc(100vw - 151px));
   }
 }
 
-/* 最小サイズ 380px以下: 130 → 156 */
+/* 最小サイズ 380px以下: 15%縮小 156px → 133px */
 @media (max-width: 380px) {
   .hero .hero-discount {
     top: 174px;
-    width: 156px;
-    left: min(194px, calc(100vw - 168px));
+    width: 133px;
+    left: min(218px, calc(100vw - 145px));
   }
 }
 
