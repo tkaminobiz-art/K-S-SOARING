@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 284" width="600" height="284">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -8 616 296" width="616" height="296">
   <defs>
     <filter id="softShadow" x="-10%" y="-10%" width="130%" height="130%">
       <feOffset dx="4" dy="5" result="off"/>

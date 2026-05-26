@@ -573,6 +573,17 @@ button { font-family: inherit; cursor: pointer; }
   position: relative;
   box-shadow: var(--c-shadow-sm);
 }
+.cv-tel-freedial-label {
+  display: inline-block;
+  background: var(--c-blue);
+  color: #fff;
+  font-weight: 900;
+  font-size: 12px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+  letter-spacing: .04em;
+}
 .cv-tel-icon { font-size: 22px; color: var(--c-green); margin-right: 4px; vertical-align: middle; }
 .cv-tel-num {
   font-size: 36px;
@@ -626,22 +637,42 @@ button { font-family: inherit; cursor: pointer; }
   margin-top: 14px;
   background: #fff;
   border-radius: 10px;
-  padding: 10px 10px;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column; /* タイトルとブランドを縦に分離 */
+  align-items: center;
+  gap: 8px;
+}
+.cv-card-strip .cv-card-title {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--c-blue-deep);
+  letter-spacing: .02em;
+}
+.cv-card-brands {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
-  gap: 6px 10px;
-  font-size: 11px;
+  gap: 6px 8px;
 }
-.cv-card-strip strong { font-size: 12px; font-weight: 800; }
-.cv-card-strip span {
+.cv-card-brands .card-brand {
   display: inline-block;
-  padding: 3px 6px;
-  border: 1px solid var(--c-line);
-  border-radius: 4px;
-  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 5px;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: #fff;
+  min-width: 50px;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,.12);
 }
+/* 各ブランドカラー（公式ブランドガイドカラー） */
+.card-brand-visa  { background: #1a1f71; }
+.card-brand-jcb   { background: linear-gradient(90deg, #003e8c 0%, #003e8c 33%, #c41e3a 33%, #c41e3a 66%, #1ea850 66%, #1ea850 100%); }
+.card-brand-mc    { background: #eb001b; }
+.card-brand-amex  { background: #006fcf; }
+.card-brand-diners{ background: #0079be; }
 
 /* ===========================================================
    安全対策
