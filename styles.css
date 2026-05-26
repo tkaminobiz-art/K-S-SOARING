@@ -5202,12 +5202,13 @@ button { font-family: inherit; cursor: pointer; }
   max-width: 92%;
   line-height: 1.7;
 }
-/* 「第62222R075401号」を1つの塊として改行を制御 */
-.site-footer .nowrap-keep,
-.site-footer .footer-license {
+/* グローバル：「第62222R075401号」のような塊を改行禁止に */
+.nowrap-keep {
   white-space: nowrap;
+  display: inline-block;
 }
 .site-footer .footer-license {
+  white-space: nowrap;
   display: inline-block;
 }
 @media (max-width: 380px) {
