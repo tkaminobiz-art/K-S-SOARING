@@ -3313,8 +3313,8 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 14.5px;
   line-height: 1.95;
   letter-spacing: .01em;
-  text-align: justify;
-  text-justify: inter-character;
+  text-align: left;
+  text-justify: auto;
 }
 
 /* ===== 4カードグリッド ===== */
@@ -3543,9 +3543,9 @@ button { font-family: inherit; cursor: pointer; }
   margin: 0 0 16px;
   color: var(--c-text);
   font-size: 14.5px;
-  line-height: 2;
+  line-height: 1.85;
   letter-spacing: .01em;
-  text-align: justify;
+  text-align: left;  /* justify → left（文字間に空白が広がる現象を解消） */
 }
 .company-story p:last-child { margin-bottom: 0; }
 
@@ -3732,7 +3732,7 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 14.5px;
   line-height: 1.95;
   letter-spacing: .01em;
-  text-align: justify;
+  text-align: left;
 }
 
 .promise-blocks {
@@ -4770,96 +4770,81 @@ button { font-family: inherit; cursor: pointer; }
 
 
 /* =============================================================
-   [Phase 5] 比較表 → スマホで縦並びカード化（横スクロール撤廃）
-   HTML 維持、CSS だけで table を card layout に変換
+   [Phase 5→8] 比較表 → スマホでも1枚テーブル形式（縦カード型から変更）
+   ユーザー要望：「1枚で表示できるのが理想」
+   フォントを縮小して画面内に収める方針
    ============================================================= */
 @media (max-width: 640px) {
   .compare-wrap {
-    overflow: visible !important;
-    max-width: none;
+    overflow-x: visible;
+    max-width: 100%;
+    padding: 0 4px;
   }
   .compare-table {
-    display: block;
     width: 100%;
     min-width: 0 !important;
     border-collapse: separate;
-    border-spacing: 0;
+    border-spacing: 2px;
+    font-size: 10.5px;
+    table-layout: fixed;
   }
-  .compare-table thead {
-    display: none; /* PC 用ヘッダー行はスマホで非表示。各カード内ラベルで補う */
+  .compare-table thead th {
+    background: var(--c-blue-deep);
+    color: #fff;
+    font-size: 10px !important;
+    padding: 4px 2px !important;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
   }
-  .compare-table tbody {
-    display: block;
-  }
-  .compare-table tr {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 6px;
-    background: #fff;
-    border: 2px solid var(--c-blue-sky-pale);
-    border-radius: 14px;
-    padding: 14px 12px;
-    margin-bottom: 14px;
-    box-shadow: 0 4px 12px rgba(15, 60, 130, 0.10);
+  .compare-table thead th.us {
+    background: var(--c-red);
+    font-size: 11px !important;
+    padding: 6px 2px !important;
   }
   .compare-table tbody th {
-    /* 比較項目（例: 写真だけの見積り）— カード見出し */
-    display: block;
-    background: var(--c-blue-deep) !important;
+    background: var(--c-blue-ink) !important;
     color: #fff !important;
-    font-size: 15px !important;
-    font-weight: 900;
-    padding: 6px 10px !important;
-    border-radius: 8px;
+    font-size: 10.5px !important;
+    padding: 6px 2px !important;
     text-align: center !important;
-    margin: 0 0 4px;
+    border-radius: 4px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    width: 22%;
   }
   .compare-table td {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 10px !important;
-    background: #f6f8fc !important;
-    border: none !important;
-    border-radius: 8px;
-    font-size: 13px;
-    text-align: left;
+    background: #fff !important;
+    border: 1px solid var(--c-line) !important;
+    border-radius: 4px;
+    padding: 5px 2px !important;
+    text-align: center !important;
+    font-size: 10px;
     font-weight: 700;
-  }
-  /* 各 td の前に "ラピッド" "他社" "買取店" ラベルを置く */
-  .compare-table td::before {
-    content: attr(data-label);
-    background: #fff;
-    border: 1.5px solid var(--c-line);
-    color: var(--c-text-mute);
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 800;
-    text-align: center;
+    line-height: 1.25;
+    letter-spacing: -0.04em;
+    vertical-align: middle;
   }
   /* "us"列（ラピッド）を強調 */
   .compare-table td.us {
     background: var(--c-yellow-pale) !important;
     border: 2px solid var(--c-red) !important;
-    font-size: 15px !important;
+    font-size: 11px !important;
     font-weight: 900;
   }
-  .compare-table td.us::before {
-    content: "ラピッド";
-    background: var(--c-red);
-    color: #fff;
-    border-color: var(--c-red);
-    font-size: 12px;
-  }
-  /* ○△× マーク */
-  .compare-table td b {
-    font-size: 18px !important;
-    margin-right: 4px;
+  /* ○△× マーク：ブロックで上に、テキストは下に */
+  .compare-table td b,
+  .compare-table td.us b {
+    display: block;
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 2px;
   }
   .compare-table td.us b {
-    font-size: 22px !important;
+    font-size: 19px;
+    color: var(--c-red);
   }
 }
 
@@ -4872,12 +4857,32 @@ button { font-family: inherit; cursor: pointer; }
 
 /* --- セクション見出し（全セクション共通 sect-h2）--- */
 .sect-h2 {
-  font-size: 26px; /* 旧 21px → 26px (+24%) */
+  font-size: 22px;     /* スマホ: 端切れ防止に 26→22px に縮小 */
   line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+/* 長文の sect-h2 はさらに縮小 + nowrap で1行 */
+.service .sect-h2,
+.ihin .sect-h2 {
+  font-size: 19px;
+  letter-spacing: -0.025em;
+}
+@media (max-width: 380px) {
+  .service .sect-h2,
+  .ihin .sect-h2 {
+    font-size: 17px;
+    letter-spacing: -0.035em;
+  }
 }
 @media (min-width: 700px) {
   .sect-h2 {
     font-size: 36px; /* PC: 旧 28px → 36px */
+    letter-spacing: 0;
+  }
+  .service .sect-h2,
+  .ihin .sect-h2 {
+    font-size: 32px;
+    letter-spacing: 0;
   }
 }
 
@@ -4964,13 +4969,22 @@ button { font-family: inherit; cursor: pointer; }
 
 /* --- フッター --- */
 .site-footer small {
-  font-size: 13px;
-  white-space: nowrap; /* 古物商番号の改行防止 */
+  font-size: 12.5px;
   letter-spacing: -0.01em;
+  display: inline-block;
+  max-width: 92%;
+  line-height: 1.7;
+}
+/* 「第62222R075401号」を1つの塊として改行を制御 */
+.site-footer .nowrap-keep,
+.site-footer .footer-license {
+  white-space: nowrap;
+}
+.site-footer .footer-license {
+  display: inline-block;
 }
 @media (max-width: 380px) {
   .site-footer small {
-    white-space: normal;
-    font-size: 11px;
+    font-size: 10.5px;
   }
 }
