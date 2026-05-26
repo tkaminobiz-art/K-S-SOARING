@@ -4207,8 +4207,7 @@ button { font-family: inherit; cursor: pointer; }
     overflow: visible;
   }
 
-  /* 短い見出しは少し大きく */
-  .staff .sect-h2,
+  /* 短い見出しは少し大きく（staffは長文のため除外、上のルールで19px適用） */
   .voice .sect-h2,
   .flow .sect-h2,
   .area .sect-h2 {
@@ -4863,13 +4862,15 @@ button { font-family: inherit; cursor: pointer; }
 }
 /* 長文の sect-h2 はさらに縮小 + nowrap で1行 */
 .service .sect-h2,
-.ihin .sect-h2 {
+.ihin .sect-h2,
+.staff .sect-h2 {
   font-size: 19px;
   letter-spacing: -0.025em;
 }
 @media (max-width: 380px) {
   .service .sect-h2,
-  .ihin .sect-h2 {
+  .ihin .sect-h2,
+  .staff .sect-h2 {
     font-size: 17px;
     letter-spacing: -0.035em;
   }
