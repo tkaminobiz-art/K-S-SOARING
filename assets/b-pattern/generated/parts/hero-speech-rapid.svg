@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 179" width="244" height="179">
+  <defs>
+    <filter id="bubbleShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feOffset dx="3" dy="5" result="off"/>
+      <feColorMatrix in="off" type="matrix" values="0 0 0 0 0  0 0 0 0 .17  0 0 0 0 .42  0 0 0 .22 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#bubbleShadow)">
+    <!-- 吹き出し本体（黄色・もくもく雲型） -->
+    <path fill="#fff200" stroke="#0054b8" stroke-width="4" stroke-linejoin="round"
+      d="M28 22 Q34 6 56 10 Q66 0 84 6 Q104 -2 122 6 Q142 -2 162 6 Q182 0 196 8
+         Q218 6 224 24 Q238 32 232 52 Q244 66 232 82 Q240 100 222 110
+         Q214 130 192 128 Q188 152 168 132 L156 150 L150 134
+         Q132 140 116 132 Q96 142 80 132 Q60 140 46 128 Q24 130 18 110
+         Q4 100 12 82 Q0 66 12 52 Q6 32 28 22 Z"/>
+    <g font-family="'Hiragino Kaku Gothic StdN','Hiragino Sans','Noto Sans JP','Yu Gothic',sans-serif" font-weight="900" text-anchor="middle" fill="#0054b8">
+      <text x="122" y="68" font-size="36">すべて</text>
+      <text x="122" y="112" font-size="40">コミコミ!!</text>
+    </g>
+  </g>
+</svg>
