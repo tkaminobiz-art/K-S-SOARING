@@ -667,26 +667,27 @@ button { font-family: inherit; cursor: pointer; }
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px 8px;
+  align-items: center;
+  gap: 8px 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.cv-card-brands .card-brand {
-  display: inline-block;
-  padding: 4px 9px;
-  border-radius: 5px;
-  font-weight: 900;
-  font-size: 11px;
-  letter-spacing: .04em;
-  color: #fff;
-  min-width: 50px;
-  text-align: center;
-  box-shadow: 0 1px 2px rgba(0,0,0,.12);
+.cv-card-brands li {
+  display: inline-flex;
+  align-items: center;
 }
-/* 各ブランドカラー（公式ブランドガイドカラー） */
-.card-brand-visa  { background: #1a1f71; }
-.card-brand-jcb   { background: linear-gradient(90deg, #003e8c 0%, #003e8c 33%, #c41e3a 33%, #c41e3a 66%, #1ea850 66%, #1ea850 100%); }
-.card-brand-mc    { background: #eb001b; }
-.card-brand-amex  { background: #006fcf; }
-.card-brand-diners{ background: #0079be; }
+.cv-card-brands img {
+  height: 32px;          /* 統一高さ。比率は元画像準拠 */
+  width: auto;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  background: #fff;
+}
+@media (min-width: 700px) {
+  .cv-card-brands img { height: 40px; }
+}
 
 /* ===========================================================
    安全対策
