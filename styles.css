@@ -1702,8 +1702,8 @@ button { font-family: inherit; cursor: pointer; }
 
 .hero-speech {
   position: absolute;
-  top: 294px;
-  left: max(245px, calc(50% - 325px));
+  top: 274px;
+  left: max(120px, calc(50% - 480px));
   z-index: 9;
   width: 244px;
   filter: drop-shadow(3px 5px 0 color-mix(in srgb, var(--ref-blue) 18%, transparent));
@@ -1780,8 +1780,8 @@ button { font-family: inherit; cursor: pointer; }
 
 .hero-price {
   position: absolute;
-  left: max(390px, calc(50% - 200px));
-  bottom: 34px;
+  left: max(540px, calc(50% - 50px));
+  bottom: 14px;
   z-index: 10;
   width: 582px;
   max-width: 45vw;
