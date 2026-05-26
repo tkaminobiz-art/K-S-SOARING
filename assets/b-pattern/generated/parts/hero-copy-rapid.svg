@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 284" width="600" height="284">
+  <defs>
+    <filter id="softShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feOffset dx="4" dy="5" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="0.2" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0 0 0 0 0 0.15 0 0 0 0 0.32 0 0 0 .25 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="redShadow" x="-12%" y="-12%" width="132%" height="132%">
+      <feOffset dx="5" dy="6" result="off"/>
+      <feColorMatrix in="off" type="matrix" values="0 0 0 0 0 0 0 0 0 .14 0 0 0 0 .33 0 0 0 .24 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g font-family="'Hiragino Kaku Gothic StdN','Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',sans-serif" font-weight="900">
+    <rect x="0" y="0" width="284" height="49" fill="#0054b8"/>
+    <rect x="393" y="0" width="207" height="49" fill="#0054b8"/>
+    <text x="142" y="34" text-anchor="middle" font-size="25" fill="#fff">安心の明朗見積り</text>
+    <text x="496" y="34" text-anchor="middle" font-size="26" fill="#fff">即日対応可能</text>
+    <text x="337" y="44" text-anchor="middle" font-size="72" fill="#0054b8">×</text>
+
+    <g filter="url(#softShadow)" paint-order="stroke fill">
+      <text x="0" y="106" font-size="34" letter-spacing="-1" textLength="590" lengthAdjust="spacingAndGlyphs" fill="#111" stroke="#fff" stroke-width="9" stroke-linejoin="round">不用品回収・粗大ごみの片付けは</text>
+    </g>
+
+    <circle cx="67" cy="182" r="67" fill="#fa1823"/>
+    <text x="67" y="193" text-anchor="middle" font-size="31" fill="#fff" transform="rotate(-11 67 182)">丸ごと</text>
+
+    <g filter="url(#redShadow)" paint-order="stroke fill">
+      <text x="151" y="178" font-size="63" fill="#f71924" stroke="#fff" stroke-width="11" stroke-linejoin="round">"ラピッド"</text>
+      <text x="151" y="248" font-size="62" fill="#f71924" stroke="#fff" stroke-width="11" stroke-linejoin="round">にお任せ!!</text>
+    </g>
+  </g>
+</svg>
