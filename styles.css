@@ -62,6 +62,28 @@ body {
   font-feature-settings: "palt";
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* ===========================================================
+   2026トレンド: Noise overlay (AIっぽさ・テンプレ感の除去)
+   全ページに 4% opacity の SVG ノイズを overlay
+   =========================================================== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+  mix-blend-mode: multiply;
+}
+
+/* prefers-reduced-motion / 印刷時はノイズ非表示 */
+@media (prefers-reduced-motion: reduce), print {
+  body::after { display: none; }
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -1569,7 +1591,24 @@ button { font-family: inherit; cursor: pointer; }
   .coupon-rabbit { display: block; position: absolute; right: -8px; bottom: -4px; width: 100px; animation: rabbitMochi 1.6s ease-in-out infinite; }
   .coupon-content { padding-right: 110px; }
 
-  .fixed-cta { display: none; }
+  /* PC: 右下コンパクトフロート */
+  .fixed-cta {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    width: 320px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 32, 90, 0.22);
+    background: transparent;
+    gap: 0;
+    transform: translateY(calc(100% + 24px));
+  }
+  .fixed-cta a {
+    padding: 14px 12px;
+    font-size: 14px;
+  }
+  .fixed-cta b { font-size: 24px; }
   .site-footer { margin-bottom: 0; }
 }
 
@@ -1694,10 +1733,59 @@ button { font-family: inherit; cursor: pointer; }
   z-index: 8;
   width: min(600px, calc(100% - 36px));
   margin: 0;
+  /* Kinetic typography コンテナ */
+  overflow: visible;
 }
 
 .hero-copy img {
   width: 100%;
+  /* 初回 0.2s 待機 → 1.0s で左→右へ reveal → 完了後 shimmer ループ */
+  animation:
+    heroCopyReveal 1.0s cubic-bezier(0.22, 0.9, 0.31, 1) 0.2s both,
+    heroCopyShimmer 5.6s ease-in-out 1.6s infinite;
+}
+
+/* 左→右への一発 reveal — clip-path で帯を引く */
+@keyframes heroCopyReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    filter: brightness(1.05) saturate(0.92);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    filter: brightness(1) saturate(1);
+  }
+}
+
+/* 静かな shimmer — 5.6s に1回、軽い光沢の波が左→右に流れる */
+@keyframes heroCopyShimmer {
+  0%, 70%, 100% {
+    filter: brightness(1) saturate(1);
+    mask-image: none;
+  }
+  /* 72-90% の間だけ shimmer 帯が流れる */
+  72% {
+    filter: brightness(1.08) saturate(1.05);
+    mask-image: linear-gradient(100deg, #000 0%, #000 30%, rgba(255,255,255,.55) 45%, #000 60%, #000 100%);
+    mask-size: 220% 100%;
+    mask-position: -100% 0;
+  }
+  90% {
+    filter: brightness(1.08) saturate(1.05);
+    mask-image: linear-gradient(100deg, #000 0%, #000 30%, rgba(255,255,255,.55) 45%, #000 60%, #000 100%);
+    mask-size: 220% 100%;
+    mask-position: 100% 0;
+  }
+}
+
+/* prefers-reduced-motion: アニメ無効化 */
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy img {
+    animation: none;
+    clip-path: none;
+    filter: none;
+    mask-image: none;
+  }
 }
 
 .hero-speech {
