@@ -4449,3 +4449,115 @@ button { font-family: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .case-item, .case-arrow { animation: none; }
 }
+
+
+/* =============================================================
+   [Phase 3] 高齢者対応：重要要素の文字サイズを1.25倍に
+   WCAG 2.2 達成基準 1.4.4 (200% zoom 可能性) と
+   日本国内の高齢者UX基準（20px以上を推奨）に準拠
+   ============================================================= */
+
+/* --- セクション見出し（全セクション共通 sect-h2）--- */
+.sect-h2 {
+  font-size: 26px; /* 旧 21px → 26px (+24%) */
+  line-height: 1.35;
+}
+@media (min-width: 700px) {
+  .sect-h2 {
+    font-size: 36px; /* PC: 旧 28px → 36px */
+  }
+}
+
+/* --- CV帯：重要文言の拡大 --- */
+.cv-band .cv-chips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.cv-band .cv-chips li {
+  font-size: 13.5px;   /* 4チップが1行に収まる安全サイズ */
+  padding: 8px 4px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-align: center;
+  white-space: nowrap;
+}
+.cv-band .cv-rabbit-text {
+  font-size: 17px;     /* 旧 14px → 17px */
+  line-height: 1.6;
+}
+.cv-band .cv-rabbit-text strong {
+  font-size: 19px;
+}
+.cv-band .cv-now {
+  font-size: 17px;     /* 旧 14px → 17px */
+}
+.cv-band .cv-now-time b {
+  font-size: 17px;
+  padding: 3px 10px;
+}
+.cv-band .cv-tel-freedial-label {
+  font-size: 15px;     /* 旧 12px → 15px */
+  padding: 4px 14px;
+}
+.cv-band .cv-tel-num {
+  font-size: 44px;     /* 旧 36px → 44px (+22%) */
+  letter-spacing: .02em;
+}
+.cv-band .cv-tel-receipt {
+  font-size: 15px;     /* 旧 12px → 15px */
+}
+.cv-band .cv-tel-receipt b {
+  font-size: 14px;     /* 旧 11px → 14px */
+}
+.cv-band .cv-btn {
+  font-size: 17px;     /* 拡大しつつ見切れ防止 */
+  padding: 15px 6px;
+  min-height: 60px;    /* 44px → 60px でタップ領域拡大 */
+  letter-spacing: -0.01em;
+}
+.cv-band .cv-btn-line {
+  /* 「LINEで かんたん相談」を縮めて1行内に収める */
+  font-size: 15px;
+  padding: 15px 4px;
+}
+.cv-band .cv-btn-line b {
+  font-size: 17px;
+}
+.cv-band .cv-card-strip .cv-card-title {
+  font-size: 16px;     /* 旧 13px → 16px */
+}
+
+@media (min-width: 700px) {
+  .cv-band .cv-chips li        { font-size: 19px; padding: 10px 22px; }
+  .cv-band .cv-rabbit-text     { font-size: 22px; }
+  .cv-band .cv-rabbit-text strong { font-size: 26px; }
+  .cv-band .cv-now             { font-size: 22px; }
+  .cv-band .cv-now-time b      { font-size: 22px; padding: 4px 12px; }
+  .cv-band .cv-tel-freedial-label { font-size: 18px; padding: 5px 18px; }
+  .cv-band .cv-tel-receipt     { font-size: 18px; }
+  .cv-band .cv-tel-receipt b   { font-size: 17px; }
+  .cv-band .cv-btn             { font-size: 24px; min-height: 72px; }
+  .cv-band .cv-card-strip .cv-card-title { font-size: 20px; }
+}
+
+/* --- ヘッダー：電話番号・通話料無料を拡大 --- */
+.header-tel-label {
+  font-size: 14px !important; /* 旧 11px → 14px */
+}
+@media (min-width: 700px) {
+  .header-tel-label { font-size: 16px !important; }
+}
+
+/* --- フッター --- */
+.site-footer small {
+  font-size: 13px;
+  white-space: nowrap; /* 古物商番号の改行防止 */
+  letter-spacing: -0.01em;
+}
+@media (max-width: 380px) {
+  .site-footer small {
+    white-space: normal;
+    font-size: 11px;
+  }
+}
