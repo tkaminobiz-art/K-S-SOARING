@@ -4500,6 +4500,111 @@ button { font-family: inherit; cursor: pointer; }
   height: auto !important;
 }
 
+/* =============================================================
+   [Phase 6] 残セクションの文字サイズ拡大 — 高齢者対応の続き
+   ご利用の流れ / 会社情報 / 回収品目 / お客様の声
+   ============================================================= */
+
+/* --- ご利用の流れ --- */
+.flow-list li h3 {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 4px 0;
+}
+.flow-list li p {
+  font-size: 14px;
+}
+.flow-list .flow-num {
+  font-size: 22px;
+}
+@media (min-width: 700px) {
+  .flow-list li h3 { font-size: 22px; }
+  .flow-list li p  { font-size: 17px; }
+  .flow-list .flow-num { font-size: 28px; }
+}
+
+/* --- 会社情報 dl --- */
+.company-dl dt {
+  font-size: 14px;
+  font-weight: 900;
+}
+.company-dl dd {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.company-dl dd a {
+  font-size: 17px;
+  font-weight: 800;
+}
+@media (min-width: 700px) {
+  .company-dl dt { font-size: 17px; }
+  .company-dl dd { font-size: 18px; }
+  .company-dl dd a { font-size: 20px; }
+}
+
+/* --- 回収品目 (service-grid) --- */
+.service-grid a,
+.service-grid li {
+  font-size: 14px;
+  font-weight: 800;
+}
+@media (min-width: 700px) {
+  .service-grid a,
+  .service-grid li {
+    font-size: 17px;
+    padding: 12px 8px !important;
+  }
+}
+
+/* --- FAQ --- */
+.faq-list summary {
+  font-size: 16px;
+  font-weight: 800;
+}
+.faq-list p, .faq-list dd {
+  font-size: 15px;
+}
+@media (min-width: 700px) {
+  .faq-list summary { font-size: 19px; }
+  .faq-list p, .faq-list dd { font-size: 17px; }
+}
+
+/* --- LINE割クーポン部の極端拡大 --- */
+.coupon-ribbon {
+  font-size: 17px !important;
+  padding: 6px 18px !important;
+}
+.coupon-line-top {
+  font-size: 17px !important;
+  font-weight: 900;
+}
+.coupon-line-big b {
+  font-size: 64px !important;  /* 「5」を極端に大きく */
+  line-height: 1;
+}
+.coupon-line-big i {
+  font-size: 36px !important;
+}
+.coupon-line-big strong {
+  font-size: 28px !important;
+}
+.coupon-note {
+  font-size: 15px;
+  font-weight: 700;
+}
+.coupon-note strong {
+  font-size: 16px;
+}
+@media (min-width: 700px) {
+  .coupon-ribbon { font-size: 22px !important; padding: 8px 24px !important; }
+  .coupon-line-top { font-size: 22px !important; }
+  .coupon-line-big b { font-size: 96px !important; }
+  .coupon-line-big i { font-size: 50px !important; }
+  .coupon-line-big strong { font-size: 38px !important; }
+  .coupon-note { font-size: 19px; }
+  .coupon-note strong { font-size: 21px; }
+}
+
 
 /* =============================================================
    [Phase 5] 比較表 → スマホで縦並びカード化（横スクロール撤廃）
