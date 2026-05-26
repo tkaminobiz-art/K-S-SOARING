@@ -631,6 +631,9 @@ button { font-family: inherit; cursor: pointer; }
   gap: 8px;
   margin-top: 12px;
 }
+.cv-btn-row-single {
+  grid-template-columns: 1fr;
+}
 .cv-btn {
   display: flex;
   align-items: center;
