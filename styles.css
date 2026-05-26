@@ -4316,9 +4316,10 @@ button { font-family: inherit; cursor: pointer; }
     margin-left: 2px;
   }
 
-  /* ▼矢印を「お電話に繋がりやすい時間です」と被らないように */
+  /* ▼スペースは .cv-now の padding-top で確保しているので、
+     cv-rabbit-row 下の余白は最小化（ユーザー指示で空白を詰める） */
   .cv-rabbit-row {
-    margin-bottom: 28px;  /* 矢印用の余白を確保 */
+    margin-bottom: 6px;
   }
   .cv-band .cv-now {
     margin-top: 0;
