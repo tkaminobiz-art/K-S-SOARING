@@ -561,6 +561,20 @@ button { font-family: inherit; cursor: pointer; }
   font-weight: 800;
   margin-bottom: 8px;
   font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.cv-now-line1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.cv-now-text {
+  margin: 0;
+  /* 「お電話に繋がりやすい時間です。」を1行で表示 */
+  white-space: nowrap;
 }
 .cv-now-clip { color: var(--c-text); font-weight: 900; }
 .cv-now-time b { background: var(--c-text); color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 800; margin: 0 4px; }
@@ -4136,6 +4150,42 @@ button { font-family: inherit; cursor: pointer; }
    - white-space: nowrap で1行強制（オーバーフロー時のみ折り返し）
    ============================================ */
 .br-sp { display: none !important; }
+/* .br-mb は強制モバイル改行（br-sp と違い無効化しない） */
+.br-mb { display: none; }
+@media (max-width: 767px) {
+  .br-mb { display: inline !important; }
+}
+
+/* =============================================================
+   半端な wrap 防止：最終行に1-2文字だけ残るのを抑制
+   text-wrap: pretty/balance は自動でバランスよく改行
+   ============================================================= */
+@media (max-width: 767px) {
+  .cv-rabbit-text,
+  .coupon-note,
+  .promise-sub,
+  .promise-card p,
+  .promise-card h3,
+  .reason-grid p,
+  .reason-grid h3,
+  .flow-list p,
+  .area-lead,
+  .area-note,
+  .danger p,
+  .company-story p,
+  .company-sub,
+  .sect-h2,
+  .staff-card p,
+  .staff-card h3,
+  .service-list p,
+  .case-note,
+  .price-desc {
+    text-wrap: pretty;  /* 最新ブラウザ: 孤立を防ぐ */
+    text-wrap: balance; /* fallback: 行を均等配分 */
+    word-break: auto-phrase;
+    line-break: strict;
+  }
+}
 
 @media (max-width: 767px) {
   /* 全セクション見出し H2 を1行に収める */
