@@ -1237,10 +1237,12 @@ button { font-family: inherit; cursor: pointer; }
   max-width: var(--c-max);
   margin: 14px auto 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* スマホは3列：「マッサージチェア」を1行に収める（PCは min-width:700 で6列に上書き）
+     minmax(0,1fr) でグリッドのはみ出し（blowout）を防ぐ */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px 8px;
 }
-.items-grid li { text-align: center; }
+.items-grid li { text-align: center; min-width: 0; }
 .items-circle {
   display: grid;
   place-items: center;
@@ -2088,8 +2090,8 @@ button { font-family: inherit; cursor: pointer; }
   .cv-btn { font-size: 20px; padding: 18px 12px; }
   .cv-tel-num { font-size: 56px; }
 
-  .price-grid { grid-template-columns: repeat(3, 1fr); }
-  .items-grid { grid-template-columns: repeat(6, 1fr); }
+  .price-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .items-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .reason-grid { grid-template-columns: repeat(2, 1fr); }
   .ihin-grid { grid-template-columns: repeat(4, 1fr); }
   .voice-grid { grid-template-columns: repeat(3, 1fr); }
@@ -4132,7 +4134,8 @@ button { font-family: inherit; cursor: pointer; }
 
 .promise-blocks {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* スマホは1列：横幅を確保し本文の行を均等化（PCは768pxで4列に上書き） */
+  grid-template-columns: 1fr;
   gap: 14px;
   margin: 0 0 28px;
 }
@@ -5662,7 +5665,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 @media (max-width: 380px) {
   .site-footer small {
-    font-size: 10.5px;
+    font-size: 12px;
   }
 }
 
@@ -5804,4 +5807,201 @@ button { font-family: inherit; cursor: pointer; }
 .coupon-lead strong,
 .area-lead strong {
   white-space: nowrap;
+}
+
+/* ============================================================
+   [MTG6 / SPテキスト調整] スマホ可読性 最終調整
+   - 本文系: word-break: auto-phrase（文節折返し）で孤立行・文節分断を解消
+   - 分断禁止: 電話番号・価格・短ラベルを nowrap
+   - 比較表: 極小フォントをやめ ≥12px ＋ 横スクロール
+   - 単品ラベル / ご利用の流れ番号 / 価格の「円〜」連結
+   ※ 末尾に置くことで、既存の重複ルールを source-order で上書きする
+   ============================================================ */
+
+/* --- 汎用 nowrap ユーティリティ --- */
+.nowrap, .no-wrap {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+/* --- 本文系：文節単位の自然な折返し（孤立行・文節途中分断の解消） --- */
+.promise-lead,
+.promise-card p,
+.coupon-lead,
+.coupon-howto-body,
+.price-note,
+.price-desc,
+.price-was,
+.compare-note,
+.case-desc,
+.cases-note,
+.cases-sub,
+.voice-grid h3,
+.voice-grid p,
+.area-lead,
+.area-note,
+.area-list li,
+.faq-list summary,
+.faq-list details p,
+.company-story p,
+.company-sub,
+.company-dl dd,
+.ihin-lead,
+.service-grid p,
+.reason-grid p,
+.danger p,
+.staff-card p,
+.cv-rabbit-text {
+  line-break: strict;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+@supports (word-break: auto-phrase) {
+  .promise-lead,
+  .promise-card p,
+  .coupon-lead,
+  .coupon-howto-body,
+  .price-note,
+  .price-desc,
+  .price-was,
+  .compare-note,
+  .case-desc,
+  .cases-note,
+  .cases-sub,
+  .voice-grid h3,
+  .voice-grid p,
+  .area-lead,
+  .area-note,
+  .area-list li,
+  .faq-list summary,
+  .faq-list details p,
+  .company-story p,
+  .company-sub,
+  .company-dl dd,
+  .ihin-lead,
+  .service-grid p,
+  .reason-grid p,
+  .danger p,
+  .staff-card p,
+  .cv-rabbit-text {
+    word-break: auto-phrase;
+  }
+}
+
+/* --- 価格：数値と「円〜」を密着＋分断禁止（8,330円〜） --- */
+.price-now { gap: 0; }
+.price-now .price-badge { margin-right: 7px; }
+.price-now strong,
+.price-now em { white-space: nowrap; }
+
+/* --- 会社情報の電話番号：分断禁止 --- */
+.company-dl dd a { white-space: nowrap; word-break: keep-all; }
+
+/* --- 単品回収ラベル：マッサージチェアを1行に（≥12px厳守・3列化と併用） --- */
+.items-circle { max-width: 96px; margin-inline: auto; }
+.items-grid b {
+  white-space: nowrap;
+  word-break: keep-all;
+  font-size: clamp(12px, 3.4vw, 14px);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+@media (min-width: 700px) {
+  .items-circle { max-width: none; }
+  .items-grid b { font-size: 15px; white-space: normal; }
+}
+
+/* --- ご利用の流れ：ol自動番号を消し、番号バッジの二重表示を防ぐ --- */
+.flow-list { list-style: none; padding: 0; }
+.flow-list li { list-style: none; }
+
+/* ============================================================
+   比較表：スマホで極小フォントをやめ、横スクロールで読ませる
+   （末尾配置＋!important で 9.5/10.5px の旧ルールを上書き）
+   ============================================================ */
+@media (max-width: 767px) {
+  /* overflow を付けない：overflow-x:auto は overflow-y を auto 化し、
+     表の上に出ているマスコット（うさぎ）を縦に切ってしまうため。
+     表は min-width:0!important + table-layout:fixed で常に収まる＝スクロール不要。 */
+  .compare-wrap {
+    overflow: visible;
+  }
+  .compare-table {
+    min-width: 0 !important;
+    font-size: 13px !important;
+  }
+  .compare-table th,
+  .compare-table td {
+    padding: 9px 6px !important;
+    letter-spacing: 0 !important;
+  }
+  .compare-table thead th { font-size: 13px !important; }
+  .compare-table thead th.us { padding: 8px 6px !important; }
+  .compare-table thead th.us .us-name { font-size: 14px !important; }
+  .compare-table thead th.us .us-badge { font-size: 11px !important; padding: 3px 8px !important; }
+  .compare-table tbody th { font-size: 13px !important; padding: 10px 8px !important; }
+  .compare-table tbody td { font-size: 13px !important; line-height: 1.4 !important; letter-spacing: 0 !important; }
+  .compare-table tbody td.us { font-size: 14px !important; }
+  .compare-table td b,
+  .compare-table td.us b.free,
+  .compare-table td.us b { font-size: 17px !important; letter-spacing: 0.04em !important; }
+  .compare-table td.us .us-pack { font-size: 12px !important; }
+  .compare-table td.us strong { font-size: 16px !important; }
+}
+@media (max-width: 380px) {
+  .compare-table { min-width: 540px; font-size: 12px !important; }
+  .compare-table th,
+  .compare-table td { padding: 8px 5px !important; }
+}
+
+/* ============================================================
+   [MTG6-2 / 枠内テキスト均等化] 2026-06-04
+   - 本文ブロックを両端揃え(justify)で枠に揃える（右端ガタガタ解消）
+   - お約束カードは1列化済み → 見出しは文節折返しで自然に
+   - 句読点直後/文節途中/1文字の孤立改行を回避
+   ============================================================ */
+
+/* 本文の両端揃え（カード内の左揃え本文のみ。リード/中央寄せ系は対象外）
+   重要: justify は word-break:normal とセットにする。
+   auto-phrase と併用すると「文節と文節の間」が引き伸ばされて
+   "その 経験 から" のような文字間スカスカ現象になるため、ここでは無効化。
+   日本語の両端揃えは normal＋line-break:strict（禁則処理）で詰めて揃える。 */
+.promise-card p,
+.voice-grid p,
+.staff-card p,
+.service-grid p,
+.faq-list details p,
+.company-story p,
+.case-desc,
+.danger p {
+  text-align: justify;
+  text-align-last: left;          /* 最終行は伸ばさない */
+  word-break: normal;             /* auto-phrase を上書き（隙間防止） */
+  line-break: strict;             /* 禁則処理 */
+  overflow-wrap: anywhere;
+}
+@supports (word-break: auto-phrase) {
+  .promise-card p,
+  .voice-grid p,
+  .staff-card p,
+  .service-grid p,
+  .faq-list details p,
+  .company-story p,
+  .case-desc,
+  .danger p { word-break: normal; }   /* 明示的に auto-phrase を打ち消す */
+}
+
+/* お約束カード見出し：1列化で横幅が広がったので文節折返しで自然な改行に */
+@media (max-width: 767px) {
+  .promise-card h3 {
+    white-space: normal;
+    word-break: auto-phrase;
+    overflow-wrap: normal;     /* 単語途中の分断を避ける */
+    text-wrap: balance;
+  }
+}
+
+/* 対応事例キャプション：中央寄せ → 両端揃え（上のルールが効くよう中央指定を解除） */
+@media (max-width: 767px) {
+  .case-desc { text-align: justify; }
 }
