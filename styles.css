@@ -3121,7 +3121,7 @@ button { font-family: inherit; cursor: pointer; }
 .sect-h2 {
   position: relative;
   display: inline-block;
-  padding: 0 36px 16px;
+  padding: 0 36px 18px;
   /* 見出しテキスト幅(=box幅−左右36pxパディング)に連動した赤黄青ライン */
   background-image: linear-gradient(90deg,
     var(--c-red) 0%, var(--c-red) 30%,
@@ -3130,7 +3130,7 @@ button { font-family: inherit; cursor: pointer; }
     transparent 65%, transparent 70%,
     var(--c-blue-deep) 70%, var(--c-blue-deep) 100%);
   background-repeat: no-repeat;
-  background-position: center bottom 2px;
+  background-position: center bottom 4px;
   background-size: calc(100% - 72px) 5px;
 }
 .sect-h2::before,
@@ -4725,12 +4725,14 @@ button { font-family: inherit; cursor: pointer; }
    ============================================ */
 @media (max-width: 767px) {
   .sect-h2 {
-    padding: 0 24px;  /* 36→24 シャイン用余白を縮小 */
+    padding: 0 24px 22px;  /* 左右36→24 / 下に3色ラインのクリアランスを確保 */
+    background-size: calc(100% - 48px) 5px;  /* 左右24pxに合わせて線幅を文字幅に一致 */
   }
   .promise .sect-h2,
   .company .sect-h2 {
     font-size: 15px;
-    padding: 0 22px;
+    padding: 0 22px 20px;
+    background-size: calc(100% - 44px) 5px;
     letter-spacing: -0.02em;
   }
   .sect-h2::before,
@@ -5653,4 +5655,120 @@ button { font-family: inherit; cursor: pointer; }
   .site-footer small {
     font-size: 10.5px;
   }
+}
+
+/* ============================================================
+   クーポン リニューアル：プレミアム金券画像 ＋ テキストオーバーレイ
+   （旧 .coupon-stub / .coupon-banner / .coupon-cut を置換）
+   ============================================================ */
+.coupon {
+  background: linear-gradient(180deg, #fffdf6 0%, #fff1cc 100%);
+  padding: 30px 14px 34px;
+}
+.coupon::before { display: none; } /* 旧サンバースト用グローを無効化 */
+
+.coupon-wrap { max-width: 600px; margin: 0 auto; }
+
+.coupon-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1280 / 853;
+  border-radius: 18px;
+  box-shadow: 0 10px 22px rgba(150,90,0,.20);
+}
+.coupon-ticket-img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+/* 期間限定タグ（左上） */
+.coupon-card .coupon-period-tag {
+  position: absolute;
+  top: -4%; left: 1%;
+  z-index: 5;
+  background: var(--c-red); color: #fff; font-weight: 900;
+  font-size: 4cqw; letter-spacing: .06em;
+  padding: 1.2cqw 3cqw; border-radius: 5px;
+  transform: rotate(-7deg);
+  box-shadow: 0 0.8cqw 1.8cqw rgba(150,0,10,.3);
+  animation: burstWobble 2.2s ease-in-out infinite alternate;
+}
+
+/* オファー：中央サンバースト円に集約 */
+.coupon-offer { position: absolute; inset: 0; z-index: 3; }
+.coupon-offer > * {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  text-align: center; white-space: nowrap;
+}
+.coupon-brand {
+  top: 6%;
+  background: linear-gradient(180deg,#25d869,#06c755 60%,#02a544);
+  color: #fff; font-weight: 900; font-family: var(--c-font-pop), sans-serif;
+  font-size: 4.6cqw; letter-spacing: .02em;
+  padding: 1.3cqw 4.5cqw; border-radius: 999px;
+  box-shadow: 0 0.8cqw 0 #02862e;
+}
+.coupon-max {
+  top: 21.5%;
+  font-size: 4.4cqw; font-weight: 900; color: var(--c-red);
+  letter-spacing: .06em; text-shadow: 0 1px 0 #fff, 0 0 3px #fff;
+}
+.coupon-off {
+  top: 51%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; line-height: .76;
+}
+.coupon-off-top { display: inline-flex; align-items: flex-start; }
+.coupon-off-num {
+  font-family: "Bowlby One", var(--c-font-pop), sans-serif;
+  font-size: 17.5cqw; color: var(--c-red); font-weight: 900;
+  -webkit-text-stroke: 0.7cqw #fff; paint-order: stroke fill;
+  text-shadow: 0 0.7cqw 0 #b80010, 0 1.2cqw 1cqw rgba(150,0,10,.25);
+  letter-spacing: -0.05em;
+}
+.coupon-off-pct {
+  font-family: "Bowlby One", var(--c-font-pop), sans-serif;
+  font-size: 10cqw; color: var(--c-red); font-weight: 900;
+  -webkit-text-stroke: 0.5cqw #fff; paint-order: stroke fill;
+  margin-top: 1cqw;
+}
+.coupon-off-word {
+  font-size: 8.5cqw; font-weight: 900; color: var(--c-red);
+  font-family: var(--c-font-pop), sans-serif;
+  -webkit-text-stroke: 0.45cqw #fff; paint-order: stroke fill;
+  letter-spacing: .04em; margin-top: -0.5cqw;
+}
+.coupon-limit {
+  top: 72%;
+  background: var(--c-red); color: #fff; font-weight: 900;
+  font-size: 4cqw; padding: 1cqw 3.4cqw; border-radius: 999px;
+  box-shadow: 0 0.6cqw 0 #b80010;
+}
+.coupon-limit b { color: #ffe14d; }
+
+/* うさぎ（右下） */
+.coupon-rabbit-img {
+  position: absolute; right: 0.5%; bottom: 2%;
+  width: 22%; z-index: 4;
+  filter: drop-shadow(0 0.5cqw 0.8cqw rgba(0,60,30,.25));
+  animation: mascotJump 1.8s ease-in-out infinite;
+}
+
+/* 説明＋ご利用方法 */
+.coupon-info { margin-top: 22px; text-align: center; }
+.coupon-lead {
+  margin: 0 auto 18px; max-width: 560px;
+  font-size: 15px; line-height: 1.8; font-weight: 700; color: #4a3a1a;
+}
+.coupon-lead strong {
+  color: var(--c-red); background: #fff3c4;
+  padding: 1px 8px; border-radius: 4px; font-weight: 900;
+}
+
+@media (min-width: 700px) {
+  .coupon-lead { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coupon-period-tag, .coupon-rabbit-img { animation: none; }
 }
