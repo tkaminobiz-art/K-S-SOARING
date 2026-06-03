@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&family=Mochiy+Pop+One&family=Bowlby+One&family=Reggae+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260530-cachebust">
+  <link rel="stylesheet" href="styles.css?v=20260603-mtg3">
 </head>
 <body>
   <!-- ===== ヘッダー ===== -->
@@ -16,10 +16,13 @@
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="即日回収ラピッド トップへ">
         <span class="brand-mark" aria-hidden="true">
-          <img src="assets/c-pattern/parts/rabbit-face.png" alt="" onerror="this.src='assets/b-pattern/generated/parts/rabbit-face-icon.webp'">
+          <img src="assets/b-pattern/generated/parts/rabbit-face-icon.webp" alt="">
         </span>
         <span class="brand-text">
-          <em class="brand-tag">不用品回収</em>
+          <span class="brand-tags">
+            <em class="brand-tag">不用品回収</em>
+            <em class="brand-tag brand-tag-ihin">遺品整理</em>
+          </span>
           <strong>即日回収ラピッド</strong>
         </span>
       </a>
@@ -61,15 +64,15 @@
       <h1 class="hero-copy">
         <img src="assets/b-pattern/generated/parts/hero-copy-rapid.svg" alt="安心の明朗見積り、即日対応可能。不用品回収・粗大ごみの片付けは丸ごとラピッドにお任せ。">
       </h1>
-      <img class="hero-speech" src="assets/b-pattern/generated/parts/hero-speech-rapid.png" alt="すべてコミコミ">
+      <img class="hero-speech" src="assets/b-pattern/generated/parts/hero-speech-komikomi.svg" alt="こみこみ価格">
       <img class="hero-rabbit-left" src="assets/b-pattern/generated/parts/rabbit-left.webp" alt="">
       <div class="hero-truck-wrap" aria-hidden="true">
         <img class="hero-truck" src="assets/c-pattern/parts/company/truck-white-ks.webp" alt="">
       </div>
       <img class="hero-rabbit-small" src="assets/b-pattern/generated/parts/rabbit-small.webp" alt="">
-      <img class="hero-discount" src="assets/b-pattern/generated/parts/hero-discount-rapid.svg" alt="LINE見積り限定 5%OFF">
+      <img class="hero-discount" src="assets/b-pattern/generated/parts/hero-discount-rapid.svg" alt="LINE見積り限定 最大20%OFF">
       <img class="hero-sparkle" src="assets/b-pattern/generated/parts/hero-sparkle-rapid.png" alt="">
-      <img class="hero-price" src="assets/b-pattern/generated/parts/hero-zero-rapid.png" alt="0円">
+      <img class="hero-price" src="assets/b-pattern/generated/parts/hero-zero-rapid-v2.png" alt="0円">
       <div class="hero-includes" aria-label="無料項目">
         <span>基本料金</span>
         <span>出張費</span>
@@ -88,11 +91,11 @@
         </ul>
 
         <div class="cv-rabbit-row">
-          <img class="cv-rabbit" src="assets/c-pattern/parts/rabbit-hello.png" alt=""
-               onerror="this.src='assets/b-pattern/rabbit-mascot.webp'">
+          <img class="cv-rabbit cv-rabbit-l" src="assets/b-pattern/rabbit-mascot.webp" alt="">
           <p class="cv-rabbit-text">
             お電話・LINEで<strong>無料相談OK！</strong><br class="br-mb">お急ぎの片付けもご連絡ください。
           </p>
+          <img class="cv-rabbit cv-rabbit-r" src="assets/b-pattern/rabbit-mascot.webp" alt="">
         </div>
 
         <div class="cv-now">
@@ -106,8 +109,10 @@
 
         <div class="cv-tel-card">
           <span class="cv-tel-freedial-label">通話料無料</span>
-          <span class="cv-tel-icon freedial-mark" aria-hidden="true">➿</span>
-          <a href="tel:0120768876" class="cv-tel-num">0120-768-876</a>
+          <span class="cv-tel-numline">
+            <img class="cv-tel-icon" src="assets/c-pattern/parts/freedial-mark.svg" alt="フリーダイヤル">
+            <a href="tel:0120768876" class="cv-tel-num">0120-768-876</a>
+          </span>
           <span class="cv-tel-receipt"><b>電話受付</b>24時間 年中無休</span>
         </div>
 
@@ -120,10 +125,10 @@
         <div class="cv-card-strip">
           <strong class="cv-card-title">各種クレジットカード支払OK!</strong>
           <ul class="cv-card-brands" aria-label="対応カードブランド">
-            <li><img src="assets/c-pattern/parts/cards/visa.webp" alt="VISA" loading="lazy" width="158" height="82"></li>
-            <li><img src="assets/c-pattern/parts/cards/mastercard.webp" alt="Mastercard" loading="lazy" width="162" height="82"></li>
-            <li><img src="assets/c-pattern/parts/cards/jcb.webp" alt="JCB" loading="lazy" width="129" height="82"></li>
-            <li><img src="assets/c-pattern/parts/cards/amex.webp" alt="American Express" loading="lazy" width="129" height="80"></li>
+            <li><img src="assets/c-pattern/parts/cards/visa-clean.webp" alt="VISA" loading="lazy" width="152" height="76"></li>
+            <li><img src="assets/c-pattern/parts/cards/mastercard-clean.webp" alt="Mastercard" loading="lazy" width="156" height="76"></li>
+            <li><img src="assets/c-pattern/parts/cards/jcb-clean.webp" alt="JCB" loading="lazy" width="123" height="76"></li>
+            <li><img src="assets/c-pattern/parts/cards/amex-clean.webp" alt="American Express" loading="lazy" width="123" height="74"></li>
           </ul>
         </div>
       </div>
@@ -131,18 +136,21 @@
 
     <!-- ===== 権威メダル（旧・安全対策セクションを置換） ===== -->
     <section class="proof" aria-label="信頼と実績">
-      <article>
-        <img class="proof-medal" src="assets/c-pattern/parts/medal-500ken.png" alt="累計対応件数 500件 突破！">
-        <small>※2025年実績</small>
-      </article>
-      <article>
-        <img class="proof-medal" src="assets/c-pattern/parts/medal-area.png" alt="対応エリア 近畿一円 全域対応">
-        <small>即日対応も可能！</small>
-      </article>
-      <article>
-        <img class="proof-medal" src="assets/c-pattern/parts/medal-98percent.png" alt="お客様満足度 98% 以上！">
-        <small>※自社アンケート調べ</small>
-      </article>
+      <h2 class="proof-title">地域密着の<span>信頼と実績</span></h2>
+      <div class="proof-medals">
+        <article>
+          <img class="proof-medal" src="assets/c-pattern/parts/medal-500ken.png" alt="累計対応件数 500件 突破！">
+          <small>※2025年実績</small>
+        </article>
+        <article>
+          <img class="proof-medal" src="assets/c-pattern/parts/medal-98percent.png" alt="お客様満足度 98% 以上！">
+          <small>※自社アンケート調べ</small>
+        </article>
+        <article>
+          <img class="proof-medal" src="assets/c-pattern/parts/medal-area.png" alt="対応エリア 近畿一円 全域対応">
+          <small>即日対応も可能！</small>
+        </article>
+      </div>
     </section>
 
     <!-- ===== お約束していること（読者の不安への直接回答） ===== -->
@@ -150,7 +158,7 @@
       <header class="sect-head">
         <span class="sect-eyebrow">お約束していること</span>
         <h2 class="sect-h2">お見積り後、追加で<br class="br-sp">お金をいただきません</h2>
-        <p class="promise-sub">東大阪市から、<br class="br-sp">近畿一円にお伺いします</p>
+        <p class="promise-sub">東大阪市から<br class="br-sp">近畿一円にお伺いします</p>
       </header>
 
       <p class="promise-lead">
@@ -182,7 +190,7 @@
             <span class="promise-label">仕分け対応</span>
           </div>
           <h3>遺品は、確認してから<br class="br-card">運びます</h3>
-          <p>写真・手紙・形見の品は、必要・不要を一品ずつ確認してから運びます。古物商許可(第62222R075401号)の知識で、買取できるお品も合わせて確認します。</p>
+          <p>写真・手紙・形見の品は、必要・不要を一品ずつ確認してから運びます。古物商の知識で、買取できるお品も合わせて確認します。</p>
         </article>
 
         <article class="promise-card">
@@ -190,13 +198,13 @@
             <img src="assets/c-pattern/parts/company/card-sign.webp" alt="東大阪市渋川町 事務所所在地" loading="lazy" width="800" height="600">
             <span class="promise-label">事務所所在地</span>
           </div>
-          <h3>東大阪市に、<br class="br-card">事務所と倉庫があります</h3>
+          <h3>東大阪市に<br class="br-card">事務所と倉庫があります</h3>
           <p>事務所も倉庫も同じ場所です。お預かりしたお品は、こちらで仕分け・査定します。</p>
         </article>
       </div>
 
       <ul class="promise-badges" aria-label="お約束していること">
-        <li><span class="promise-badge-mark">✓</span>古物商許可保有</li>
+        <li><span class="promise-badge-mark">✓</span>古物商</li>
         <li><span class="promise-badge-mark">✓</span>大型倉庫完備</li>
         <li><span class="promise-badge-mark">✓</span>お見積り無料</li>
         <li><span class="promise-badge-mark">✓</span>出張料無料</li>
@@ -206,8 +214,29 @@
     <!-- ===== LINE割クーポン（割引訴求セクション） ===== -->
     <section class="coupon" id="coupon" aria-label="LINE割クーポン">
       <div class="coupon-ticket">
-        <!-- 上半券：1枚画像で完結（期間限定/LINE割/1日10名/5%OFF/うさぎ全部入り） -->
-        <img class="coupon-banner" src="assets/c-pattern/parts/coupon-banner.webp" alt="期間限定LINE割クーポン 1日10名限定 最大5%OFF 今ならお得なキャンペーン中。ホームページを見てお問い合わせいただいた方に特別価格でご案内します。" width="1316" height="708">
+        <span class="coupon-period-tag">期間限定</span>
+
+        <!-- 上半券：左右分割（テキストはすべて編集可能） -->
+        <div class="coupon-stub">
+          <div class="coupon-stub-left">
+            <span class="coupon-stub-brand">LINE割クーポン</span>
+            <img class="coupon-burst" src="assets/c-pattern/parts/coupon-burst-3mei.svg" alt="1日3名限定">
+            <p class="coupon-stub-lead">今ならお得な<br>キャンペーン中!!</p>
+            <p class="coupon-stub-cond">ホームページを見てお問い合わせいただいた方に<strong>特別価格</strong>でご案内</p>
+          </div>
+          <div class="coupon-stub-right">
+            <span class="coupon-stub-prefix">最大</span>
+            <span class="coupon-stub-num-row">
+              <span class="coupon-stub-num">20</span>
+              <span class="coupon-stub-unit">
+                <span class="coupon-stub-percent">%</span>
+                <span class="coupon-stub-off">OFF</span>
+              </span>
+            </span>
+            <span class="coupon-stub-exclaim">!!</span>
+            <img class="coupon-stub-mascot" src="assets/b-pattern/rabbit-coupon.webp" alt="">
+          </div>
+        </div>
 
         <!-- きりとり線 -->
         <div class="coupon-cut" aria-hidden="true">
@@ -222,7 +251,7 @@
           <p class="coupon-howto-title">▼ ご利用方法 ▼</p>
           <p class="coupon-howto-body">
             LINEで写真送信のメッセージに<br class="br-mb">
-            <strong>「HPを見ました」</strong>と一言お伝えください
+            <strong class="coupon-hp-em">「HPを見ました」</strong><br>と一言お伝えください
           </p>
           <a class="coupon-howto-cta" href="https://lin.ee/Uze6YTx" target="_blank" rel="noopener">
             <span aria-hidden="true">💬</span>LINEでクーポンを使う
@@ -245,7 +274,7 @@
             <span class="price-was">通常価格 9,800円(税込)〜が</span>
             <div class="price-now">
               <span class="price-badge">LINE割</span>
-              <strong>4,980</strong><em>円〜</em>
+              <strong>8,330</strong><em>円〜</em>
             </div>
           </div>
           <p class="price-desc">小型家電・袋ゴミ数点</p>
@@ -257,7 +286,7 @@
             <span class="price-was">通常価格 19,800円(税込)〜が</span>
             <div class="price-now">
               <span class="price-badge">LINE割</span>
-              <strong>9,800</strong><em>円〜</em>
+              <strong>16,830</strong><em>円〜</em>
             </div>
           </div>
           <p class="price-desc">1R・単身向けまとめて</p>
@@ -269,7 +298,7 @@
             <span class="price-was">通常価格 29,800円(税込)〜が</span>
             <div class="price-now">
               <span class="price-badge">LINE割</span>
-              <strong>14,800</strong><em>円〜</em>
+              <strong>25,330</strong><em>円〜</em>
             </div>
           </div>
           <p class="price-desc">家具家電をまとめて</p>
@@ -281,19 +310,19 @@
             <span class="price-was">通常価格 39,800円(税込)〜が</span>
             <div class="price-now">
               <span class="price-badge">LINE割</span>
-              <strong>24,800</strong><em>円〜</em>
+              <strong>31,840</strong><em>円〜</em>
             </div>
           </div>
           <p class="price-desc">1DK〜1LDK</p>
         </li>
         <li class="price-card">
-          <span class="price-ribbon price-ribbon-xl">2tパック</span>
+          <span class="price-ribbon price-ribbon-xl">LLパック</span>
           <div class="price-card-body">
-            <img class="price-illust" src="assets/c-pattern/parts/price/pack-2t-cargo.webp" alt="2tパック - 2tトラック" loading="lazy">
+            <img class="price-illust" src="assets/c-pattern/parts/price/pack-2t-cargo.webp" alt="LLパック - 大型トラック" loading="lazy">
             <span class="price-was">通常価格 69,800円(税込)〜が</span>
             <div class="price-now">
               <span class="price-badge">LINE割</span>
-              <strong>49,800</strong><em>円〜</em>
+              <strong>55,840</strong><em>円〜</em>
             </div>
           </div>
           <p class="price-desc">ファミリー・大量回収</p>
@@ -301,17 +330,17 @@
         <li class="price-card">
           <span class="price-ribbon price-ribbon-house">ゴミ屋敷</span>
           <div class="price-card-body">
-            <img src="assets/c-pattern/parts/price-illust-house.png" alt="" onerror="this.style.display='none'">
+            <img class="price-illust" src="assets/c-pattern/parts/icon-yashiki.png" alt="ゴミ屋敷 - 一部屋まるごと" loading="lazy">
             <span class="price-was">通常価格 99,800円(税込)〜が</span>
             <div class="price-now">
               <span class="price-badge">LINE割</span>
-              <strong>79,800</strong><em>円〜</em>
+              <strong>79,840</strong><em>円〜</em>
             </div>
           </div>
           <p class="price-desc">1部屋まるごと</p>
         </li>
       </ul>
-      <p class="price-note">※搬出経路・量により金額が変動する場合があります。LINEで写真を送っていただければ概算をご案内します。</p>
+      <p class="price-note">※搬出経路・量により金額が変動する場合があります。<br>LINEで写真を送っていただければ概算をご案内します。</p>
     </section>
 
     <!-- ===== 単品回収 ===== -->
@@ -331,7 +360,7 @@
         <li><span class="items-circle"><img src="assets/c-pattern/parts/item-futon.png" alt=""></span><b>布団</b></li>
         <li><span class="items-circle"><img src="assets/c-pattern/parts/item-aircon.png" alt=""></span><b>エアコン</b></li>
         <li><span class="items-circle"><img src="assets/c-pattern/parts/item-dryer.png" alt=""></span><b>乾燥機</b></li>
-        <li><span class="items-circle"><img src="assets/c-pattern/parts/item-massage.png" alt=""></span><b>マッサージチェア</b></li>
+        <li><span class="items-circle"><img src="assets/c-pattern/parts/item-massage.png" alt=""></span><b>マッサージ<br>チェア</b></li>
         <li><span class="items-circle"><img src="assets/c-pattern/parts/item-bike.png" alt=""></span><b>自転車</b></li>
       </ul>
       <div class="items-cloud">
@@ -377,7 +406,7 @@
       <div class="compare-head">
         <p class="compare-headline">こんなに違う！こんなにオトク！</p>
         <h2 class="compare-title">
-          <span class="compare-title-big">他社</span><span class="compare-title-rest">と比べて<br class="br-mb">みてください！</span>
+          <span class="compare-title-big">他社</span><span class="compare-title-rest">と比べてみてください！</span>
         </h2>
       </div>
       <div class="compare-wrap">
@@ -412,7 +441,7 @@
               <th>車両費</th>
               <td class="us"><b class="free">無&nbsp;料</b></td>
               <td>無料</td>
-              <td>3,000円</td>
+              <td>3,000円〜</td>
             </tr>
             <tr>
               <th>追加料金</th>
@@ -426,8 +455,8 @@
                 <span class="us-pack">SSパック</span>
                 <strong>4,980円〜</strong>
               </td>
-              <td>軽トラ1台<br>19,800円</td>
-              <td>軽トラパック<br>15,000円</td>
+              <td>軽トラ1台<br>19,800円〜</td>
+              <td>軽トラパック<br>15,000円〜</td>
             </tr>
             <tr>
               <th>対応スピード</th>
@@ -438,7 +467,7 @@
           </tbody>
         </table>
       </div>
-      <p class="compare-note">※A社・B社は業界相場（当社調べ）。サービス内容や状況により実際の料金は変動します。</p>
+      <p class="compare-note">※A社・B社は業界相場（当社調べ）。<br>サービス内容や状況により実際の料金は変動します。</p>
     </section>
 
     <!-- ===== 対応サービス ===== -->
@@ -505,9 +534,30 @@
     <!-- ===== 遺品整理 仕分け ===== -->
     <section class="ihin" id="ihin">
       <div class="sect-head">
-        <span class="sect-eyebrow">遺品整理</span>
+        <span class="sect-eyebrow">遺品整理・生前整理</span>
         <h2 class="sect-h2">大切な品を、確認しながら仕分けます。</h2>
       </div>
+
+      <p class="ihin-lead">
+        本業は不動産業。相続や遺品の現場に、数多く立ち会ってきました。<br>
+        写真・手紙・思い出の品は、ご家族のお気持ちに寄り添い、<br class="br-sp">一つずつ確認しながら丁寧に仕分けます。
+      </p>
+
+      <div class="ihin-photos">
+        <figure class="ihin-photo">
+          <img src="assets/c-pattern/parts/ihin/ihin-memories.webp" alt="思い出の写真やアルバムを一つずつ確認" loading="lazy" width="800" height="533">
+          <figcaption>思い出の品を、大切に確認</figcaption>
+        </figure>
+        <figure class="ihin-photo">
+          <img src="assets/c-pattern/parts/ihin/ihin-belongings.webp" alt="衣類や日用品を丁寧に整理" loading="lazy" width="800" height="533">
+          <figcaption>残すもの・手放すものを仕分け</figcaption>
+        </figure>
+        <figure class="ihin-photo">
+          <img src="assets/c-pattern/parts/ihin/ihin-room.webp" alt="お片付け後のすっきりした和室" loading="lazy" width="800" height="533">
+          <figcaption>気持ちのよい空間でお引き渡し</figcaption>
+        </figure>
+      </div>
+
       <div class="ihin-grid">
         <article><b>必要品</b><span>残すものを確認</span></article>
         <article><b>貴重品</b><span>現金・通帳・権利書など</span></article>
@@ -523,7 +573,7 @@
         <div class="danger-text">
           <span class="danger-tag">DANGER</span>
           <h2>高額請求にご注意ください。</h2>
-          <p>「定額」と聞いていたのに、積み込み後に追加費用が膨らむケースがあります。ラピッドでは荷物量・搬出条件・買取可否を確認し、追加費用が出る可能性も事前にお伝えします。</p>
+          <p>「定額」と聞いていたのに、積み込み後に追加費用が膨らむケースがあります。<br>ラピッドでは荷物量・搬出条件・買取可否を確認し、追加費用が出る可能性も事前にお伝えします。</p>
         </div>
       </div>
     </section>
@@ -609,7 +659,7 @@
         <span class="sect-eyebrow">対応エリア</span>
         <h2 class="sect-h2">近畿一円 全域対応</h2>
       </div>
-      <p class="area-lead">東大阪市の倉庫を拠点に、<strong>近畿一円</strong>（大阪・京都・兵庫・奈良・滋賀・和歌山）へ即日でお伺いします。</p>
+      <p class="area-lead">東大阪市の倉庫を拠点に<br><strong>近畿一円</strong>（大阪・京都・兵庫・奈良・滋賀・和歌山）へ即日でお伺いします。</p>
       <ul class="area-list">
         <li><b>大阪府</b>大阪市・堺市・東大阪市・八尾市・松原市・豊中市・吹田市・枚方市・寝屋川市・守口市・門真市・大東市・柏原市・藤井寺市・羽曳野市・富田林市・河内長野市・和泉市・岸和田市・泉佐野市・高槻市・茨木市 ほか全域</li>
         <li><b>京都府</b>京都市・宇治市・城陽市・八幡市・京田辺市・木津川市 ほか</li>
@@ -618,7 +668,7 @@
         <li><b>滋賀県</b>大津市・草津市・守山市・栗東市・甲賀市 ほか</li>
         <li><b>和歌山県</b>和歌山市・橋本市・海南市 ほか</li>
       </ul>
-      <p class="area-note">※遠方の場合、到着時間は要相談。LINEまたはお電話でお気軽にお問い合わせください。</p>
+      <p class="area-note">※遠方の場合、到着時間は要相談。<br>LINEまたはお電話でお気軽にお問い合わせください。</p>
     </section>
 
     <!-- ===== よくある質問 ===== -->
@@ -634,7 +684,7 @@
         </details>
         <details>
           <summary><b>Q</b>回収と買取を同時に相談できますか？</summary>
-          <p><b>A</b>はい。回収したいお品の中に価値が残るものがあれば、処分費を抑える材料として確認します。</p>
+          <p><b>A</b>はい。<br>回収したいお品の中に価値が残るものがあれば、処分費を抑える材料として確認します。</p>
         </details>
         <details>
           <summary><b>Q</b>遺品整理の仕分けもできますか？</summary>
@@ -646,7 +696,7 @@
         </details>
         <details>
           <summary><b>Q</b>許認可は何がありますか？</summary>
-          <p><b>A</b>古物商許可を取得しています。古物商許可証番号 第62222R075401号。</p>
+          <p><b>A</b>古物商許可を取得しています。</p>
         </details>
         <details>
           <summary><b>Q</b>支払い方法は？</summary>
@@ -659,8 +709,8 @@
     <section class="company" id="company">
       <div class="sect-head">
         <span class="sect-eyebrow">会社案内</span>
-        <h2 class="sect-h2">相続物件の片付けから、<br class="br-sp">私たちは生まれました</h2>
-        <p class="company-sub">本業は不動産業。<br class="br-sp">だから、相続や遺品整理に詳しい</p>
+        <h2 class="sect-h2">相続物件の片付けから<br class="br-sp">私たちは生まれました</h2>
+        <p class="company-sub">本業は不動産業。<br>だから相続や遺品整理に詳しい</p>
       </div>
 
       <!-- ヘッダー画像帯 -->
@@ -681,7 +731,7 @@
         <div><dt>屋号</dt><dd>即日回収ラピッド</dd></div>
         <div><dt>運営会社</dt><dd>株式会社K&rsquo;sSOARING</dd></div>
         <div><dt>所在地</dt><dd>〒577-0836<br>大阪府東大阪市渋川町2丁目9-23</dd></div>
-        <div><dt>電話番号</dt><dd><a href="tel:0120768876">0120-768-876</a></dd></div>
+        <div><dt>電話番号</dt><dd><a href="tel:0643097642">06-4309-7642</a></dd></div>
         <div><dt>資本金</dt><dd>600万円</dd></div>
         <div><dt>許認可</dt><dd>古物商許可証番号<wbr> <span class="nowrap-keep">第62222R075401号</span></dd></div>
       </dl>
@@ -691,7 +741,7 @@
   <!-- ===== 固定CTA ===== -->
   <nav class="fixed-cta" aria-label="固定お問い合わせ">
     <a href="tel:0120768876" class="fixed-tel">
-      <b aria-hidden="true" class="freedial-mark">➿</b>
+      <img class="fixed-freedial" aria-hidden="true" src="assets/c-pattern/parts/freedial-mark-white.svg" alt="">
       <span>通話料無料<br>0120-768-876</span>
     </a>
     <a href="https://lin.ee/Uze6YTx" target="_blank" rel="noopener" class="fixed-line">
@@ -702,7 +752,7 @@
 
   <footer class="site-footer">
     <p class="footer-brand">即日回収ラピッド</p>
-    <small>運営会社: 株式会社K&rsquo;sSOARING / <span class="footer-license">古物商許可証番号<wbr> <span class="nowrap-keep">第62222R075401号</span></span></small>
+    <small>運営会社: 株式会社K&rsquo;sSOARING<br><span class="footer-license">古物商許可証番号<wbr> <span class="nowrap-keep">第62222R075401号</span></span></small>
   </footer>
 
   <script>

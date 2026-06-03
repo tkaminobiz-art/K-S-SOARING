@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="500" height="400">
+  <g transform="translate(8,14)">
+    <path d="M 240.0 24.0 A 59.1 59.1 0 0 1 338.5 41.9 A 53.5 53.5 0 0 1 414.5 91.4 A 46.3 46.3 0 0 1 450.5 161.2 A 44.3 44.3 0 0 1 438.2 235.3 A 49.7 49.7 0 0 1 380.6 296.8 A 56.8 56.8 0 0 1 290.7 331.5 A 59.9 59.9 0 0 1 189.3 331.5 A 56.8 56.8 0 0 1 99.4 296.8 A 49.7 49.7 0 0 1 41.8 235.3 A 44.3 44.3 0 0 1 29.5 161.2 A 46.3 46.3 0 0 1 65.5 91.4 A 53.5 53.5 0 0 1 141.5 41.9 A 59.1 59.1 0 0 1 240.0 24.0 Z" fill="#0054b8" transform="translate(5,7)" opacity="0.9"/>
+    <path d="M 240.0 24.0 A 59.1 59.1 0 0 1 338.5 41.9 A 53.5 53.5 0 0 1 414.5 91.4 A 46.3 46.3 0 0 1 450.5 161.2 A 44.3 44.3 0 0 1 438.2 235.3 A 49.7 49.7 0 0 1 380.6 296.8 A 56.8 56.8 0 0 1 290.7 331.5 A 59.9 59.9 0 0 1 189.3 331.5 A 56.8 56.8 0 0 1 99.4 296.8 A 49.7 49.7 0 0 1 41.8 235.3 A 44.3 44.3 0 0 1 29.5 161.2 A 46.3 46.3 0 0 1 65.5 91.4 A 53.5 53.5 0 0 1 141.5 41.9 A 59.1 59.1 0 0 1 240.0 24.0 Z" fill="#ffffff" stroke="#0054b8" stroke-width="9" stroke-linejoin="round"/>
+    <g font-family="&apos;Hiragino Kaku Gothic StdN&apos;,&apos;Hiragino Sans&apos;,&apos;Noto Sans JP&apos;,&apos;Yu Gothic&apos;,sans-serif" font-weight="900" fill="#0054b8" text-anchor="middle">
+      <text x="240" y="158" font-size="76" letter-spacing="2">こみこみ</text>
+      <text x="240" y="252" font-size="86" letter-spacing="6">価格</text>
+    </g>
+  </g>
+</svg>

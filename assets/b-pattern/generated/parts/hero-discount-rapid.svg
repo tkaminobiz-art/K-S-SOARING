@@ -12,9 +12,10 @@
   <g filter="url(#drop)">
     <path fill="#fff200" stroke="#ff8b00" stroke-width="5" stroke-linejoin="round" d="M119 5l13 26 24-18 3 30 29-8-8 29 30 3-18 24 26 13-26 15 18 23-30 4 8 28-29-7-3 30-24-18-13 25-15-25-23 18-4-30-28 7 7-28-30-4 18-23-25-15 25-13-18-24 30-3-7-29 28 8 4-30 23 18z"/>
     <g font-family="'Hiragino Kaku Gothic StdN','Hiragino Sans','Noto Sans JP','Yu Gothic',sans-serif" font-weight="900" text-anchor="middle">
-      <text x="121" y="78" fill="#0054b8" font-size="20" transform="rotate(-12 121 78)">LINE見積り限定</text>
-      <text x="118" y="139" fill="#f71924" font-size="58" stroke="#fff" stroke-width="7" stroke-linejoin="round" paint-order="stroke fill" transform="rotate(-5 118 139)">5%</text>
-      <text x="119" y="178" fill="#f71924" font-size="35" stroke="#fff" stroke-width="6" stroke-linejoin="round" paint-order="stroke fill" transform="rotate(-5 119 178)">OFF!!</text>
+      <text x="119" y="64" font-size="18" transform="rotate(-10 119 64)"><tspan fill="#06c755">LINE</tspan><tspan fill="#0054b8">見積り限定</tspan></text>
+      <text x="119" y="103" fill="#f71924" font-size="24" stroke="#fff" stroke-width="5" stroke-linejoin="round" paint-order="stroke fill" transform="rotate(-5 119 103)">最大</text>
+      <text x="118" y="156" fill="#f71924" font-size="54" stroke="#fff" stroke-width="7" stroke-linejoin="round" paint-order="stroke fill" transform="rotate(-5 118 156)">20%</text>
+      <text x="119" y="196" fill="#f71924" font-size="30" stroke="#fff" stroke-width="6" stroke-linejoin="round" paint-order="stroke fill" transform="rotate(-5 119 196)">OFF!!</text>
     </g>
   </g>
 </svg>
