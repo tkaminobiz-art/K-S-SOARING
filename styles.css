@@ -4587,7 +4587,7 @@ button { font-family: inherit; cursor: pointer; }
   .sect-h2,
   .staff-card p,
   .staff-card h3,
-  .service-list p,
+  .service-grid p,
   .case-note,
   .price-desc {
     text-wrap: pretty;  /* 最新ブラウザ: 孤立を防ぐ */
