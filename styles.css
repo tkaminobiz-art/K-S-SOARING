@@ -5503,8 +5503,9 @@ button { font-family: inherit; cursor: pointer; }
     outline-width: 4px;
     outline-offset: -4px;
   }
-  /* PC: うさぎを表より上に大きく */
-  .compare-mascot { width: 140px; margin-bottom: -28px; left: -20px; }
+  /* PC: うさぎを表より上に大きく。margin-bottom を深めにして表の空コーナーへ
+     沈め、耳がセクション上端(overflow:hidden)で切れないようにする。 */
+  .compare-mascot { width: 140px; margin-bottom: -72px; left: -20px; }
   .compare-table thead th.us .us-name { font-size: 22px; }
   .compare-table thead th.us .us-badge { font-size: 15px; padding: 4px 12px; }
   .compare-table tbody th { font-size: 18px !important; padding: 18px 8px !important; }
