@@ -140,6 +140,10 @@ button { font-family: inherit; cursor: pointer; }
   font-weight: 900;
   letter-spacing: .01em;
   line-height: 1.35;
+  /* 熟語(例:お金)を行末で分断しない＋行バランス調整（全デバイス） */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 .sect-h2 strong { color: var(--c-red); }
 
@@ -5771,4 +5775,28 @@ button { font-family: inherit; cursor: pointer; }
 }
 @media (prefers-reduced-motion: reduce) {
   .coupon-period-tag, .coupon-rabbit-img { animation: none; }
+}
+
+/* ============================================================
+   改行のデバイス別最適化（PC/タブレットのorphan・不自然改行を防止）
+   - 本文リードは text-wrap: pretty で末尾1〜2文字の孤立行を回避
+   - ハイライト語（特別価格・近畿一円）は行末で割らない
+   ============================================================ */
+.coupon-lead,
+.area-lead,
+.promise-lead,
+.ihin-lead,
+.company-story p,
+.company-sub,
+.danger p,
+.cases-sub,
+.area-note,
+.compare-note,
+.price-note,
+.faq-list details p {
+  text-wrap: pretty;
+}
+.coupon-lead strong,
+.area-lead strong {
+  white-space: nowrap;
 }
