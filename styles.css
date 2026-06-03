@@ -1402,7 +1402,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .reason-grid li .reason-num {
   position: absolute;
-  top: -16px; left: 50%;
+  top: -13px; left: 50%;
   transform: translateX(-50%);
   background: var(--c-red);
   color: #fff;
@@ -5028,19 +5028,19 @@ button { font-family: inherit; cursor: pointer; }
 /* G(2): 安さの理由 各項目に背景透かしアイコン */
 .reason-grid li {
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* 番号バッジ(top:-12px)が切れないように。透かしはカード内に収める */
 }
 .reason-grid li::after {
   content: "";
   position: absolute;
-  right: -10px;
-  bottom: -10px;
-  width: 128px;
-  height: 128px;
+  right: 8px;
+  bottom: 8px;
+  width: 104px;
+  height: 104px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom right;
-  opacity: 0.17;
+  opacity: 0.16;
   pointer-events: none;
   z-index: 0;
 }
