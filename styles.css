@@ -1343,16 +1343,17 @@ button { font-family: inherit; cursor: pointer; }
   content: "";
   position: absolute;
   z-index: 2;
-  width: clamp(16px, 5.2vw, 34px);
+  width: clamp(20px, 6.4vw, 44px);
   aspect-ratio: 1;
   pointer-events: none;
   background:
-    radial-gradient(circle, #fffef4 0 11%, #ffe77a 12% 25%, rgba(255, 213, 62, .28) 26% 42%, transparent 43%),
-    conic-gradient(from 45deg, transparent 0 18%, rgba(255, 255, 236, .98) 19% 25%, transparent 26% 43%, rgba(255, 238, 119, .86) 44% 50%, transparent 51% 100%);
+    radial-gradient(circle, #fff 0 12%, #fff4a8 13% 25%, rgba(255, 221, 66, .44) 26% 46%, transparent 47%),
+    conic-gradient(from 45deg, transparent 0 16%, #fff 17% 25%, transparent 26% 41%, rgba(255, 239, 110, .96) 42% 51%, transparent 52% 100%);
   clip-path: polygon(50% 0, 60% 38%, 100% 50%, 60% 62%, 50% 100%, 40% 62%, 0 50%, 40% 38%);
   filter:
-    drop-shadow(0 0 4px rgba(255, 244, 145, .78))
-    drop-shadow(0 0 10px rgba(255, 184, 32, .36));
+    drop-shadow(0 0 6px rgba(255, 248, 172, .95))
+    drop-shadow(0 0 15px rgba(255, 191, 36, .62))
+    drop-shadow(0 0 26px rgba(255, 214, 72, .32));
   opacity: 0;
   transform: scale(.35) rotate(-18deg);
   animation: proofTitleSparkle 6.8s ease-in-out infinite;
@@ -1364,25 +1365,25 @@ button { font-family: inherit; cursor: pointer; }
 .proof-title::after {
   top: 36%;
   right: 23%;
-  width: clamp(14px, 4.2vw, 28px);
+  width: clamp(17px, 5.2vw, 36px);
   animation-delay: .72s;
 }
 @keyframes proofTitleSparkle {
-  0%, 11%, 25%, 65%, 79%, 100% {
+  0%, 10%, 27%, 64%, 81%, 100% {
     opacity: 0;
     transform: scale(.35) rotate(-18deg);
   }
-  16%, 70% {
-    opacity: .95;
-    transform: scale(1) rotate(0deg);
+  15%, 69% {
+    opacity: 1;
+    transform: scale(1.18) rotate(0deg);
   }
   21%, 75% {
-    opacity: .68;
-    transform: scale(.72) rotate(14deg);
+    opacity: .82;
+    transform: scale(.86) rotate(14deg);
   }
-  24%, 78% {
+  26%, 80% {
     opacity: 0;
-    transform: scale(.44) rotate(22deg);
+    transform: scale(.5) rotate(22deg);
   }
 }
 @media (prefers-reduced-motion: reduce) {
