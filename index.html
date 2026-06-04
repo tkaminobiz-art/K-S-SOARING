@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&family=Mochiy+Pop+One&family=Bowlby+One&family=Reggae+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260604-storyC">
+  <link rel="stylesheet" href="styles.css?v=20260604-proseC">
 </head>
 <body>
   <!-- ===== ヘッダー ===== -->
@@ -783,7 +783,7 @@
       // プローズは ZWSP 無し＝句読点(、。)だけで折ると clause 単位の自然な改行になる。
       // 単語内分断が起きるのは列幅が極端に狭い staff-card / cv-rabbit-text のみ。
       var SEL = [
-        ".staff-card p", ".cv-rabbit-text"
+        ".cv-rabbit-text"
       ].join(",");
       if (!("customElements" in window)) return; // 非対応は keep-all のみで安全側
       document.querySelectorAll(SEL).forEach(function (el) {

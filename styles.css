@@ -6441,11 +6441,16 @@ button { font-family: inherit; cursor: pointer; }
   .gnav.is-open { animation: none; }
 }
 
-/* 【試験・指定場所のみ】会社案内の本文を C案＝伝統的フル行＋両端揃えに。
-   word-break:normal でどこでも折って各行を端まで埋め、line-break:strict の
-   禁則で 、。 は行頭に来ない。normal＋justify は折り点が密なので字間は間延び
-   しない（本・新聞の組版）。keep-all/balance/overflow-wrap:anywhere を無効化。 */
-.company-story p {
+/* 本文プローズ（左揃えの長文）を C案＝伝統的フル行＋両端揃えに統一。
+   word-break:normal でどこでも折って各行を端まで埋め、line-break:strict の禁則で
+   、。 は行頭に来ない。normal＋justify は折り点が密なので字間は間延びしない（本・
+   新聞の組版）。単語の途中で折れるのは日本語では正常。keep-all/balance/overflow-wrap
+   :anywhere を本要素のみ無効化。※中央寄せの短文(注記/リード/カード)は対象外
+   （中央寄せは元々左右対称でガタつかないため現状維持）。 */
+.company-story p,
+.voice-grid p,
+.faq-list details p,
+.staff-card p {
   word-break: normal;
   line-break: strict;
   overflow-wrap: normal;
