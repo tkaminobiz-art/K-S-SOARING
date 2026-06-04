@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="2048" height="2048" text-rendering="geometricPrecision" shape-rendering="geometricPrecision">
+  <defs>
+    <radialGradient id="goldFace" cx="38%" cy="24%" r="72%">
+      <stop offset="0" stop-color="#fff8bd"/>
+      <stop offset=".24" stop-color="#ffe37a"/>
+      <stop offset=".48" stop-color="#c88a13"/>
+      <stop offset=".72" stop-color="#f8d66a"/>
+      <stop offset="1" stop-color="#8a5200"/>
+    </radialGradient>
+    <linearGradient id="goldText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff9b8"/>
+      <stop offset=".22" stop-color="#ffe45f"/>
+      <stop offset=".5" stop-color="#d59610"/>
+      <stop offset=".72" stop-color="#fff0a0"/>
+      <stop offset="1" stop-color="#a26400"/>
+    </linearGradient>
+    <radialGradient id="navyFace" cx="42%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#27456c"/>
+      <stop offset=".5" stop-color="#0f2746"/>
+      <stop offset="1" stop-color="#06152d"/>
+    </radialGradient>
+    <linearGradient id="ribbonRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fa2821"/>
+      <stop offset=".52" stop-color="#b60012"/>
+      <stop offset="1" stop-color="#6e0009"/>
+    </linearGradient>
+    <filter id="shadow" x="-18%" y="-18%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#300000" flood-opacity=".48"/>
+    </filter>
+    <filter id="typeShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="7" stdDeviation="2" flood-color="#020817" flood-opacity=".75"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <circle cx="512" cy="470" r="402" fill="url(#goldFace)" stroke="#7a4700" stroke-width="10"/>
+    <circle cx="512" cy="470" r="356" fill="none" stroke="#fff2b5" stroke-width="18"/>
+    <circle cx="512" cy="470" r="316" fill="#082040" stroke="#0b1430" stroke-width="22"/>
+    <circle cx="512" cy="470" r="286" fill="url(#navyFace)" stroke="#f7dc7e" stroke-width="13"/>
+    <g fill="url(#goldText)" stroke="#8b5200" stroke-width="7">
+      <path d="M512 100l33 67 74 11-54 52 13 74-66-35-66 35 13-74-54-52 74-11z"/>
+      <path d="M262 218l22 44 49 7-35 34 8 49-44-23-44 23 8-49-35-34 49-7z"/>
+      <path d="M762 218l22 44 49 7-35 34 8 49-44-23-44 23 8-49-35-34 49-7z"/>
+    </g>
+    <g font-family="'Hiragino Kaku Gothic StdN','Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" text-anchor="middle" filter="url(#typeShadow)">
+      <text x="512" y="360" font-size="55" fill="#fff" stroke="#06152d" stroke-width="8" stroke-linejoin="round">対応エリア</text>
+      <text x="512" y="485" font-size="86" fill="url(#goldText)" stroke="#fff" stroke-width="14" stroke-linejoin="round">近畿一円</text>
+      <text x="512" y="580" font-size="70" fill="url(#goldText)" stroke="#fff" stroke-width="12" stroke-linejoin="round">全域対応</text>
+    </g>
+    <g>
+      <path d="M274 666h476l-32 51 32 51H274l32-51z" fill="#7c000b"/>
+      <path d="M330 643h364v119H330z" fill="url(#ribbonRed)" stroke="#74000a" stroke-width="7"/>
+      <path d="M330 643l-80 28 56 46 24-36zM694 643l80 28-56 46-24-36z" fill="#a6000e" stroke="#74000a" stroke-width="6"/>
+      <text x="512" y="724" font-family="'Hiragino Kaku Gothic StdN','Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" text-anchor="middle" font-size="55" fill="#fff" stroke="#5c0008" stroke-width="7" stroke-linejoin="round">お任せ!</text>
+    </g>
+    <path d="M250 842c118 56 407 56 524 0l31 62c-158 76-428 76-586 0z" fill="url(#goldFace)" stroke="#845100" stroke-width="7"/>
+  </g>
+</svg>

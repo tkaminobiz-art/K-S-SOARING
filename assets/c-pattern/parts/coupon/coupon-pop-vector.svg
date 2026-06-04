@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 853" width="1280" height="853" text-rendering="geometricPrecision" shape-rendering="geometricPrecision">
+  <defs>
+    <radialGradient id="sun" cx="50%" cy="50%" r="70%">
+      <stop offset="0" stop-color="#fff46b"/>
+      <stop offset=".5" stop-color="#ffe400"/>
+      <stop offset="1" stop-color="#ffcf00"/>
+    </radialGradient>
+    <linearGradient id="greenBtn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#17df57"/>
+      <stop offset=".48" stop-color="#06c755"/>
+      <stop offset="1" stop-color="#029b3e"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff2a24"/>
+      <stop offset=".52" stop-color="#e60012"/>
+      <stop offset="1" stop-color="#a9000b"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-8%" y="-12%" width="116%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#6b4a00" flood-opacity=".35"/>
+    </filter>
+    <filter id="typeShadow" x="-12%" y="-12%" width="124%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="3" flood-color="#5c3100" flood-opacity=".42"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="853" fill="url(#sun)"/>
+  <g opacity=".18" stroke="#fff" stroke-width="3">
+    <path d="M640 426L44 0M640 426L1236 0M640 426L0 426M640 426L1280 426M640 426L44 853M640 426L1236 853"/>
+  </g>
+  <g>
+    <path d="M38 158h470v86H38z" fill="url(#redGrad)" transform="rotate(-43 273 201)" stroke="#fff2a0" stroke-width="5"/>
+    <text x="200" y="204" transform="rotate(-43 200 204)" font-family="'Hiragino Kaku Gothic StdN','Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" font-size="58" fill="#fff" stroke="#9d0009" stroke-width="3" paint-order="stroke fill">期間限定</text>
+  </g>
+  <g fill="#00a6df" opacity=".85">
+    <path d="M54 97l37-22 18 42-38 22z"/>
+    <path d="M70 743c12-31 30-48 58-59-10 34-31 54-58 59z"/>
+    <path d="M1194 131c24-25 49-32 79-23-24 28-52 37-79 23z"/>
+  </g>
+  <g fill="#e73d35" opacity=".8">
+    <rect x="439" y="56" width="26" height="26" transform="rotate(24 452 69)"/>
+    <rect x="761" y="92" width="28" height="28" transform="rotate(37 775 106)"/>
+    <rect x="885" y="765" width="25" height="25" transform="rotate(24 897 777)"/>
+  </g>
+  <g fill="#25c758" opacity=".78">
+    <rect x="326" y="108" width="24" height="24" transform="rotate(30 338 120)"/>
+    <rect x="972" y="726" width="26" height="26" transform="rotate(35 985 739)"/>
+  </g>
+  <g fill="#fff" opacity=".9">
+    <path d="M1088 42l13 29 31 13-31 13-13 30-13-30-30-13 30-13z"/>
+    <path d="M224 774l11 24 25 11-25 11-11 25-11-25-24-11 24-11z"/>
+    <path d="M50 389l14 31 33 14-33 14-14 33-14-33-32-14 32-14z"/>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <path d="M138 159h844c46 0 83 37 83 83v344c0 46-37 83-83 83H138c-46 0-83-37-83-83V478c38-7 66-40 66-79s-28-72-66-79v-78c0-46 37-83 83-83z" fill="#fffdf1" stroke="#f4d451" stroke-width="10"/>
+    <path d="M165 192h790c34 0 62 28 62 62v310c0 34-28 62-62 62H165c-34 0-62-28-62-62V489c40-17 65-48 65-90s-25-73-65-90v-55c0-34 28-62 62-62z" fill="none" stroke="#f0cf39" stroke-width="4" stroke-dasharray="10 10"/>
+  </g>
+
+  <g filter="url(#typeShadow)" font-family="'Hiragino Kaku Gothic StdN','Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" text-anchor="middle">
+    <rect x="235" y="194" width="610" height="95" rx="45" fill="url(#greenBtn)" stroke="#00963a" stroke-width="5"/>
+    <text x="540" y="259" font-size="58" fill="#fff" stroke="#00682c" stroke-width="3" paint-order="stroke fill" letter-spacing="4">LINE割クーポン</text>
+
+    <path d="M930 186l40 80 88 13-64 62 15 88-79-42-79 42 15-88-64-62 88-13z" fill="url(#redGrad)" stroke="#fff" stroke-width="11"/>
+    <text x="930" y="307" font-size="44" fill="#fff" stroke="#9a0009" stroke-width="3" paint-order="stroke fill">1日3名</text>
+    <text x="930" y="360" font-size="43" fill="#fff" stroke="#9a0009" stroke-width="3" paint-order="stroke fill">限定</text>
+
+    <g stroke="#fff" stroke-linejoin="round" fill="none">
+      <text x="214" y="488" font-size="112" stroke-width="20">最</text>
+      <text x="214" y="599" font-size="112" stroke-width="20">大</text>
+      <text x="535" y="604" font-size="278" stroke-width="28">20</text>
+      <text x="778" y="487" font-size="109" stroke-width="18">%</text>
+      <text x="795" y="596" font-size="95" stroke-width="17">OFF</text>
+    </g>
+    <g fill="url(#redGrad)" stroke="#a9000b" stroke-width="2" stroke-linejoin="round">
+      <text x="214" y="488" font-size="112">最</text>
+      <text x="214" y="599" font-size="112">大</text>
+      <text x="535" y="604" font-size="278">20</text>
+      <text x="778" y="487" font-size="109">%</text>
+      <text x="795" y="596" font-size="95">OFF</text>
+    </g>
+  </g>
+
+  <image href="../../../b-pattern/rabbit-coupon.webp" x="880" y="236" width="330" height="568" preserveAspectRatio="xMidYMax meet"/>
+</svg>
