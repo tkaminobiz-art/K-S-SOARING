@@ -6147,15 +6147,15 @@ button { font-family: inherit; cursor: pointer; }
     width: 168px;
     transform: rotate(8deg);
     animation: none;
-    z-index: 10;
+    z-index: 12;
   }
 
   .hero .hero-price {
-    left: 98px;
+    left: 42px;
     right: auto;
-    bottom: 92px;
-    width: 253px;
-    z-index: 11;
+    bottom: 4px;
+    width: 380px;
+    z-index: 9;
   }
 
   .hero .hero-sparkle {
@@ -6198,9 +6198,9 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-price {
-    left: 92px;
-    bottom: 88px;
-    width: 242px;
+    left: 38px;
+    bottom: 2px;
+    width: 363px;
   }
 
   .hero .hero-sparkle {
@@ -6306,4 +6306,14 @@ button { font-family: inherit; cursor: pointer; }
 }
 @media (min-width: 768px) {
   .promise-card h3 { font-size: 21px; }
+}
+
+/* セクション見出し: eyebrow(青ラベル) と h2 が両方 inline-block のため、
+   短いセクション(price/cases/area)では1行に収まり横並びになっていた。
+   flex-column で常に縦積み(eyebrow 上 → h2 下)に固定。h2 の文字幅連動
+   下線は flex item が content 幅に縮むので維持される。 */
+.sect-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
