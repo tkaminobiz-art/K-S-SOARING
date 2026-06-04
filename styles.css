@@ -6440,3 +6440,16 @@ button { font-family: inherit; cursor: pointer; }
   .float-menu { transition: opacity .2s ease; transform: none; }
   .gnav.is-open { animation: none; }
 }
+
+/* 【試験・指定場所のみ】会社案内の本文を C案＝伝統的フル行＋両端揃えに。
+   word-break:normal でどこでも折って各行を端まで埋め、line-break:strict の
+   禁則で 、。 は行頭に来ない。normal＋justify は折り点が密なので字間は間延び
+   しない（本・新聞の組版）。keep-all/balance/overflow-wrap:anywhere を無効化。 */
+.company-story p {
+  word-break: normal;
+  line-break: strict;
+  overflow-wrap: normal;
+  text-wrap: wrap;
+  text-align: justify;
+  text-align-last: left;
+}
