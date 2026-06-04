@@ -2357,7 +2357,7 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   top: 18px;
   left: max(18px, calc(50% - 540px));
-  z-index: 8;
+  z-index: 13;
   width: min(600px, calc(100% - 36px));
   margin: 0;
   /* Kinetic typography コンテナ */
@@ -2399,7 +2399,7 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   top: 274px;
   left: max(340px, calc(50% - 280px));
-  z-index: 9;
+  z-index: 13;
   width: 244px;
   filter: drop-shadow(3px 5px 0 color-mix(in srgb, var(--ref-blue) 18%, transparent));
 }
@@ -2826,7 +2826,7 @@ button { font-family: inherit; cursor: pointer; }
     width: min(300px, calc(100vw - 96px));
     justify-content: flex-start;
     transform: none;
-    z-index: 12;
+    z-index: 14;
   }
 
   .hero .hero-includes span {
@@ -6153,7 +6153,7 @@ button { font-family: inherit; cursor: pointer; }
   .hero .hero-price {
     left: 42px;
     right: auto;
-    bottom: 4px;
+    bottom: 62px;
     width: 380px;
     z-index: 9;
   }
@@ -6199,7 +6199,7 @@ button { font-family: inherit; cursor: pointer; }
 
   .hero .hero-price {
     left: 38px;
-    bottom: 2px;
+    bottom: 58px;
     width: 363px;
   }
 
@@ -6316,4 +6316,20 @@ button { font-family: inherit; cursor: pointer; }
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* セクション見出しのフォントサイズを全セクション統一（2026-06-04）。
+   従来は1行に収めるため 15〜26px にバラバラに詰めていた（不揃い）。同一画面では
+   全セクション同サイズの clamp に統一し、長い見出しは2段を許可（短い見出しは1段）。
+   折り返しは句読点 or <wbr>(company/staff)。balance で2段を左右対称に。 */
+@media (max-width: 767px) {
+  .sect-head .sect-h2 {
+    font-size: clamp(18px, 5.6vw, 22px);
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    white-space: normal;        /* nowrap 解除＝長い見出しは2段に */
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
 }
