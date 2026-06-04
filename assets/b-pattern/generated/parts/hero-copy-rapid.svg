@@ -35,8 +35,8 @@
     <text x="55" y="225" text-anchor="middle" font-size="24" fill="#fff" transform="rotate(-11 55 204)">解決</text>
 
     <g filter="url(#redShadow)" paint-order="stroke fill">
-      <text x="104" y="190" font-size="82" textLength="490" fill="#f71924" stroke="#fff" stroke-width="12" stroke-linejoin="round">"ラピッド"</text>
-      <text x="112" y="262" font-size="74" textLength="470" fill="#f71924" stroke="#fff" stroke-width="12" stroke-linejoin="round">にお任せ!!</text>
+      <text x="100" y="194" font-size="88" textLength="494" fill="#f71924" stroke="#fff" stroke-width="12" stroke-linejoin="round">ラピッドに</text>
+      <text x="318" y="260" text-anchor="middle" font-size="58" textLength="330" fill="#111" stroke="#fff" stroke-width="10" stroke-linejoin="round">お任せ!!</text>
     </g>
   </g>
 </svg>
