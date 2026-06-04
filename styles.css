@@ -6141,10 +6141,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-discount {
-    top: 195px;
-    left: clamp(231px, 60.7vw, 237px);
+    top: 183px;
+    left: clamp(219px, 57.6vw, 225px);
     right: auto;
-    width: 143px;
+    width: 168px;
     transform: rotate(8deg);
     animation: none;
     z-index: 10;
@@ -6191,10 +6191,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-discount {
-    top: 190px;
-    left: 225px;
+    top: 178px;
+    left: 213px;
     right: auto;
-    width: 139px;
+    width: 163px;
   }
 
   .hero .hero-price {
@@ -6292,12 +6292,18 @@ button { font-family: inherit; cursor: pointer; }
   text-align-last: center;
 }
 
-/* promise カード見出しが本文(14.5px)より小さい異常を是正（13.5px→17px）。
-   見出しは本文より明確に大きく。2列カードでも 2行に収まる範囲。 */
+/* promise カード見出しを拡大（本文より明確に大きく）＋本文との余白を是正。
+   SP は画像上/テキスト下の1カラムでタイトルがほぼ1行。min-height(2行予約)が
+   1行タイトルの下に過剰な余白を作っていたので解除し、margin で一定の間隔に。 */
 @media (max-width: 767px) {
   .promise-card h3 {
-    font-size: 17px;
+    font-size: 20px;
     line-height: 1.4;
     letter-spacing: -0.01em;
+    min-height: 0;        /* 2行予約をやめる＝1行タイトル下の空きすぎを解消 */
+    margin: 12px 0 6px;   /* 上(画像/ラベルから) / 下(本文へ) を一定に */
   }
+}
+@media (min-width: 768px) {
+  .promise-card h3 { font-size: 21px; }
 }
