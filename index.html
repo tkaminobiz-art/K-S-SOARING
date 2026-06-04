@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&family=Mochiy+Pop+One&family=Bowlby+One&family=Reggae+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260604-proseC">
+  <link rel="stylesheet" href="styles.css?v=20260604-allC2">
 </head>
 <body>
   <!-- ===== ヘッダー ===== -->
@@ -770,30 +770,7 @@
     <span class="float-menu-bars" aria-hidden="true"></span>
   </button>
 
-  <!-- BudouX(日本語文節分割・JA同梱版)。全エンジンで同一の文節改行を保証 -->
-  <script src="assets/js/budoux-ja.min.js"></script>
   <script>
-    // === 本文の文節改行統一（BudouX） ===
-    // CSS 側の word-break: keep-all と対で機能。文節境界に ZWSP を挿入し、
-    // どのブラウザ(iOS WebKit 含む)でも単語内分断ゼロ・同一の改行位置にする。
-    (function () {
-      // BudouX(文節ZWSP)は「極狭の列」だけに限定する。
-      // 広いプローズ本文に入れると、text-wrap:balance が文字数合わせのため
-      // 文節の途中（例:「依頼したい」の前 / 覚えてきた｜ことを）で不自然に折る。
-      // プローズは ZWSP 無し＝句読点(、。)だけで折ると clause 単位の自然な改行になる。
-      // 単語内分断が起きるのは列幅が極端に狭い staff-card / cv-rabbit-text のみ。
-      var SEL = [
-        ".cv-rabbit-text"
-      ].join(",");
-      if (!("customElements" in window)) return; // 非対応は keep-all のみで安全側
-      document.querySelectorAll(SEL).forEach(function (el) {
-        if (el.querySelector("budoux-ja")) return;      // 二重適用防止
-        var w = document.createElement("budoux-ja");
-        while (el.firstChild) w.appendChild(el.firstChild);
-        el.appendChild(w);
-      });
-    })();
-
     // === 現在時刻表示 ===
     (function () {
       var el = document.getElementById("now-time");

@@ -6253,15 +6253,16 @@ button { font-family: inherit; cursor: pointer; }
 .danger p,
 .staff-card p,
 .cv-rabbit-text {
-  word-break: keep-all;
-  overflow-wrap: anywhere;
+  /* 本文の折り返しは全要素「伝統的フル行」: normal でどこでも折って端まで埋め、
+     line-break:strict の禁則で 、。 を行頭に出さない。日本語は単語途中で折れて正常。
+     keep-all/overflow-wrap:anywhere/balance は撤去（ガタガタ・文節途中折れの原因）。
+     揃えは下で振り分け（左プローズ=justify / 中央寄せ短文=center）。 */
+  word-break: normal;
+  overflow-wrap: normal;
   line-break: strict;
   text-align: left;
   text-align-last: auto;
-  /* balance: 行長を均一化（1列の文字数を揃える）。BudouX/句読点の文節境界から
-     選ぶだけなので WebKit/Chromium でほぼ同一の結果（実測 spread 差±数px）。
-     auto-phrase と違いエンジン差が出ないため keep-all+BudouX と併用してよい */
-  text-wrap: balance;
+  text-wrap: wrap;
   letter-spacing: 0.02em;
   line-height: 1.85;
 }
@@ -6285,6 +6286,10 @@ button { font-family: inherit; cursor: pointer; }
 .reason-grid p {
   text-align: center;
   text-align-last: center;
+  /* 中央寄せは「句読点で折る」方が綺麗（単語途中折れは中央寄せだと不格好）。
+     左プローズの normal+justify と違い、中央寄せ短文は keep-all で 、。 折り。 */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 /* 中央寄せ振り分け 第2弾（2026-06-04・実機監査で漏れを補完）:
@@ -6295,6 +6300,8 @@ button { font-family: inherit; cursor: pointer; }
 .coupon-howto-body {
   text-align: center;
   text-align-last: center;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 /* promise カード見出しを拡大（本文より明確に大きく）＋本文との余白を是正。
