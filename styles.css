@@ -6547,3 +6547,43 @@ button { font-family: inherit; cursor: pointer; }
   text-align: left;
   text-align-last: left;
 }
+
+/* ============================================================
+   全体フォント拡大（2026-06-04・高齢者配慮）
+   小さい文字を排除し、本文系・注記・サブ・eyebrow を底上げ。
+   nowrap 詰めだった sub は折返し許可。末尾で source-order 上書き。
+   ============================================================ */
+.sect-eyebrow { font-size: 16px; }
+.promise-sub, .company-sub, .cases-sub {
+  font-size: 17px !important;
+  white-space: normal !important;
+  letter-spacing: 0 !important;
+}
+.promise-card > p,
+.voice-grid p,
+.danger p,
+.service-grid p,
+.reason-grid p,
+.faq-list details p,
+.case-desc,
+.price-desc,
+.staff-card p,
+.area-list li,
+.coupon-lead,
+.coupon-howto-body,
+.compare-note,
+.cases-note,
+.cv-rabbit-text {
+  font-size: 16px;
+}
+.company-story p,
+.area-lead,
+.ihin-lead,
+.promise-lead {
+  font-size: 16.5px;
+}
+.area-note { font-size: 14.5px; }
+.voice-grid small { font-size: 14px; }
+.company-dl dt, .company-dl dd { font-size: 16px; }
+.company-dl dd a { font-size: 16px; }
+.faq-list summary { font-size: 17px; }
