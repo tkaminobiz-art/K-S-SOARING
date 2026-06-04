@@ -2932,21 +2932,23 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 
-/* スマホ 640px以下: 15%縮小 164px → 139px */
+/* スマホ 640px以下: 20%OFF をFV内で優先訴求するため拡大 */
 @media (max-width: 640px) {
   .hero .hero-discount {
-    top: 178px;
-    width: 139px;
-    left: min(228px, calc(100vw - 151px));
+    top: 164px;
+    right: 0;
+    left: auto;
+    width: 168px;
   }
 }
 
-/* 最小サイズ 380px以下: 15%縮小 156px → 133px */
+/* 最小サイズ 380px以下: 右端の安全余白を残しつつ存在感を維持 */
 @media (max-width: 380px) {
   .hero .hero-discount {
-    top: 174px;
-    width: 133px;
-    left: min(218px, calc(100vw - 145px));
+    top: 164px;
+    right: 0;
+    left: auto;
+    width: 158px;
   }
 }
 
