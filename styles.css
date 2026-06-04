@@ -6279,3 +6279,23 @@ button { font-family: inherit; cursor: pointer; }
   text-align: center;
   text-align-last: center;
 }
+
+/* 中央寄せ振り分け 第2弾（2026-06-04・実機監査で漏れを補完）:
+   カード見出し/本文・サービス品目見出し・クーポン利用方法もセンターへ。 */
+.promise-card h3,
+.promise-card p,
+.service-grid li h3,
+.coupon-howto-body {
+  text-align: center;
+  text-align-last: center;
+}
+
+/* promise カード見出しが本文(14.5px)より小さい異常を是正（13.5px→17px）。
+   見出しは本文より明確に大きく。2列カードでも 2行に収まる範囲。 */
+@media (max-width: 767px) {
+  .promise-card h3 {
+    font-size: 17px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+}
