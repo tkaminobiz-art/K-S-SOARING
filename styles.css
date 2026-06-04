@@ -6141,10 +6141,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-discount {
-    top: 204px;
-    left: clamp(240px, 63vw, 246px);
+    top: 196px;
+    left: clamp(232px, 61vw, 238px);
     right: auto;
-    width: 124px;
+    width: 140px;
     transform: rotate(8deg);
     animation: none;
     z-index: 10;
@@ -6191,10 +6191,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-discount {
-    top: 200px;
-    left: 235px;
+    top: 192px;
+    left: 227px;
     right: auto;
-    width: 120px;
+    width: 136px;
   }
 
   .hero .hero-price {
