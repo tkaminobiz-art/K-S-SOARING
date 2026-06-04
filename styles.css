@@ -1937,7 +1937,7 @@ button { font-family: inherit; cursor: pointer; }
   padding: 11px 12px;
   font-size: 14.5px;
 }
-.company-dl dd a { color: #1a1a1a; font-weight: 800; text-decoration: none; }
+.company-dl dd a { color: #1a1a1a; font-weight: 500; text-decoration: none; }
 
 /* ===========================================================
    固定CTA
@@ -6514,8 +6514,6 @@ button { font-family: inherit; cursor: pointer; }
    新聞の組版）。単語の途中で折れるのは日本語では正常。keep-all/balance/overflow-wrap
    :anywhere を本要素のみ無効化。※中央寄せの短文(注記/リード/カード)は対象外
    （中央寄せは元々左右対称でガタつかないため現状維持）。 */
-.company-story p,
-.voice-grid p,
 .faq-list details p,
 .staff-card p {
   word-break: normal;
@@ -6523,5 +6521,17 @@ button { font-family: inherit; cursor: pointer; }
   overflow-wrap: normal;
   text-wrap: wrap;
   text-align: justify;
+  text-align-last: left;
+}
+
+/* 会社案内・お客様の声は「左揃え＋句読点で折る」（手動改行/「」を割らない/
+   中央ブロック）。justify だと手動改行の行が間延びするため left に。 */
+.company-story p,
+.voice-grid p {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  line-break: strict;
+  text-wrap: wrap;
+  text-align: left;
   text-align-last: left;
 }
