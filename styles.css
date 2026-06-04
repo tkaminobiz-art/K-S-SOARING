@@ -6338,3 +6338,100 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 340px) {
   .sect-head .sect-h2 { font-size: 18px; }
 }
+
+/* ===========================================================
+   スクロール追従メニュー（SP・うさぎピル C案）
+   - position:fixed なので overflow-x:hidden(横ロック)を壊さない
+   - 開いたメニューも fixed のドロップダウンにして、スクロール位置に
+     関係なく常にピル直下＝画面内に出す（ヘッダー子要素のままだと
+     画面外で開く不具合への対処）
+   =========================================================== */
+.float-menu { display: none; }   /* PC では非表示（既定） */
+
+@media (max-width: 767px) {
+  .float-menu {
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top));
+    right: 14px;
+    z-index: 10050;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    height: 46px;
+    padding: 0 13px 0 5px;
+    border: none;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(8, 35, 76, .24);
+    cursor: pointer;
+    /* 既定は隠す。.is-visible で出現 */
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: transform .38s cubic-bezier(.16, 1, .3, 1), opacity .3s ease;
+  }
+  .float-menu.is-visible { transform: translateY(0); opacity: 1; }
+  .float-menu-rabbit {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--c-yellow);
+  }
+  /* ハンバーガー3本線（疑似要素で描画） */
+  .float-menu-bars,
+  .float-menu-bars::before,
+  .float-menu-bars::after {
+    content: "";
+    display: block;
+    width: 20px; height: 2.6px;
+    background: var(--c-blue-ink);
+    border-radius: 2px;
+  }
+  .float-menu-bars { position: relative; }
+  .float-menu-bars::before { position: absolute; left: 0; top: -6px; }
+  .float-menu-bars::after  { position: absolute; left: 0; top: 6px; }
+  /* 開いている時は×に */
+  .float-menu[aria-expanded="true"] .float-menu-bars { background: transparent; }
+  .float-menu[aria-expanded="true"] .float-menu-bars::before { top: 0; transform: rotate(45deg); }
+  .float-menu[aria-expanded="true"] .float-menu-bars::after  { top: 0; transform: rotate(-45deg); }
+
+  /* 開いたメニューを「画面内に固定」ドロップダウン化（ピル/ヘッダー直下・右寄せ） */
+  .gnav.is-open {
+    position: fixed;
+    top: calc(66px + env(safe-area-inset-top));
+    right: 14px;
+    left: auto;
+    z-index: 10049;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: min(62vw, 226px);
+    padding: 8px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 16px 36px rgba(8, 35, 76, .3);
+    animation: gnavDrop .26s cubic-bezier(.16, 1, .3, 1);
+  }
+  .gnav.is-open a {
+    flex: none;
+    text-align: left;
+    color: var(--c-blue-ink);
+    font-size: 14.5px;
+    font-weight: 800;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+  }
+  .gnav.is-open a:active { background: var(--c-blue-sky-pale); }
+  @keyframes gnavDrop {
+    from { opacity: 0; transform: translateY(-8px) scale(.98); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* アンカー着地時に上を少し空ける（追従ピルの下に頭が潜らない程度） */
+  #price, #items, #reason, #voice, #area, #faq, #company, #service, #ihin {
+    scroll-margin-top: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-menu { transition: opacity .2s ease; transform: none; }
+  .gnav.is-open { animation: none; }
+}
