@@ -209,6 +209,14 @@ button { font-family: inherit; cursor: pointer; }
   white-space: nowrap;
 }
 .header-tel-link b { font-size: 16px; margin-right: 4px; color: var(--c-green); }
+/* フリーダイヤル白黒マーク（➿の置換）。電話番号と同じ行に収める */
+.freedial-mark-img {
+  height: 0.82em;
+  width: auto;
+  margin-right: 5px;
+  vertical-align: -0.08em;
+  display: inline-block;
+}
 
 .header-cta {
   display: none;
@@ -5272,11 +5280,15 @@ button { font-family: inherit; cursor: pointer; }
 .promise-card-image-illust {
   background: #f6f8fc !important;
   padding: 16px;
+  display: flex;             /* イラストを枠の中央に（上ずれ解消） */
+  align-items: center;
+  justify-content: center;
 }
 .promise-card-image-illust img {
   object-fit: contain !important;
   max-height: 180px;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto !important;
 }
 
@@ -5594,12 +5606,12 @@ button { font-family: inherit; cursor: pointer; }
   background: linear-gradient(180deg, #f5faff 0%, #e2eff9 100%);
 }
 
-/* us列セル: 薄ピーチ色 + オレンジ太枠（outline で確実に） */
+/* us列セル: 蛍光イエロー + 赤の極太枠（目立たせる） */
 .compare-table tbody td.us {
-  background: #ffe6cc !important; /* 薄ピーチ */
-  border: 3px solid #e85d00 !important;
-  outline: 3px solid #e85d00;
-  outline-offset: -3px;
+  background: #fff200 !important; /* 蛍光イエロー */
+  border: 4px solid #e60012 !important;
+  outline: 4px solid #e60012;
+  outline-offset: -4px;
   color: #1a1a1a;
   font-size: 14px !important;
   position: relative;
@@ -6369,15 +6381,15 @@ button { font-family: inherit; cursor: pointer; }
    1行タイトルの下に過剰な余白を作っていたので解除し、margin で一定の間隔に。 */
 @media (max-width: 767px) {
   .promise-card h3 {
-    font-size: 20px;
-    line-height: 1.4;
+    font-size: 23px;
+    line-height: 1.35;
     letter-spacing: -0.01em;
     min-height: 0;        /* 2行予約をやめる＝1行タイトル下の空きすぎを解消 */
     margin: 12px 0 6px;   /* 上(画像/ラベルから) / 下(本文へ) を一定に */
   }
 }
 @media (min-width: 768px) {
-  .promise-card h3 { font-size: 21px; }
+  .promise-card h3 { font-size: 24px; }
 }
 
 /* セクション見出し: eyebrow(青ラベル) と h2 が両方 inline-block のため、
