@@ -6265,6 +6265,8 @@ button { font-family: inherit; cursor: pointer; }
    長文プローズは left（可読性）。短い導入/注記/キャプション/カード本文/コールアウトは
    center（親が中央寄せ＝チラシ・ポスター調の一体感）。text-wrap: balance と併用で
    中央寄せでも左右対称の整ったブロックになる。上の統一ブロック(left)を後ろで上書き。 */
+.promise-lead,
+.ihin-lead,
 .coupon-lead,
 .area-lead,
 .area-note,
