@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 686 262" width="1372" height="524" text-rendering="geometricPrecision" shape-rendering="geometricPrecision">
   <defs>
     <linearGradient id="goldClear" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff8b8"/>
-      <stop offset=".18" stop-color="#ffe36a"/>
-      <stop offset=".46" stop-color="#d59611"/>
-      <stop offset=".66" stop-color="#fff0a0"/>
-      <stop offset=".82" stop-color="#f1b928"/>
-      <stop offset="1" stop-color="#8b5200"/>
+      <stop offset="0" stop-color="#ffe58a"/>
+      <stop offset=".16" stop-color="#ffc936"/>
+      <stop offset=".42" stop-color="#a85f00"/>
+      <stop offset=".6" stop-color="#f6c33d"/>
+      <stop offset=".78" stop-color="#c67900"/>
+      <stop offset="1" stop-color="#5a2700"/>
     </linearGradient>
     <linearGradient id="goldRibbon" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#fff3a5"/>
@@ -80,11 +80,11 @@
   </g>
 
   <g font-family="'Hiragino Kaku Gothic StdN','Hiragino Sans','Noto Sans JP','Yu Gothic','Meiryo',sans-serif" font-weight="900" text-anchor="middle" filter="url(#deepShadow)">
-    <text x="343" y="70" font-size="42" letter-spacing="1" fill="#8b3c00" stroke="#4a1300" stroke-width="8" stroke-linejoin="round">地域密着の</text>
-    <text x="343" y="70" font-size="42" letter-spacing="1" fill="url(#goldClear)" stroke="#ffe78c" stroke-width="1.6" stroke-linejoin="round">地域密着の</text>
+    <text x="343" y="70" font-size="42" letter-spacing="1" fill="#5f2500" stroke="#351000" stroke-width="9" stroke-linejoin="round">地域密着の</text>
+    <text x="343" y="70" font-size="42" letter-spacing="1" fill="url(#goldClear)" stroke="#7b3b00" stroke-width="1.2" stroke-linejoin="round">地域密着の</text>
 
-    <text x="343" y="150" font-size="75" letter-spacing="1" fill="#7a2500" stroke="#4a1000" stroke-width="12" stroke-linejoin="round">信頼と実績</text>
-    <text x="343" y="150" font-size="75" letter-spacing="1" fill="url(#goldClear)" stroke="#fff0a6" stroke-width="2.4" stroke-linejoin="round">信頼と実績</text>
+    <text x="343" y="150" font-size="75" letter-spacing="1" fill="#5a2100" stroke="#2f0d00" stroke-width="14" stroke-linejoin="round">信頼と実績</text>
+    <text x="343" y="150" font-size="75" letter-spacing="1" fill="url(#goldClear)" stroke="#6e3200" stroke-width="1.6" stroke-linejoin="round">信頼と実績</text>
   </g>
 
   <g filter="url(#softGlow)">
