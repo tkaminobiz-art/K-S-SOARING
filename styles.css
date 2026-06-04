@@ -6141,20 +6141,20 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-discount {
-    top: 196px;
-    left: clamp(232px, 61vw, 238px);
+    top: 186px;
+    left: clamp(221px, 58vw, 227px);
     right: auto;
-    width: 140px;
+    width: 161px;
     transform: rotate(8deg);
     animation: none;
     z-index: 10;
   }
 
   .hero .hero-price {
-    left: 114px;
+    left: 98px;
     right: auto;
     bottom: 92px;
-    width: 220px;
+    width: 253px;
     z-index: 11;
   }
 
@@ -6191,16 +6191,16 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-discount {
-    top: 192px;
-    left: 227px;
+    top: 182px;
+    left: 217px;
     right: auto;
-    width: 136px;
+    width: 156px;
   }
 
   .hero .hero-price {
-    left: 108px;
+    left: 92px;
     bottom: 88px;
-    width: 210px;
+    width: 242px;
   }
 
   .hero .hero-sparkle {
