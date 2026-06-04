@@ -6151,10 +6151,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-price {
-    left: 42px;
+    left: 70px;
     right: auto;
-    bottom: 62px;
-    width: 380px;
+    bottom: 79px;
+    width: 360px;
     z-index: 9;
   }
 
@@ -6198,9 +6198,9 @@ button { font-family: inherit; cursor: pointer; }
   }
 
   .hero .hero-price {
-    left: 38px;
-    bottom: 58px;
-    width: 363px;
+    left: 66px;
+    bottom: 74px;
+    width: 344px;
   }
 
   .hero .hero-sparkle {
@@ -6324,7 +6324,7 @@ button { font-family: inherit; cursor: pointer; }
    折り返しは句読点 or <wbr>(company/staff)。balance で2段を左右対称に。 */
 @media (max-width: 767px) {
   .sect-head .sect-h2 {
-    font-size: clamp(18px, 5.6vw, 22px);
+    font-size: clamp(18px, 6.15vw, 24px);  /* 390px=24px。22px だと2段見出しが小さく見えたので増量 */
     letter-spacing: -0.01em;
     line-height: 1.35;
     white-space: normal;        /* nowrap 解除＝長い見出しは2段に */
@@ -6332,4 +6332,9 @@ button { font-family: inherit; cursor: pointer; }
     overflow-wrap: anywhere;
     text-wrap: balance;
   }
+}
+/* 極小幅(iPhone SE 等)だけ 18px に抑え、最長の promise 見出しが3段化するのを防ぐ
+   （1つの clamp では「390px=24px」と「320px=18px」を両立できないため）。 */
+@media (max-width: 340px) {
+  .sect-head .sect-h2 { font-size: 18px; }
 }
