@@ -777,11 +777,12 @@
     // CSS 側の word-break: keep-all と対で機能。文節境界に ZWSP を挿入し、
     // どのブラウザ(iOS WebKit 含む)でも単語内分断ゼロ・同一の改行位置にする。
     (function () {
+      // BudouX(文節ZWSP)は「極狭の列」だけに限定する。
+      // 広いプローズ本文に入れると、text-wrap:balance が文字数合わせのため
+      // 文節の途中（例:「依頼したい」の前 / 覚えてきた｜ことを）で不自然に折る。
+      // プローズは ZWSP 無し＝句読点(、。)だけで折ると clause 単位の自然な改行になる。
+      // 単語内分断が起きるのは列幅が極端に狭い staff-card / cv-rabbit-text のみ。
       var SEL = [
-        ".promise-lead", ".promise-card p", ".coupon-lead", ".coupon-howto-body",
-        ".price-desc", ".compare-note", ".case-desc", ".cases-note", ".voice-grid p",
-        ".area-lead", ".area-note", ".faq-list details p", ".company-story p",
-        ".ihin-lead", ".service-grid p", ".reason-grid p", ".danger p",
         ".staff-card p", ".cv-rabbit-text"
       ].join(",");
       if (!("customElements" in window)) return; // 非対応は keep-all のみで安全側
