@@ -6253,7 +6253,10 @@ button { font-family: inherit; cursor: pointer; }
   line-break: strict;
   text-align: left;
   text-align-last: auto;
-  text-wrap: wrap;        /* engine差のある pretty/balance を無効化（決定的な貪欲折返し） */
+  /* balance: 行長を均一化（1列の文字数を揃える）。BudouX/句読点の文節境界から
+     選ぶだけなので WebKit/Chromium でほぼ同一の結果（実測 spread 差±数px）。
+     auto-phrase と違いエンジン差が出ないため keep-all+BudouX と併用してよい */
+  text-wrap: balance;
   letter-spacing: 0.02em;
   line-height: 1.85;
 }
