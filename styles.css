@@ -5794,8 +5794,11 @@ button { font-family: inherit; cursor: pointer; }
   padding: 4px 14px;
 }
 .cv-band .cv-tel-num {
-  font-size: 44px;     /* 旧 36px → 44px (+22%) */
-  letter-spacing: .02em;
+  font-size: clamp(29px, 7.8vw, 32px);     /* 公式アイコン追加後もスマホ幅で全桁を表示 */
+  letter-spacing: 0;
+}
+.cv-band .cv-tel-numline {
+  gap: 4px;
 }
 .cv-band .cv-tel-receipt {
   font-size: 15px;     /* 旧 12px → 15px */
