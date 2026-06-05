@@ -6590,3 +6590,9 @@ button { font-family: inherit; cursor: pointer; }
 .company-dl dt, .company-dl dd { font-size: 16px; }
 .company-dl dd a { font-size: 16px; }
 .faq-list summary { font-size: 17px; }
+
+/* 会社案内の本文は中央揃え（ユーザー指定）。手動改行＋中央で対称に。 */
+.company-story p {
+  text-align: center;
+  text-align-last: center;
+}
