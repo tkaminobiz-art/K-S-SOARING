@@ -2038,15 +2038,42 @@ button { font-family: inherit; cursor: pointer; }
 }
 .footer-bubble {
   position: relative; margin: 0; max-width: 240px;
-  background: #fff; color: var(--c-blue-ink);
+  background:
+    radial-gradient(72% 88% at 18% 20%, rgba(255,255,255,.96) 0 56%, transparent 57%),
+    #fff;
+  color: var(--c-blue-ink);
   font-family: var(--c-font-pop); font-size: 17px; line-height: 1.45; font-weight: 400;
-  border-radius: 18px; padding: 13px 18px; box-shadow: 0 6px 0 rgba(0,0,0,.18);
+  border-radius: 26px 22px 24px 20px / 24px 26px 22px 24px;
+  padding: 14px 20px 15px;
+  box-shadow:
+    0 6px 0 rgba(0,0,0,.18),
+    inset 0 0 0 1px rgba(255,255,255,.88);
   transform: translateY(-42px);
 }
 .footer-bubble b { color: var(--c-red); }
+.footer-bubble::before,
 .footer-bubble::after {
-  content: ""; position: absolute; left: -13px; bottom: 58px;
-  border: 9px solid transparent; border-right-color: #fff; border-left: 0;
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.footer-bubble::before {
+  left: -23px;
+  bottom: 56px;
+  width: 31px;
+  height: 28px;
+  background: rgba(0,0,0,.11);
+  clip-path: polygon(0 52%, 100% 14%, 100% 86%);
+  transform: translateY(4px);
+}
+.footer-bubble::after {
+  left: -21px;
+  bottom: 61px;
+  width: 31px;
+  height: 28px;
+  background: #fff;
+  clip-path: polygon(0 52%, 100% 14%, 100% 86%);
+  transform: none;
 }
 
 /* 最後のCTA */
@@ -2097,7 +2124,8 @@ button { font-family: inherit; cursor: pointer; }
   .footer-hero { gap: 14px; margin-top: 10px; }
   .footer-rabbit { width: 108px; }
   .footer-bubble { font-size: 20px; max-width: none; transform: translateY(-48px); }
-  .footer-bubble::after { bottom: 66px; }
+  .footer-bubble::before { bottom: 64px; }
+  .footer-bubble::after { bottom: 69px; }
   .footer-cta-lead { font-size: 18px; }
   .footer-cta { gap: 12px; }
   .footer-tel b { font-size: 26px; }
