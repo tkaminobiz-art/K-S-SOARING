@@ -2057,23 +2057,31 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute;
   pointer-events: none;
 }
+/* 吹き出しの尻尾：うさぎの口元の高さ（中央やや下）から、隙間なく密着させて
+   左へ向ける。以前は bubble 上部（耳の高さ）で浮いた「◁矢印」に見えていた。 */
 .footer-bubble::before {
-  left: -23px;
-  bottom: 56px;
-  width: 31px;
-  height: 28px;
-  background: rgba(0,0,0,.11);
-  clip-path: polygon(0 52%, 100% 14%, 100% 86%);
+  left: -17px;
+  bottom: 30px;
+  width: 26px;
+  height: 24px;
+  background: rgba(0,0,0,.12);
+  clip-path: polygon(0 50%, 100% 14%, 100% 86%);
   transform: translateY(4px);
 }
 .footer-bubble::after {
-  left: -21px;
-  bottom: 61px;
-  width: 31px;
-  height: 28px;
+  left: -14px;
+  bottom: 34px;
+  width: 26px;
+  height: 24px;
   background: #fff;
-  clip-path: polygon(0 52%, 100% 14%, 100% 86%);
+  clip-path: polygon(0 50%, 100% 14%, 100% 86%);
   transform: none;
+}
+
+/* 320px級の極狭幅：吹き出しが flex で圧迫され「いただ／き」と崩れるため、
+   フォントとパディングを詰めて2行を維持。 */
+@media (max-width: 360px) {
+  .footer-bubble { font-size: 15px; padding: 12px 16px 13px; }
 }
 
 /* 最後のCTA */
@@ -2115,7 +2123,7 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ブランド締め＋運営情報 */
 .footer-brand { margin: 22px 0 3px; font-family: var(--c-font-pop); font-weight: 400; font-size: 26px; letter-spacing: .02em; text-shadow: 0 2px 0 rgba(0,0,0,.25); }
-.footer-brand-dot { color: var(--c-yellow); }
+.footer-brand-dot { color: inherit; }   /* 句点だけ黄色で浮いていたのでブランド名と同色(白)に */
 .site-footer small { opacity: .82; font-size: 12.5px; line-height: 1.8; }
 
 /* フッター：PC拡大 */
@@ -5355,13 +5363,11 @@ button { font-family: inherit; cursor: pointer; }
   line-height: 1.6;
 }
 .company-dl dd a {
-  font-size: 17px;
-  font-weight: 800;
+  font-weight: 500;   /* 電話番号だけ太字(800/17px)で浮いていたので他のddと同じ太さ・大きさに揃える */
 }
 @media (min-width: 700px) {
   .company-dl dt { font-size: 17px; }
-  .company-dl dd { font-size: 18px; }
-  .company-dl dd a { font-size: 20px; }
+  .company-dl dd { font-size: 18px; }   /* dd a はサイズ上書きせず dd と同寸に揃える */
 }
 
 /* --- 回収品目 (service-grid) --- */
@@ -6625,4 +6631,85 @@ button { font-family: inherit; cursor: pointer; }
 .company-story p {
   text-align: center;
   text-align-last: center;
+}
+
+/* ============================================================
+   SP 孤立改行（widow/orphan）の根治（2026-06-15）
+   症状: 手動<br>区切りの塊が SP 幅に1〜3字だけ溢れ、末尾の「。」や
+   仮名1字が次行に孤立（会社案内・遺品整理リード・お客様の声 No.3）。
+   原因: これら中央/左寄せ短文に effecting していた
+     word-break: keep-all; overflow-wrap: anywhere;
+   の anywhere が「収まる最後の1字」まで詰めて残り1字を改行に落とし、
+   さらに line-break:strict の禁則すら上書きしていた。
+   対処:
+     - overflow-wrap: anywhere → normal（最後の1字オーバーフロー折りを止める）
+     - word-break: keep-all → normal（任意の文字境界で折れる）
+     - line-break: strict（禁則を復活＝「。」「、」を行頭に出さない＝必ず行末へ）
+       ⇒ 句読点(。、)の孤立はこれで根治（全ブラウザ）。
+     - text-wrap: balance（<br>を含まないオーバーフロー塊の均等配分の保険。
+       手動<br>を含む段落では発火しない=Chrome仕様）。
+     - 仮名1字(例「り」)は禁則対象外で balance も<br>段落では効かないため、
+       該当の長い塊は HTML 側で自然な位置に <br> を1つ追加し clause 単位の
+       均等2行に割る（会社案内/遺品整理リード/お客様の声 No.3。最も確実）。
+   ※純日本語プローズのみ。電話番号/URL を含む列(area-list 等)は対象外。
+   ============================================================ */
+.company-story p,
+.ihin-lead,
+.voice-grid p,
+.promise-lead,
+.promise-card p,
+.coupon-lead,
+.coupon-howto-body,
+.price-desc,
+.compare-note,
+.case-desc,
+.cases-note,
+.area-lead,
+.area-note,
+.danger p,
+.service-grid p,
+.reason-grid p,
+.cv-rabbit-text {
+  word-break: normal;
+  overflow-wrap: normal;
+  line-break: strict;   /* 禁則: 。、 を必ず行末へ＝句読点単独の孤立を全廃 */
+}
+
+/* 連続文(手動<br>無し)の「短い尾(widow)」を均等行で解消（2026-06-15・実機検証）。
+   balance は手動<br>を含む段落では無効＝Chrome実測（poster段落は手動<br>で対応）。
+   pretty は尾を3字に縮めるだけで不十分だったため balance を採用。
+   cv-rabbit-text は BudouX ZWSP のため除外（文節途中折れ回避）。 */
+.company-story p,
+.ihin-lead,
+.voice-grid p,
+.promise-lead,
+.promise-card p,
+.coupon-lead,
+.coupon-howto-body,
+.price-desc,
+.compare-note,
+.case-desc,
+.cases-note,
+.area-lead,
+.area-note,
+.danger p,
+.service-grid p,
+.reason-grid p {
+  text-wrap: balance;
+}
+
+/* 狭幅(≤374px)では手動<br>を解除し balance に均等折りさせる（2026-06-15・実機検証）。
+   理由: 手動<br>のclauseは375px基準で組まれており、360/320px では各clauseが1〜2字
+   あふれて末尾に孤立(助詞/句点)が出る。<br>を畳むと連続文になり balance が全幅で均等行に
+   整える（句読点 。、 は禁則で行頭に出ない）。375px以上は<br>のclauseリズムを維持
+   （主力 iPhone SE/12-15 は崩れないため）。company-story は読点なしの phrase 区切りが
+   あり連結が不自然になるので対象外（元々360/320でも崩れない）。 */
+@media (max-width: 374px) {
+  .ihin-lead br,
+  .danger p br,
+  .reason-grid p br,
+  .voice-grid p br,
+  .area-note br {
+    display: none;
+  }
 }
