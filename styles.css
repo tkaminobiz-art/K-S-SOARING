@@ -4800,29 +4800,18 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* =============================================================
-   半端な wrap 防止：最終行に1-2文字だけ残るのを抑制
-   text-wrap: pretty/balance は自動でバランスよく改行
+   SP: 見出し/サブ/短ラベル（非プローズ）の半端 wrap 抑制。
+   本文プローズ群（各 p / lead / cv-rabbit-text 等）は「本文プローズ 改行・揃えの
+   単一権威ブロック」へ集約済み（このリストからは重複削除）。
    ============================================================= */
 @media (max-width: 767px) {
-  .cv-rabbit-text,
-  .coupon-note,
   .promise-sub,
-  .promise-card p,
   .promise-card h3,
-  .reason-grid p,
   .reason-grid h3,
   .flow-list p,
-  .area-lead,
-  .area-note,
-  .danger p,
-  .company-story p,
   .company-sub,
   .sect-h2,
-  .staff-card p,
-  .staff-card h3,
-  .service-grid p,
-  .case-note,
-  .price-desc {
+  .staff-card h3 {
     text-wrap: pretty;  /* 最新ブラウザ: 孤立を防ぐ */
     text-wrap: balance; /* fallback: 行を均等配分 */
     word-break: auto-phrase;
@@ -5199,7 +5188,7 @@ button { font-family: inherit; cursor: pointer; }
     50%      { transform: rotate(0) translateX(4px); opacity: 1; }
   }
   .case-tag { font-size: 16px; padding: 5px 16px; }
-  .case-desc { font-size: 15px; text-align: center; }
+  .case-desc { font-size: 15px; }  /* text-align は単一権威ブロックが供給(center) */
 }
 
 /* スクロールインアニメ */
@@ -6020,25 +6009,9 @@ button { font-family: inherit; cursor: pointer; }
   .coupon-period-tag, .coupon-rabbit-img { animation: none; }
 }
 
-/* ============================================================
-   改行のデバイス別最適化（PC/タブレットのorphan・不自然改行を防止）
-   - 本文リードは text-wrap: pretty で末尾1〜2文字の孤立行を回避
-   - ハイライト語（特別価格・近畿一円）は行末で割らない
-   ============================================================ */
-.coupon-lead,
-.area-lead,
-.promise-lead,
-.ihin-lead,
-.company-story p,
-.company-sub,
-.danger p,
-.cases-sub,
-.area-note,
-.compare-note,
-.price-note,
-.faq-list details p {
-  text-wrap: pretty;
-}
+/* ハイライト語（特別価格・近畿一円）を行末で割らない。
+   本文リード/注記の text-wrap は「本文プローズ 改行・揃えの単一権威ブロック」と
+   6062 の非プローズ群へ集約済み（旧 device別 text-wrap:pretty ブロック削除）。 */
 .coupon-lead strong,
 .area-lead strong {
   white-space: nowrap;
@@ -6059,66 +6032,30 @@ button { font-family: inherit; cursor: pointer; }
   word-break: keep-all;
 }
 
-/* --- 本文系：文節単位の自然な折返し（孤立行・文節途中分断の解消） --- */
-.promise-lead,
-.promise-card p,
-.coupon-lead,
-.coupon-howto-body,
+/* --- 注記/サブ/ラベル/定義リスト等（非プローズ）：文節単位の自然な折返し ---
+   本文プローズ群（lead/各 p/cv-rabbit-text 等）は「本文プローズ 改行・揃えの
+   単一権威ブロック」へ集約済み（このリストからは重複削除）。 */
 .price-note,
-.price-desc,
 .price-was,
-.compare-note,
-.case-desc,
-.cases-note,
 .cases-sub,
 .voice-grid h3,
-.voice-grid p,
-.area-lead,
-.area-note,
 .area-list li,
 .faq-list summary,
-.faq-list details p,
-.company-story p,
 .company-sub,
-.company-dl dd,
-.ihin-lead,
-.service-grid p,
-.reason-grid p,
-.danger p,
-.staff-card p,
-.cv-rabbit-text {
+.company-dl dd {
   line-break: strict;
   overflow-wrap: break-word;
   text-wrap: pretty;
 }
 @supports (word-break: auto-phrase) {
-  .promise-lead,
-  .promise-card p,
-  .coupon-lead,
-  .coupon-howto-body,
   .price-note,
-  .price-desc,
   .price-was,
-  .compare-note,
-  .case-desc,
-  .cases-note,
   .cases-sub,
   .voice-grid h3,
-  .voice-grid p,
-  .area-lead,
-  .area-note,
   .area-list li,
   .faq-list summary,
-  .faq-list details p,
-  .company-story p,
   .company-sub,
-  .company-dl dd,
-  .ihin-lead,
-  .service-grid p,
-  .reason-grid p,
-  .danger p,
-  .staff-card p,
-  .cv-rabbit-text {
+  .company-dl dd {
     word-break: auto-phrase;
   }
 }
@@ -6190,41 +6127,11 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ============================================================
-   [MTG6-2 / 枠内テキスト均等化] 2026-06-04
-   - 本文ブロックを両端揃え(justify)で枠に揃える（右端ガタガタ解消）
-   - お約束カードは1列化済み → 見出しは文節折返しで自然に
-   - 句読点直後/文節途中/1文字の孤立改行を回避
+   [MTG6-2] お約束カード見出しの SP 折返し。
+   本文 p の両端揃え/中央寄せ振り分け（promise-card p / voice-grid p / staff-card p /
+   service-grid p / faq-list details p / company-story p / case-desc / danger p）は
+   「本文プローズ 改行・揃えの単一権威ブロック」へ集約済み（旧 justify ブロック削除）。
    ============================================================ */
-
-/* 本文の両端揃え（カード内の左揃え本文のみ。リード/中央寄せ系は対象外）
-   重要: justify は word-break:normal とセットにする。
-   auto-phrase と併用すると「文節と文節の間」が引き伸ばされて
-   "その 経験 から" のような文字間スカスカ現象になるため、ここでは無効化。
-   日本語の両端揃えは normal＋line-break:strict（禁則処理）で詰めて揃える。 */
-.promise-card p,
-.voice-grid p,
-.staff-card p,
-.service-grid p,
-.faq-list details p,
-.company-story p,
-.case-desc,
-.danger p {
-  text-align: justify;
-  text-align-last: left;          /* 最終行は伸ばさない */
-  word-break: normal;             /* auto-phrase を上書き（隙間防止） */
-  line-break: strict;             /* 禁則処理 */
-  overflow-wrap: anywhere;
-}
-@supports (word-break: auto-phrase) {
-  .promise-card p,
-  .voice-grid p,
-  .staff-card p,
-  .service-grid p,
-  .faq-list details p,
-  .company-story p,
-  .case-desc,
-  .danger p { word-break: normal; }   /* 明示的に auto-phrase を打ち消す */
-}
 
 /* お約束カード見出し：1列化で横幅が広がったので文節折返しで自然な改行に */
 @media (max-width: 767px) {
@@ -6234,11 +6141,6 @@ button { font-family: inherit; cursor: pointer; }
     overflow-wrap: normal;     /* 単語途中の分断を避ける */
     text-wrap: balance;
   }
-}
-
-/* 対応事例キャプション：中央寄せ → 両端揃え（上のルールが効くよう中央指定を解除） */
-@media (max-width: 767px) {
-  .case-desc { text-align: justify; }
 }
 
 /* ============================================================
@@ -6334,16 +6236,11 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ============================================================
-   本文タイポグラフィ 全デバイス統一（2026-06-04）
-   目的: どの端末・どの描画エンジンでも「同じ改行・同じ行間・同じ字間」。
-   方針:
-   - word-break: keep-all + 文節境界(<wbr>) で単語内分断を根絶
-     （normal/auto-phrase は engine の測定差で割れ位置がブレるため撤廃）
-   - justify を廃止（左揃え）。文節境界が疎なため justify は字間スカスカの原因
-   - engine 依存で結果が変わる text-wrap: pretty/balance を本文では使わない
-   - line-height / letter-spacing を単一値で固定（媒体別の上書きをここで無効化）
-   ※ 末尾配置で、上の auto-phrase / normal / justify 実験ブロックを source-order で上書き
-   ※ 見出し・サブ見出し・短ラベルは SP 1行詰めを尊重し対象外
+   本文プローズ 字間・行間（letter-spacing / line-height）統一（2026-06-04）
+   目的: どの端末・描画エンジンでも同じ字間・行間。
+   改行・揃え（word-break / overflow-wrap / line-break / text-wrap / text-align）は
+   「本文プローズ 改行・揃えの単一権威ブロック」へ集約済み（ここでは扱わない）。
+   ※ cv-rabbit-text の line-height は .cv-band .cv-rabbit-text(1.6) が上書きする。
    ============================================================ */
 .promise-lead,
 .promise-card p,
@@ -6364,51 +6261,15 @@ button { font-family: inherit; cursor: pointer; }
 .danger p,
 .staff-card p,
 .cv-rabbit-text {
-  /* 本文の折り返しは全要素「伝統的フル行」: normal でどこでも折って端まで埋め、
-     line-break:strict の禁則で 、。 を行頭に出さない。日本語は単語途中で折れて正常。
-     keep-all/overflow-wrap:anywhere/balance は撤去（ガタガタ・文節途中折れの原因）。
-     揃えは下で振り分け（左プローズ=justify / 中央寄せ短文=center）。 */
-  word-break: normal;
-  overflow-wrap: normal;
-  line-break: strict;
-  text-align: left;
-  text-align-last: auto;
-  text-wrap: wrap;
   letter-spacing: 0.02em;
   line-height: 1.85;
 }
 
-/* 左右揃えの振り分け（2026-06-04）:
-   長文プローズは left（可読性）。短い導入/注記/キャプション/カード本文/コールアウトは
-   center（親が中央寄せ＝チラシ・ポスター調の一体感）。text-wrap: balance と併用で
-   中央寄せでも左右対称の整ったブロックになる。上の統一ブロック(left)を後ろで上書き。 */
-.promise-lead,
-.ihin-lead,
-.coupon-lead,
-.area-lead,
-.area-note,
-.price-desc,
-.cases-note,
-.compare-note,
-.case-desc,
-.cv-rabbit-text,
-.danger p,
-.service-grid p,
-.reason-grid p {
-  text-align: center;
-  text-align-last: center;
-  /* 中央寄せは「句読点で折る」方が綺麗（単語途中折れは中央寄せだと不格好）。
-     左プローズの normal+justify と違い、中央寄せ短文は keep-all で 、。 折り。 */
-  word-break: keep-all;
-  overflow-wrap: anywhere;
-}
-
-/* 中央寄せ振り分け 第2弾（2026-06-04・実機監査で漏れを補完）:
-   カード見出し/本文・サービス品目見出し・クーポン利用方法もセンターへ。 */
+/* カード見出し・サービス品目見出し（非プローズ）を中央寄せ＋熟語非分断に。
+   本文プローズ（promise-card p / coupon-howto-body / リード/注記 等）の text-align・
+   word-break は「本文プローズ 改行・揃えの単一権威ブロック」へ集約済み（旧 B/C ブロック削除）。 */
 .promise-card h3,
-.promise-card p,
-.service-grid li h3,
-.coupon-howto-body {
+.service-grid li h3 {
   text-align: center;
   text-align-last: center;
   word-break: keep-all;
@@ -6559,33 +6420,8 @@ button { font-family: inherit; cursor: pointer; }
   .gnav.is-open { animation: none; }
 }
 
-/* 本文プローズ（左揃えの長文）を C案＝伝統的フル行＋両端揃えに統一。
-   word-break:normal でどこでも折って各行を端まで埋め、line-break:strict の禁則で
-   、。 は行頭に来ない。normal＋justify は折り点が密なので字間は間延びしない（本・
-   新聞の組版）。単語の途中で折れるのは日本語では正常。keep-all/balance/overflow-wrap
-   :anywhere を本要素のみ無効化。※中央寄せの短文(注記/リード/カード)は対象外
-   （中央寄せは元々左右対称でガタつかないため現状維持）。 */
-.faq-list details p,
-.staff-card p {
-  word-break: normal;
-  line-break: strict;
-  overflow-wrap: normal;
-  text-wrap: wrap;
-  text-align: justify;
-  text-align-last: left;
-}
-
-/* 会社案内・お客様の声は「左揃え＋句読点で折る」（手動改行/「」を割らない/
-   中央ブロック）。justify だと手動改行の行が間延びするため left に。 */
-.company-story p,
-.voice-grid p {
-  word-break: keep-all;
-  overflow-wrap: anywhere;
-  line-break: strict;
-  text-wrap: wrap;
-  text-align: left;
-  text-align-last: left;
-}
+/* （旧: faq/staff の justify ブロックと company-story/voice の left ブロックは
+   「本文プローズ 改行・揃えの単一権威ブロック」へ統合・削除。下記参照） */
 
 /* ============================================================
    全体フォント拡大（2026-06-04・高齢者配慮）
@@ -6627,75 +6463,88 @@ button { font-family: inherit; cursor: pointer; }
 .company-dl dd a { font-size: 16px; }
 .faq-list summary { font-size: 17px; }
 
-/* 会社案内の本文は中央揃え（ユーザー指定）。手動改行＋中央で対称に。 */
-.company-story p {
-  text-align: center;
-  text-align-last: center;
-}
-
 /* ============================================================
-   SP 孤立改行（widow/orphan）の根治（2026-06-15）
-   症状: 手動<br>区切りの塊が SP 幅に1〜3字だけ溢れ、末尾の「。」や
-   仮名1字が次行に孤立（会社案内・遺品整理リード・お客様の声 No.3）。
-   原因: これら中央/左寄せ短文に effecting していた
-     word-break: keep-all; overflow-wrap: anywhere;
-   の anywhere が「収まる最後の1字」まで詰めて残り1字を改行に落とし、
-   さらに line-break:strict の禁則すら上書きしていた。
-   対処:
-     - overflow-wrap: anywhere → normal（最後の1字オーバーフロー折りを止める）
-     - word-break: keep-all → normal（任意の文字境界で折れる）
-     - line-break: strict（禁則を復活＝「。」「、」を行頭に出さない＝必ず行末へ）
-       ⇒ 句読点(。、)の孤立はこれで根治（全ブラウザ）。
-     - text-wrap: balance（<br>を含まないオーバーフロー塊の均等配分の保険。
-       手動<br>を含む段落では発火しない=Chrome仕様）。
-     - 仮名1字(例「り」)は禁則対象外で balance も<br>段落では効かないため、
-       該当の長い塊は HTML 側で自然な位置に <br> を1つ追加し clause 単位の
-       均等2行に割る（会社案内/遺品整理リード/お客様の声 No.3。最も確実）。
-   ※純日本語プローズのみ。電話番号/URL を含む列(area-list 等)は対象外。
+   本文プローズ 改行・揃えの【単一権威ブロック】（2026-06-15 統合）
+   従来 word-break / overflow-wrap / line-break / text-wrap / text-align(-last)
+   が 4806・6062・6204・6348(A)・6385(B)・6408(C)・6568・6580・6631・6656・6682 等
+   5ブロック超に重複・一部矛盾して散在し、正しさが source-order に依存していた。
+   それらを当ブロック1か所へ集約（値は統合前の最終解決値と完全一致・CDP実測検証済み）。
+   方針（全ブラウザ・実機検証済み）:
+   - word-break:normal + overflow-wrap:normal … 単語途中でも折って各行を端まで埋める
+     （日本語は単語途中の折返しが正常）。「収まる最後の1字」を次行へ落とす anywhere は不使用。
+   - line-break:strict … 禁則で 。、 を行頭に出さない＝句読点単独の孤立を全廃。
+   - 中央寄せ短文（チラシ/ポスター調の一体感）は text-wrap:balance を併用し、連続文の
+     短い尾(widow)を均等行で解消（手動<br>段落では balance は不活性＝Chrome実仕様）。
+   - letter-spacing / line-height / font-size は別ブロック管理（ここでは触らない）。
+   - 狭幅(≤374px)で手動<br>を畳む処理は末尾の @media (max-width:374px) を参照。
    ============================================================ */
+
+/* 共通: 折り方は全プローズ統一（端まで埋める＋禁則で句読点を行頭に出さない）。 */
 .company-story p,
 .ihin-lead,
-.voice-grid p,
 .promise-lead,
 .promise-card p,
-.coupon-lead,
-.coupon-howto-body,
+.danger p,
+.reason-grid p,
+.area-lead,
+.area-note,
 .price-desc,
 .compare-note,
 .case-desc,
 .cases-note,
-.area-lead,
-.area-note,
-.danger p,
+.coupon-lead,
+.coupon-howto-body,
 .service-grid p,
-.reason-grid p,
-.cv-rabbit-text {
+.voice-grid p,
+.cv-rabbit-text,
+.faq-list details p,
+.staff-card p {
   word-break: normal;
   overflow-wrap: normal;
   line-break: strict;   /* 禁則: 。、 を必ず行末へ＝句読点単独の孤立を全廃 */
 }
 
-/* 連続文(手動<br>無し)の「短い尾(widow)」を均等行で解消（2026-06-15・実機検証）。
-   balance は手動<br>を含む段落では無効＝Chrome実測（poster段落は手動<br>で対応）。
-   pretty は尾を3字に縮めるだけで不十分だったため balance を採用。
-   cv-rabbit-text は BudouX ZWSP のため除外（文節途中折れ回避）。 */
+/* 中央寄せ短文（リード/注記/カード本文）＝チラシ調の一体感。連続文の尾は balance で均等化。 */
 .company-story p,
 .ihin-lead,
-.voice-grid p,
 .promise-lead,
 .promise-card p,
-.coupon-lead,
-.coupon-howto-body,
+.danger p,
+.reason-grid p,
+.area-lead,
+.area-note,
 .price-desc,
 .compare-note,
 .case-desc,
 .cases-note,
-.area-lead,
-.area-note,
-.danger p,
-.service-grid p,
-.reason-grid p {
+.coupon-lead,
+.coupon-howto-body,
+.service-grid p {
+  text-align: center;
+  text-align-last: center;
   text-wrap: balance;
+}
+
+/* CV うさぎ吹き出し: 手動 <br class="br-mb"> で改行するため balance は不活性。中央寄せ＋通常折り。 */
+.cv-rabbit-text {
+  text-align: center;
+  text-align-last: center;
+  text-wrap: wrap;
+}
+
+/* お客様の声: 手動改行/「」を割らない中央ブロック＝左揃え＋句読点折り。 */
+.voice-grid p {
+  text-align: left;
+  text-align-last: left;
+  text-wrap: balance;
+}
+
+/* FAQ本文・スタッフ紹介: 通常組版の両端揃え（最終行は左）。 */
+.faq-list details p,
+.staff-card p {
+  text-align: justify;
+  text-align-last: left;
+  text-wrap: wrap;
 }
 
 /* 狭幅(≤374px)では手動<br>を解除し balance に均等折りさせる（2026-06-15・実機検証）。
