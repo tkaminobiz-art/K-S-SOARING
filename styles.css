@@ -759,376 +759,6 @@ button { font-family: inherit; cursor: pointer; }
 .safe-list b { font-size: 12px; font-weight: 800; color: var(--c-blue-ink); }
 
 /* ===========================================================
-   クーポン帯
-   =========================================================== */
-/* =============================================================
-   LINE割クーポン（チケット型・A案）
-   左右分割の半券型 + 中央切り取り線 + 下部に使い方
-   ============================================================= */
-.coupon {
-  background:
-    radial-gradient(circle at 50% 30%, #fff7c2 0%, #ffe066 30%, #ffc800 60%, transparent 80%),
-    repeating-conic-gradient(from -10deg at 50% 30%,
-      #ff8b00 0deg, #ff8b00 12deg, #ffd633 12deg, #ffd633 30deg
-    ),
-    #ffc800;
-  padding: 36px 12px 36px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.coupon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 55%, rgba(255,255,255,0.6) 0%, transparent 70%);
-  pointer-events: none;
-}
-.coupon > * { position: relative; z-index: 1; }
-
-/* チケット本体 */
-.coupon-ticket {
-  position: relative;
-  max-width: 720px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(120, 60, 0, 0.25), 0 4px 0 #d97d00;
-}
-
-/* 上半券：1枚画像 */
-.coupon-banner {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 16px 16px 0 0;
-  background: #fff;
-}
-
-/* 期間限定タグ（左上の斜めリボン） */
-.coupon-period-tag {
-  position: absolute;
-  top: -14px;
-  left: -8px;
-  z-index: 4;
-  background: var(--c-red);
-  color: #fff;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: .08em;
-  padding: 6px 16px;
-  border-radius: 5px;
-  transform: rotate(-8deg);
-  box-shadow: 0 4px 10px rgba(150,0,10,.3);
-  animation: burstWobble 2.2s ease-in-out infinite alternate;
-}
-
-/* ── 上半券：左右分割 ── */
-.coupon-stub {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 0;
-  padding: 22px 18px 20px;
-  border-radius: 16px 16px 0 0;
-}
-
-/* 左セル：訴求内容 */
-.coupon-stub-left {
-  text-align: center;
-  padding: 0 8px;
-  border-right: 3px dashed #d8d8d8;
-}
-.coupon-stub-brand {
-  display: inline-block;
-  background: var(--c-green-line);
-  color: #fff;
-  font-weight: 900;
-  font-size: 14px;
-  padding: 5px 14px;
-  border-radius: 999px;
-  margin-bottom: 8px;
-  box-shadow: 0 3px 0 #048a3c;
-}
-.coupon-burst {
-  display: block;
-  width: 78px;
-  height: auto;
-  margin: 0 auto 6px;
-  animation: burstWobble 1.6s ease-in-out infinite alternate;
-  filter: drop-shadow(2px 3px 0 rgba(180, 0, 8, 0.3));
-}
-@keyframes burstWobble {
-  0%   { transform: rotate(-5deg) scale(1); }
-  100% { transform: rotate(5deg) scale(1.04); }
-}
-.coupon-stub-lead {
-  margin: 4px 0;
-  font-weight: 900;
-  font-size: 15px;
-  color: var(--c-red);
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-}
-.coupon-stub-cond {
-  margin: 6px 0 0;
-  font-size: 11.5px;
-  color: #4a5060;
-  line-height: 1.55;
-  font-weight: 700;
-}
-.coupon-stub-cond strong {
-  color: var(--c-red);
-  font-weight: 900;
-  background: #fff5d6;
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-size: 12.5px;
-  display: inline-block;
-}
-
-/* 右セル：割引率 */
-.coupon-stub-right {
-  position: relative;
-  text-align: center;
-  padding: 0 4px 0 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #fff5b8 0%, #ffd633 100%);
-  border-radius: 8px;
-  margin-left: 4px;
-}
-.coupon-stub-prefix {
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--c-red);
-  text-shadow: 2px 2px 0 #fff;
-}
-.coupon-stub-num-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 2px;
-  line-height: 0.85;
-}
-.coupon-stub-num {
-  font-size: 84px;
-  font-weight: 900;
-  color: var(--c-red);
-  font-family: var(--c-font-pop), "Mochiy Pop One", sans-serif;
-  letter-spacing: -0.04em;
-  -webkit-text-stroke: 2px #fff;
-  filter: drop-shadow(3px 4px 0 rgba(180, 0, 8, 0.35));
-  line-height: 0.85;
-}
-.coupon-stub-unit {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.coupon-stub-percent {
-  font-size: 30px;
-  font-weight: 900;
-  color: var(--c-red);
-  text-shadow: 2px 2px 0 #fff;
-  line-height: 1;
-}
-.coupon-stub-off {
-  font-size: 22px;
-  font-weight: 900;
-  color: var(--c-red);
-  text-shadow: 2px 2px 0 #fff;
-  line-height: 1;
-  margin-top: 2px;
-}
-.coupon-stub-exclaim {
-  font-size: 24px;
-  font-weight: 900;
-  color: var(--c-red);
-  text-shadow: 2px 2px 0 #fff;
-  line-height: 1;
-  margin-top: 2px;
-}
-.coupon-stub-mascot {
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  width: 50px;
-  height: auto;
-  filter: drop-shadow(2px 3px 0 rgba(0, 80, 30, 0.18));
-  animation: mascotJump 1.8s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes mascotJump {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-4px) rotate(4deg); }
-}
-
-/* ── 切り取り線（円形ノッチ＋破線） ── */
-.coupon-cut {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #999;
-  padding: 8px 24px;
-  background:
-    radial-gradient(circle at 0 50%, transparent 8px, transparent 9px, #fff 10px),
-    radial-gradient(circle at 100% 50%, transparent 8px, transparent 9px, #fff 10px),
-    #fff;
-}
-.coupon-cut::before,
-.coupon-cut::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  background: var(--c-yellow-deep);
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-.coupon-cut::before { left: -10px; }
-.coupon-cut::after { right: -10px; }
-.coupon-cut-line {
-  flex: 1;
-  height: 0;
-  border-top: 2px dashed #cfcfcf;
-  min-width: 30px;
-}
-
-/* ── 下半券：使い方 ── */
-.coupon-howto {
-  background: linear-gradient(180deg, #f6fbff 0%, #e8f4ff 100%);
-  border-radius: 0 0 16px 16px;
-  padding: 18px 18px 22px;
-  text-align: center;
-}
-.coupon-howto-title {
-  margin: 0 0 10px;
-  font-weight: 900;
-  font-size: 16px;
-  color: var(--c-blue-deep);
-  letter-spacing: 0.04em;
-}
-.coupon-howto-body {
-  margin: 0 0 14px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #1a1a1a;
-  line-height: 1.6;
-}
-.coupon-howto-body strong {
-  color: var(--c-red);
-  font-weight: 900;
-  background: #fff5d6;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 15px;
-}
-/* 「HPを見ました」を特大＋発光で目立たせる */
-.coupon-howto-body .coupon-hp-em {
-  display: inline-block;
-  margin: 8px 0 4px;
-  font-size: 26px;
-  line-height: 1.2;
-  color: var(--c-red);
-  background: linear-gradient(180deg, #fff7b0 0%, #ffe14d 100%);
-  padding: 6px 16px;
-  border-radius: 10px;
-  box-shadow: 0 3px 0 #e0a800;
-  animation: hpGlow 1.3s ease-in-out infinite;
-}
-@keyframes hpGlow {
-  0%, 100% { transform: scale(1); box-shadow: 0 3px 0 #e0a800, 0 0 0 rgba(255,205,0,0); }
-  50%      { transform: scale(1.05); box-shadow: 0 3px 0 #e0a800, 0 0 20px rgba(255,200,0,.9); }
-}
-.coupon-howto-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--c-green-line);
-  color: #fff;
-  font-weight: 900;
-  font-size: 17px;
-  padding: 13px 26px;
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 5px 0 #048a3c, 0 8px 18px rgba(6, 199, 85, 0.3);
-  letter-spacing: 0.03em;
-  transition: transform 0.15s ease;
-}
-.coupon-howto-cta:hover { transform: translateY(-2px); }
-.coupon-howto-cta:active { transform: translateY(1px); box-shadow: 0 2px 0 #048a3c; }
-.coupon-howto-cta span { font-size: 22px; }
-
-/* スマホ */
-@media (max-width: 640px) {
-  .coupon { padding: 28px 8px 28px; }
-  .coupon-period-tag { font-size: 12px; padding: 5px 12px; top: -12px; left: -6px; }
-  .coupon-stub { padding: 16px 12px 16px; }
-  .coupon-stub-left { padding: 0 4px; }
-  .coupon-stub-brand { font-size: 12px; padding: 4px 11px; }
-  .coupon-burst { width: 68px; }
-  .coupon-stub-lead { font-size: 13px; }
-  .coupon-stub-cond { font-size: 10.5px; }
-  .coupon-stub-cond strong { font-size: 11.5px; }
-  .coupon-stub-prefix { font-size: 15px; }
-  .coupon-stub-num { font-size: 72px; }
-  .coupon-stub-percent { font-size: 26px; }
-  .coupon-stub-off { font-size: 19px; }
-  .coupon-stub-exclaim { font-size: 20px; }
-  .coupon-stub-mascot { width: 40px; }
-  .coupon-howto { padding: 16px 14px 20px; }
-  .coupon-howto-title { font-size: 17px; }
-  .coupon-howto-body { font-size: 15px; line-height: 1.7; }
-  .coupon-howto-body strong { font-size: 16px; }
-  .coupon-howto-body .coupon-hp-em { font-size: 25px; }
-  .coupon-howto-cta { font-size: 17px; padding: 14px 24px; }
-}
-
-@media (max-width: 380px) {
-  .coupon-stub-num { font-size: 60px; }
-  .coupon-stub-percent { font-size: 22px; }
-  .coupon-stub-off { font-size: 17px; }
-}
-
-/* PC */
-@media (min-width: 700px) {
-  .coupon { padding: 48px 16px 48px; }
-  .coupon-period-tag { font-size: 18px; padding: 8px 22px; top: -22px; left: -14px; }
-  .coupon-stub { padding: 32px 32px 28px; gap: 24px; }
-  .coupon-stub-brand { font-size: 18px; padding: 7px 22px; }
-  .coupon-burst { width: 100px; }
-  .coupon-stub-lead { font-size: 22px; }
-  .coupon-stub-cond { font-size: 15px; }
-  .coupon-stub-cond strong { font-size: 16px; }
-  .coupon-stub-prefix { font-size: 26px; }
-  .coupon-stub-num { font-size: 140px; }
-  .coupon-stub-percent { font-size: 50px; }
-  .coupon-stub-off { font-size: 36px; }
-  .coupon-stub-exclaim { font-size: 36px; }
-  .coupon-stub-mascot { width: 80px; }
-  .coupon-howto-title { font-size: 22px; }
-  .coupon-howto-body { font-size: 18px; }
-  .coupon-howto-body strong { font-size: 20px; }
-  .coupon-howto-cta { font-size: 21px; padding: 16px 36px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .coupon-period-tag,
-  .coupon-burst,
-  .coupon-stub-mascot { animation: none; }
-}
-
-/* ===========================================================
    料金プラン
    =========================================================== */
 .price {
@@ -2321,8 +1951,8 @@ button { font-family: inherit; cursor: pointer; }
   .service-grid { grid-template-columns: repeat(3, 1fr); }
   .proof { grid-template-columns: repeat(3, 1fr); }
 
-  .coupon-rabbit { display: block; position: absolute; right: -8px; bottom: -4px; width: 100px; animation: rabbitMochi 1.6s ease-in-out infinite; }
-  .coupon-content { padding-right: 110px; }
+  
+  
 
   /* PC: 右下コンパクトフロート */
   .fixed-cta {
@@ -3001,8 +2631,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 
-
-
 /* ============================================================
    FV 0円 & キラキラ：イージング＋反動の登場アニメ強化
    CODEX 既存 .hero-price / .hero-sparkle の animation をオーバーライド
@@ -3321,7 +2949,6 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ====== 1. セクション間の斜め境界（zig-zag 風）====== */
 /* 上向き三角 (前セクションの底が三角形に切れる) */
-.coupon::before,
 .price::before,
 .reason::before,
 .compare::before,
@@ -3340,8 +2967,15 @@ button { font-family: inherit; cursor: pointer; }
   clip-path: polygon(0 100%, 50% 0, 100% 100%);
   z-index: 1;
 }
-.coupon, .price, .reason, .compare, .service,
-.ihin, .voice, .flow, .area, .faq {
+.price,
+.reason,
+.compare,
+.service,
+.ihin,
+.voice,
+.flow,
+.area,
+.faq {
   position: relative;
 }
 
@@ -3477,13 +3111,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ====== 7. クーポン帯に薄いストライプ背景 ====== */
-.coupon {
-  background-image:
-    repeating-linear-gradient(135deg,
-      rgba(255, 255, 255, .35) 0 12px,
-      transparent 12px 24px),
-    linear-gradient(180deg, var(--c-green-pale) 0%, #d8f0cb 100%);
-}
+
 
 /* ====== 8. CTA電話番号に呼吸グロー ====== */
 .cv-tel-num,
@@ -3547,7 +3175,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ====== 2. セクション境界を波形（既存の三角を波に置換） ====== */
-.coupon::before,
 .price::before,
 .reason::before,
 .compare::before,
@@ -3613,11 +3240,8 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ====== 5. 期間限定バッジ — 削除済み（画像内に焼き込まれているため） ====== */
-.coupon .coupon-ticket { position: relative; }
-.coupon .coupon-ticket::before {
-  content: none;
-  display: none;
-}
+
+
 @keyframes limitedBlink {
   0%, 100% { transform: rotate(-8deg) scale(1); }
   50%      { transform: rotate(-8deg) scale(1.06); filter: brightness(1.1); }
@@ -4233,10 +3857,7 @@ button { font-family: inherit; cursor: pointer; }
     padding-bottom: 88px;
   }
 
-  .coupon {
-    padding-top: 56px;
-    padding-bottom: 64px;
-  }
+  
 
   .danger {
     padding-top: 64px;
@@ -5291,17 +4912,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* H: LINE割クーポン部 さらに極端に拡大 (Phase 6 続き) */
-.coupon-ribbon {
-  font-size: 21px !important;
-  padding: 8px 22px !important;
-  font-weight: 900 !important;
-}
-@media (min-width: 700px) {
-  .coupon-ribbon {
-    font-size: 28px !important;
-    padding: 10px 32px !important;
-  }
-}
+
 
 /* お約束カードのイラスト画像（写真ではなくイラスト） */
 .promise-card-image-illust {
@@ -5387,40 +4998,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* --- LINE割クーポン部の極端拡大 --- */
-.coupon-ribbon {
-  font-size: 17px !important;
-  padding: 6px 18px !important;
-}
-.coupon-line-top {
-  font-size: 17px !important;
-  font-weight: 900;
-}
-.coupon-line-big b {
-  font-size: 64px !important;  /* 「5」を極端に大きく */
-  line-height: 1;
-}
-.coupon-line-big i {
-  font-size: 36px !important;
-}
-.coupon-line-big strong {
-  font-size: 28px !important;
-}
-.coupon-note {
-  font-size: 15px;
-  font-weight: 700;
-}
-.coupon-note strong {
-  font-size: 16px;
-}
-@media (min-width: 700px) {
-  .coupon-ribbon { font-size: 22px !important; padding: 8px 24px !important; }
-  .coupon-line-top { font-size: 22px !important; }
-  .coupon-line-big b { font-size: 96px !important; }
-  .coupon-line-big i { font-size: 50px !important; }
-  .coupon-line-big strong { font-size: 38px !important; }
-  .coupon-note { font-size: 19px; }
-  .coupon-note strong { font-size: 21px; }
-}
 
 
 /* =============================================================
@@ -5893,126 +5470,9 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 
-/* ============================================================
-   クーポン リニューアル：プレミアム金券画像 ＋ テキストオーバーレイ
-   （旧 .coupon-stub / .coupon-banner / .coupon-cut を置換）
-   ============================================================ */
-.coupon {
-  background: linear-gradient(180deg, #fffdf6 0%, #fff1cc 100%);
-  padding: 30px 14px 34px;
-}
-.coupon::before { display: none; } /* 旧サンバースト用グローを無効化 */
-
-.coupon-wrap { max-width: 600px; margin: 0 auto; }
-
-.coupon-card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1280 / 853;
-  border-radius: 18px;
-  box-shadow: 0 10px 22px rgba(150,90,0,.20);
-}
-.coupon-ticket-img {
-  display: block;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
-}
-
-/* 期間限定タグ（左上） */
-.coupon-card .coupon-period-tag {
-  position: absolute;
-  top: -4%; left: 1%;
-  z-index: 5;
-  background: var(--c-red); color: #fff; font-weight: 900;
-  font-size: 4cqw; letter-spacing: .06em;
-  padding: 1.2cqw 3cqw; border-radius: 5px;
-  transform: rotate(-7deg);
-  box-shadow: 0 0.8cqw 1.8cqw rgba(150,0,10,.3);
-  animation: burstWobble 2.2s ease-in-out infinite alternate;
-}
-
-/* オファー：中央サンバースト円に集約 */
-.coupon-offer { position: absolute; inset: 0; z-index: 3; }
-.coupon-offer > * {
-  position: absolute; left: 50%; transform: translateX(-50%);
-  text-align: center; white-space: nowrap;
-}
-.coupon-brand {
-  top: 6%;
-  background: linear-gradient(180deg,#25d869,#06c755 60%,#02a544);
-  color: #fff; font-weight: 900; font-family: var(--c-font-pop), sans-serif;
-  font-size: 4.6cqw; letter-spacing: .02em;
-  padding: 1.3cqw 4.5cqw; border-radius: 999px;
-  box-shadow: 0 0.8cqw 0 #02862e;
-}
-.coupon-max {
-  top: 21.5%;
-  font-size: 4.4cqw; font-weight: 900; color: var(--c-red);
-  letter-spacing: .06em; text-shadow: 0 1px 0 #fff, 0 0 3px #fff;
-}
-.coupon-off {
-  top: 51%; transform: translate(-50%, -50%);
-  display: flex; flex-direction: column; align-items: center; line-height: .76;
-}
-.coupon-off-top { display: inline-flex; align-items: flex-start; }
-.coupon-off-num {
-  font-family: "Bowlby One", var(--c-font-pop), sans-serif;
-  font-size: 17.5cqw; color: var(--c-red); font-weight: 900;
-  -webkit-text-stroke: 0.7cqw #fff; paint-order: stroke fill;
-  text-shadow: 0 0.7cqw 0 #b80010, 0 1.2cqw 1cqw rgba(150,0,10,.25);
-  letter-spacing: -0.05em;
-}
-.coupon-off-pct {
-  font-family: "Bowlby One", var(--c-font-pop), sans-serif;
-  font-size: 10cqw; color: var(--c-red); font-weight: 900;
-  -webkit-text-stroke: 0.5cqw #fff; paint-order: stroke fill;
-  margin-top: 1cqw;
-}
-.coupon-off-word {
-  font-size: 8.5cqw; font-weight: 900; color: var(--c-red);
-  font-family: var(--c-font-pop), sans-serif;
-  -webkit-text-stroke: 0.45cqw #fff; paint-order: stroke fill;
-  letter-spacing: .04em; margin-top: -0.5cqw;
-}
-.coupon-limit {
-  top: 72%;
-  background: var(--c-red); color: #fff; font-weight: 900;
-  font-size: 4cqw; padding: 1cqw 3.4cqw; border-radius: 999px;
-  box-shadow: 0 0.6cqw 0 #b80010;
-}
-.coupon-limit b { color: #ffe14d; }
-
-/* うさぎ（右下） */
-.coupon-rabbit-img {
-  position: absolute; right: 0.5%; bottom: 2%;
-  width: 22%; z-index: 4;
-  filter: drop-shadow(0 0.5cqw 0.8cqw rgba(0,60,30,.25));
-  animation: mascotJump 1.8s ease-in-out infinite;
-}
-
-/* 説明＋ご利用方法 */
-.coupon-info { margin-top: 22px; text-align: center; }
-.coupon-lead {
-  margin: 0 auto 18px; max-width: 560px;
-  font-size: 15px; line-height: 1.8; font-weight: 700; color: #4a3a1a;
-}
-.coupon-lead strong {
-  color: var(--c-red); background: #fff3c4;
-  padding: 1px 8px; border-radius: 4px; font-weight: 900;
-}
-
-@media (min-width: 700px) {
-  .coupon-lead { font-size: 17px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .coupon-period-tag, .coupon-rabbit-img { animation: none; }
-}
-
-/* ハイライト語（特別価格・近畿一円）を行末で割らない。
+/* ハイライト語（近畿一円）を行末で割らない。
    本文リード/注記の text-wrap は「本文プローズ 改行・揃えの単一権威ブロック」と
    6062 の非プローズ群へ集約済み（旧 device別 text-wrap:pretty ブロック削除）。 */
-.coupon-lead strong,
 .area-lead strong {
   white-space: nowrap;
 }
@@ -6244,8 +5704,6 @@ button { font-family: inherit; cursor: pointer; }
    ============================================================ */
 .promise-lead,
 .promise-card p,
-.coupon-lead,
-.coupon-howto-body,
 .price-desc,
 .compare-note,
 .case-desc,
@@ -6266,7 +5724,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* カード見出し・サービス品目見出し（非プローズ）を中央寄せ＋熟語非分断に。
-   本文プローズ（promise-card p / coupon-howto-body / リード/注記 等）の text-align・
+   本文プローズ（promise-card p / リード/注記 等）の text-align・
    word-break は「本文プローズ 改行・揃えの単一権威ブロック」へ集約済み（旧 B/C ブロック削除）。 */
 .promise-card h3,
 .service-grid li h3 {
@@ -6444,8 +5902,6 @@ button { font-family: inherit; cursor: pointer; }
 .price-desc,
 .staff-card p,
 .area-list li,
-.coupon-lead,
-.coupon-howto-body,
 .compare-note,
 .cases-note,
 .cv-rabbit-text {
@@ -6492,8 +5948,6 @@ button { font-family: inherit; cursor: pointer; }
 .compare-note,
 .case-desc,
 .cases-note,
-.coupon-lead,
-.coupon-howto-body,
 .service-grid p,
 .voice-grid p,
 .cv-rabbit-text,
@@ -6517,8 +5971,6 @@ button { font-family: inherit; cursor: pointer; }
 .compare-note,
 .case-desc,
 .cases-note,
-.coupon-lead,
-.coupon-howto-body,
 .service-grid p {
   text-align: center;
   text-align-last: center;
