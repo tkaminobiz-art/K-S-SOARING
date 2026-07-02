@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&family=Mochiy+Pop+One&family=Bowlby+One&family=Reggae+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260702-coupon-removed">
+  <link rel="stylesheet" href="styles.css?v=20260702-clock24">
   <!-- 構造化データ：LocalBusiness / Organization / WebSite / FAQ -->
   <script type="application/ld+json">
   {
@@ -864,13 +864,13 @@
     <span class="float-menu-bars" aria-hidden="true"></span>
   </button>
 
-  <!-- ===== オープニングルーレット（プレミアム抽選モーダル＋常時カウントダウンバー） ===== -->
+  <!-- ===== オープニングルーレット（プレミアム抽選モーダル＋左下デジタル時計） ===== -->
   <div id="rl-root">
-    <button class="rl-bar" id="rlBar" type="button" hidden aria-label="獲得したクーポンを表示">
-      <img class="rl-bar-rabbit" src="assets/b-pattern/generated/parts/rabbit-face-icon.webp" alt="" width="26" height="26">
-      <span class="rl-bar-label" id="rlBarLabel"><b id="rlBarPrize">20%OFF</b><span id="rlBarMode">クーポン獲得中</span></span>
-      <span class="rl-bar-time" id="rlBarTime">30:00</span>
-      <span class="rl-bar-cta" id="rlBarCta" aria-hidden="true">使う ▸</span>
+    <!-- 当選後カウントダウン: 『24』風 7セグLED時計（左下固定・固定CTAの上へ自動退避） -->
+    <button class="rl-clock" id="rlClock" type="button" hidden aria-label="獲得したクーポンの残り時間を表示">
+      <span class="rl-clock-label" id="rlClockLabel">20%OFF クーポン有効期限</span>
+      <svg class="rl-clock-svg" id="rlClockSvg" viewBox="0 0 113 40" aria-hidden="true"></svg>
+      <span class="rl-clock-sub" id="rlClockSub">タップで表示 ▸</span>
     </button>
 
     <div class="rl-overlay" id="rlOverlay" role="dialog" aria-modal="true" aria-labelledby="rlTitle" hidden>
@@ -1648,9 +1648,44 @@
         }
       }
 
-      /* ---- カウントダウン（モーダル内＋常時バー 共通tick） ---- */
+      /* ---- 左下デジタル時計（『24』風 7セグLED）の構築 ---- */
+      var clockEl = $("rlClock");
+      // 7セグメントの形状（1桁=22×40の箱、六角形セグメント）
+      var SEG_PTS = {
+        a: "3,0 19,0 15.5,4.5 6.5,4.5",
+        b: "22,2 22,18.5 17.5,15 17.5,6.5",
+        c: "22,21.5 22,38 17.5,33.5 17.5,25",
+        d: "3,40 6.5,35.5 15.5,35.5 19,40",
+        e: "0,21.5 4.5,25 4.5,33.5 0,38",
+        f: "0,2 4.5,6.5 4.5,15 0,18.5",
+        g: "3.5,20 6.5,17.5 15.5,17.5 18.5,20 15.5,22.5 6.5,22.5"
+      };
+      var DIGIT_SEGS = {
+        "0": "abcdef", "1": "bc", "2": "abdeg", "3": "abcdg", "4": "bcfg",
+        "5": "acdfg", "6": "acdefg", "7": "abc", "8": "abcdefg", "9": "abcdfg"
+      };
+      var clockDigits = [];
+      (function () {
+        var svg = $("rlClockSvg");
+        [0, 27, 64, 91].forEach(function (x) {
+          var g = svgEl("g", { transform: "translate(" + x + " 0)" }, svg);
+          var segs = {};
+          for (var k in SEG_PTS) segs[k] = svgEl("polygon", { points: SEG_PTS[k], "class": "seg" }, g);
+          clockDigits.push(segs);
+        });
+        svgEl("rect", { x: 54, y: 10, width: 5, height: 5, rx: 1, "class": "colon" }, svg);
+        svgEl("rect", { x: 54, y: 25, width: 5, height: 5, rx: 1, "class": "colon" }, svg);
+      })();
+      function setClock(str) { // "MM:SS"
+        var ds = str.replace(":", "");
+        for (var i = 0; i < 4; i++) {
+          var on = DIGIT_SEGS[ds.charAt(i)] || "";
+          for (var k in SEG_PTS) clockDigits[i][k].classList.toggle("on", on.indexOf(k) >= 0);
+        }
+      }
+
+      /* ---- カウントダウン（モーダル内＋時計 共通tick） ---- */
       var tickInt = null, expiredDone = false;
-      var barEl = $("rlBar");
       function fmt(rem) {
         var mm = Math.floor(rem / 60000), ss = Math.floor((rem % 60000) / 1000);
         return String(mm).padStart(2, "0") + ":" + String(ss).padStart(2, "0");
@@ -1665,9 +1700,9 @@
         var str = fmt(rem);
         $("rlCdTime").textContent = str;
         $("rlCdBar").style.width = (rem / TTL * 100) + "%";
-        $("rlBarTime").textContent = str;
+        setClock(str);
         var hot = rem > 0 && rem < HOT_AT;
-        barEl.classList.toggle("is-hot", hot);
+        clockEl.classList.toggle("is-hot", hot);
         $("rlCd").classList.toggle("is-hot", hot);
         if (rem <= 0 && !expiredDone) {
           expiredDone = true;
@@ -1678,41 +1713,43 @@
           $("rlCd").classList.remove("is-hot");
           $("rlResCongrats").textContent = "クーポンの有効期限が切れました";
           $("rlResNote").textContent = "※このクーポンはご利用いただけません";
-          barEl.classList.remove("is-hot");
-          barEl.classList.add("is-expired");
-          $("rlBarLabel").textContent = "クーポンの有効期限が切れました";
-          setTimeout(function () { barEl.hidden = true; }, 6000);
+          clockEl.classList.remove("is-hot");
+          clockEl.classList.add("is-expired");
+          $("rlClockLabel").textContent = "有効期限が切れました";
+          setClock("00:00");
+          setTimeout(function () { clockEl.hidden = true; }, 6000);
         }
       }
 
-      /* ---- 常時カウントダウンバー ---- */
-      function placeBar() {
-        var h = document.querySelector(".site-header");
-        barEl.style.top = (h ? h.offsetHeight : 0) + "px";
+      /* ---- 時計の表示制御・配置（固定CTAの上へ自動退避） ---- */
+      function placeClock() {
+        var cta = document.querySelector(".fixed-cta");
+        var up = 10;
+        if (cta && cta.classList.contains("is-visible")) up = cta.offsetHeight + 12;
+        clockEl.style.setProperty("--rl-clock-up", up + "px");
       }
-      function updateBar() {
-        if (isOpen) { barEl.hidden = true; return; }
+      function updateClock() {
+        if (isOpen) { clockEl.hidden = true; return; }
         var active = rec && !expiredDone && (Date.now() < rec.t + TTL);
         if (active) {
-          barEl.classList.remove("is-invite");
-          $("rlBarPrize").textContent = PRIZE_NAME[rec.k];
-          $("rlBarMode").textContent = "クーポン獲得中";
-          $("rlBarTime").hidden = false;
-          $("rlBarCta").textContent = "使う ▸";
-          placeBar();
-          barEl.hidden = false;
+          clockEl.classList.remove("is-invite");
+          $("rlClockLabel").textContent = PRIZE_NAME[rec.k] + " クーポン有効期限";
+          $("rlClockSub").textContent = "タップで表示 ▸";
+          clockEl.setAttribute("aria-label", "獲得したクーポンの残り時間を表示");
+          placeClock();
+          clockEl.hidden = false;
           startTick();
         } else if (!rec) {
-          // 未抽選のままモーダルを閉じた場合の再入口（誤タップ対策）
-          barEl.classList.add("is-invite");
-          $("rlBarPrize").textContent = "最大80%OFF";
-          $("rlBarMode").textContent = "クーポンが当たる！";
-          $("rlBarTime").hidden = true;
-          $("rlBarCta").textContent = "抽選する ▸";
-          placeBar();
-          barEl.hidden = false;
+          // 未抽選のまま閉じた場合の再入口: 全消灯の「眠っている時計」で抽選開始を誘う
+          clockEl.classList.add("is-invite");
+          $("rlClockLabel").textContent = "オープン記念ルーレット";
+          setClock("    "); // 全セグメント消灯（ゴーストのみ）
+          $("rlClockSub").textContent = "最大80%OFF｜タップで抽選 ▸";
+          clockEl.setAttribute("aria-label", "クーポン抽選を開く");
+          placeClock();
+          clockEl.hidden = false;
         } else {
-          barEl.hidden = true;
+          clockEl.hidden = true;
         }
       }
       var resizeRaf = null;
@@ -1720,13 +1757,13 @@
         if (resizeRaf) return;
         resizeRaf = requestAnimationFrame(function () {
           resizeRaf = null;
-          if (!barEl.hidden) placeBar();
+          if (!clockEl.hidden) placeClock();
         });
       });
-      // Webフォント読込後にヘッダー高が変わることがあるため再配置
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(function () { if (!barEl.hidden) placeBar(); });
-      }
+      // 固定CTAの出没に追従（同じscrollイベントで判定されるため受動監視でよい）
+      window.addEventListener("scroll", function () {
+        if (!clockEl.hidden) placeClock();
+      }, { passive: true });
 
       /* ---- 開閉 ---- */
       var overlay = $("rlOverlay");
@@ -1738,7 +1775,7 @@
         lastFocus = document.activeElement;
         overlay.hidden = false;
         document.body.classList.add("rl-lock");
-        updateBar();
+        updateClock();
         ledStart();
         loopStart();
         try { $("rlSpinBtn").focus({ preventScroll: true }); } catch (e) {}
@@ -1749,7 +1786,7 @@
         lastFocus = document.activeElement;
         overlay.hidden = false;
         document.body.classList.add("rl-lock");
-        updateBar();
+        updateClock();
         showResult(true);
         try { $("rlClose").focus({ preventScroll: true }); } catch (e) {}
       }
@@ -1775,7 +1812,7 @@
           ledMode = "idle";
           setPhase("idle");
         }
-        updateBar();
+        updateClock();
         if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
         lastFocus = null;
       }
@@ -1804,7 +1841,7 @@
           else if (!overlay.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
         }
       });
-      barEl.addEventListener("click", function () {
+      clockEl.addEventListener("click", function () {
         if (rec) openToResult(); else openToSpin();
       });
       function copyCode() {
@@ -1841,7 +1878,7 @@
         if (rec) { setTimeout(openToResult, 300); }
         else { setTimeout(openToSpin, 300); }
       } else if (rec) {
-        if (remNow > 0) updateBar();
+        if (remNow > 0) updateClock();
         // 期限切れ: 何も出さない（お一人様1回）
       } else {
         setTimeout(openToSpin, 800);

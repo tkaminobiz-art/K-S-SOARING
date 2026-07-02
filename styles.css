@@ -6033,8 +6033,7 @@ button { font-family: inherit; cursor: pointer; }
    ============================================================ */
 .rl-lock { overflow: hidden; }
 .rl-overlay[hidden],
-.rl-bar[hidden],
-.rl-bar-time[hidden],
+.rl-clock[hidden],
 .rl-stage-spin[hidden],
 .rl-stage-result[hidden],
 .rl-res-jack[hidden] { display: none !important; }
@@ -6437,57 +6436,66 @@ button { font-family: inherit; cursor: pointer; }
   animation: rlOvIn .25s ease both;
 }
 
-/* ---- 常時カウントダウンバー（当選後・ページ閲覧中） ---- */
-.rl-bar {
-  position: fixed; left: 0; right: 0; top: 0; z-index: 10000; /* headerの下、コンテンツの上 */
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%; min-height: 44px; padding: 6px 10px;
-  border: none; cursor: pointer;
-  font-family: var(--c-font-jp);
-  background: linear-gradient(180deg, #fff3bd, #f5c94e 55%, #d9a530);
-  border-bottom: 2px solid #8a5a00;
-  box-shadow: 0 4px 14px rgba(0,0,0,.28);
-  animation: rlBarIn .4s ease both;
+/* ---- 左下デジタル時計（『24』風 7セグLED・当選後カウントダウン） ---- */
+.rl-clock {
+  position: fixed;
+  left: calc(10px + env(safe-area-inset-left, 0px));
+  bottom: calc(var(--rl-clock-up, 10px) + env(safe-area-inset-bottom, 0px));
+  z-index: 10002; /* 固定CTA(10001)のスライドに隠れない */
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 12px 7px;
+  border: 1px solid #33343a;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 32%),
+    #0b0b0d;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 10px 26px rgba(0,0,0,.45), inset 0 0 14px rgba(0,0,0,.85);
+  cursor: pointer;
+  transition: bottom .3s ease;
+  animation: rlClockIn .45s cubic-bezier(.2,1.2,.4,1) both;
 }
-@keyframes rlBarIn { from { transform: translateY(-100%); } to { transform: none; } }
-.rl-bar-rabbit {
-  width: 26px; height: 26px; border-radius: 50%;
-  border: 2px solid #fff; background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+@keyframes rlClockIn { from { transform: translateX(-120%); opacity: 0; } to { transform: none; opacity: 1; } }
+.rl-clock-label {
+  font-family: var(--c-font-jp); font-size: 10px; font-weight: 800; letter-spacing: .12em;
+  color: #f7c948; white-space: nowrap;
 }
-.rl-bar-label { font-size: 12.5px; font-weight: 800; color: #3a2500; letter-spacing: .02em; white-space: nowrap; }
-.rl-bar-label b { color: #b30010; font-size: 14.5px; padding: 0 1px; }
-.rl-bar-time {
-  font-family: "Bowlby One", var(--c-font-pop), sans-serif; font-size: 16.5px; line-height: 1;
-  color: #b30010; background: #fff;
-  padding: 4px 10px 3px; border-radius: 999px;
-  border: 1.5px solid #b30010;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+.rl-clock-svg {
+  display: block; width: 118px; height: auto;
+  filter: drop-shadow(0 0 6px rgba(255,185,20,.5));
 }
-.rl-bar-cta {
-  font-size: 12px; font-weight: 900; color: #fff; white-space: nowrap;
-  background: #b30010; border-radius: 999px; padding: 5px 11px 6px;
-  box-shadow: 0 2px 0 rgba(90,0,8,.9);
+.rl-clock-svg .seg { fill: rgba(255,193,26,.09); } /* 消灯セグメントのゴースト */
+.rl-clock-svg .seg.on { fill: #ffc21a; }
+.rl-clock-svg .colon { fill: #ffc21a; animation: rlColonBlink 1s steps(1) infinite; }
+@keyframes rlColonBlink { 50% { opacity: .15; } }
+.rl-clock-sub {
+  font-family: var(--c-font-jp); font-size: 9px; font-weight: 700; letter-spacing: .1em;
+  color: #8d8f96; white-space: nowrap;
 }
-.rl-bar.is-hot {
-  background: linear-gradient(180deg, #ff5a3c, #e60012 55%, #b80010);
-  border-bottom-color: #7d000b;
-  animation: rlBarHot 1s ease-in-out infinite;
+/* 招待状態（未抽選）: 全消灯の眠っている時計＋アンバーの誘い文句 */
+.rl-clock.is-invite .rl-clock-svg { filter: none; }
+.rl-clock.is-invite .rl-clock-svg .colon { fill: rgba(255,193,26,.12); animation: none; }
+.rl-clock.is-invite .rl-clock-sub {
+  color: #ffc21a; font-size: 10.5px; font-weight: 800;
+  text-shadow: 0 0 8px rgba(255,185,20,.45);
 }
-@keyframes rlBarHot {
-  0%, 100% { filter: brightness(1); }
-  50%      { filter: brightness(1.18); }
+/* 残り5分: 赤LED化 */
+.rl-clock.is-hot { border-color: #5a1512; animation: rlClockHot 1s ease-in-out infinite; }
+.rl-clock.is-hot .rl-clock-label { color: #ff6b61; }
+.rl-clock.is-hot .rl-clock-svg { filter: drop-shadow(0 0 7px rgba(255,60,50,.6)); }
+.rl-clock.is-hot .rl-clock-svg .seg { fill: rgba(255,59,48,.1); }
+.rl-clock.is-hot .rl-clock-svg .seg.on { fill: #ff3b30; }
+.rl-clock.is-hot .rl-clock-svg .colon { fill: #ff3b30; }
+@keyframes rlClockHot {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 10px 26px rgba(0,0,0,.45), inset 0 0 14px rgba(0,0,0,.85); }
+  50%      { box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 10px 26px rgba(0,0,0,.45), 0 0 22px rgba(255,60,50,.5), inset 0 0 14px rgba(0,0,0,.85); }
 }
-.rl-bar.is-hot .rl-bar-label { color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,.35); }
-.rl-bar.is-hot .rl-bar-label b { color: #ffe483; }
-.rl-bar.is-hot .rl-bar-time { animation: rlBeat 1.05s ease-in-out infinite; }
-.rl-bar.is-hot .rl-bar-cta { background: #fff; color: #b30010; box-shadow: 0 2px 0 rgba(90,0,8,.5); }
-.rl-bar.is-expired { background: linear-gradient(180deg, #e8e8e8, #cfcfcf); border-bottom-color: #9a9a9a; animation: none; }
-.rl-bar.is-expired .rl-bar-label { color: #666; }
-.rl-bar.is-expired .rl-bar-label b { color: #666; }
-.rl-bar.is-expired .rl-bar-time { color: #888; border-color: #999; animation: none; }
-.rl-bar.is-expired .rl-bar-cta { display: none; }
+/* 期限切れ */
+.rl-clock.is-expired { animation: none; opacity: .85; }
+.rl-clock.is-expired .rl-clock-label { color: #9a9ba1; }
+.rl-clock.is-expired .rl-clock-svg { filter: none; }
+.rl-clock.is-expired .rl-clock-svg .seg.on { fill: #6f7076; }
+.rl-clock.is-expired .rl-clock-svg .colon { fill: #6f7076; animation: none; }
+.rl-clock.is-expired .rl-clock-sub { display: none; }
 
 @media (max-height: 760px) {
   .rl-title { font-size: 26px; }
@@ -6496,21 +6504,14 @@ button { font-family: inherit; cursor: pointer; }
 }
 /* max-height:760px より後に置く（320px級は両方に該当するため小さい方を勝たせる） */
 @media (max-width: 360px) {
-  .rl-bar-label { font-size: 11px; }
-  .rl-bar-label b { font-size: 13px; }
-  .rl-bar-rabbit { display: none; }
   .rl-title { font-size: 23px; }        /* 320pxで「オープニングルーレット」を1行に */
   .rl-line-btn span { font-size: 15px; } /* 「使う」の1文字孤立を防ぐ */
   .rl-res-prize { font-size: 48px; }
 }
-/* PC: モーダルを一段拡大し、バーの情報密度を金帯の面積に釣り合わせる */
+/* PC: モーダルと時計を一段拡大 */
 @media (min-width: 768px) {
-  .rl-bar { min-height: 56px; gap: 14px; }
-  .rl-bar-rabbit { width: 34px; height: 34px; }
-  .rl-bar-label { font-size: 15px; }
-  .rl-bar-label b { font-size: 19px; }
-  .rl-bar-time { font-size: 21px; padding: 5px 14px 4px; }
-  .rl-bar-cta { font-size: 14px; padding: 7px 16px 8px; }
+  .rl-clock-svg { width: 132px; }
+  .rl-clock-label { font-size: 11px; }
 }
 @media (min-width: 768px) and (min-height: 800px) {
   .rl-frame { width: 416px; }
@@ -6530,9 +6531,9 @@ button { font-family: inherit; cursor: pointer; }
   .rl-cd-time,
   .rl-res-rabbit,
   .rl-res-jack,
-  .rl-bar,
-  .rl-bar.is-hot,
-  .rl-bar.is-hot .rl-bar-time,
+  .rl-clock,
+  .rl-clock.is-hot,
+  .rl-clock-svg .colon,
   .rl-streaks,
   .rl-led.is-win,
   .rl-spark { animation: none; }
