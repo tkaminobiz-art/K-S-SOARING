@@ -31,6 +31,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&family=Mochiy+Pop+One&family=Bowlby+One&family=Reggae+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260702-clock24">
+  <!-- Google Ads: site-wide base tag. No customer data is passed from this page. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18262130937"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18262130937');
+  </script>
   <!-- 構造化データ：LocalBusiness / Organization / WebSite / FAQ -->
   <script type="application/ld+json">
   {
@@ -1030,6 +1038,62 @@
   </div>
 
   <script>
+    // === Google Ads コンバージョン ===
+    // LINEへの遷移を妨げず、クリックした時点でコンバージョンを送信する。
+    function gtag_report_conversion() {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18262130937/NYplCJLBxc8cEPmBiIRE'
+      });
+      return true;
+    }
+
+    (function () {
+      var lineLinks = document.querySelectorAll('a[href^="https://lin.ee/Uze6YTx"]');
+      for (var i = 0; i < lineLinks.length; i++) {
+        lineLinks[i].addEventListener('click', gtag_report_conversion);
+      }
+    })();
+
+    // 「LP30秒滞在」は、タブが表示されている時間だけを合計して1セッションに1回送信する。
+    (function () {
+      var conversionId = 'AW-18262130937/01NXCOnXws8cEPmBiIRE';
+      var storageKey = 'ks-google-ads-lp-30s-fired';
+      var requiredMs = 30000;
+      var visibleSince = document.visibilityState === 'visible' ? Date.now() : null;
+      var visibleMs = 0;
+      var fired = false;
+
+      try { fired = sessionStorage.getItem(storageKey) === '1'; } catch (e) {}
+
+      function sendIfEligible() {
+        if (fired || visibleMs < requiredMs) return;
+        fired = true;
+        try { sessionStorage.setItem(storageKey, '1'); } catch (e) {}
+        gtag('event', 'conversion', { 'send_to': conversionId });
+      }
+
+      function updateVisibleTime() {
+        if (visibleSince === null) return;
+        visibleMs += Date.now() - visibleSince;
+        visibleSince = Date.now();
+        sendIfEligible();
+      }
+
+      var timer = setInterval(updateVisibleTime, 1000);
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') {
+          updateVisibleTime();
+          visibleSince = null;
+        } else {
+          visibleSince = Date.now();
+        }
+      });
+      window.addEventListener('pagehide', function () {
+        updateVisibleTime();
+        clearInterval(timer);
+      });
+    })();
+
     // === 現在時刻表示 ===
     (function () {
       var el = document.getElementById("now-time");
