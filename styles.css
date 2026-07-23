@@ -759,376 +759,6 @@ button { font-family: inherit; cursor: pointer; }
 .safe-list b { font-size: 12px; font-weight: 800; color: var(--c-blue-ink); }
 
 /* ===========================================================
-   クーポン帯
-   =========================================================== */
-/* =============================================================
-   LINE割クーポン（チケット型・A案）
-   左右分割の半券型 + 中央切り取り線 + 下部に使い方
-   ============================================================= */
-.coupon {
-  background:
-    radial-gradient(circle at 50% 30%, #fff7c2 0%, #ffe066 30%, #ffc800 60%, transparent 80%),
-    repeating-conic-gradient(from -10deg at 50% 30%,
-      #ff8b00 0deg, #ff8b00 12deg, #ffd633 12deg, #ffd633 30deg
-    ),
-    #ffc800;
-  padding: 36px 12px 36px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.coupon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 55%, rgba(255,255,255,0.6) 0%, transparent 70%);
-  pointer-events: none;
-}
-.coupon > * { position: relative; z-index: 1; }
-
-/* チケット本体 */
-.coupon-ticket {
-  position: relative;
-  max-width: 720px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(120, 60, 0, 0.25), 0 4px 0 #d97d00;
-}
-
-/* 上半券：1枚画像 */
-.coupon-banner {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 16px 16px 0 0;
-  background: #fff;
-}
-
-/* 期間限定タグ（左上の斜めリボン） */
-.coupon-period-tag {
-  position: absolute;
-  top: -14px;
-  left: -8px;
-  z-index: 4;
-  background: var(--c-red);
-  color: #fff;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: .08em;
-  padding: 6px 16px;
-  border-radius: 5px;
-  transform: rotate(-8deg);
-  box-shadow: 0 4px 10px rgba(150,0,10,.3);
-  animation: burstWobble 2.2s ease-in-out infinite alternate;
-}
-
-/* ── 上半券：左右分割 ── */
-.coupon-stub {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 0;
-  padding: 22px 18px 20px;
-  border-radius: 16px 16px 0 0;
-}
-
-/* 左セル：訴求内容 */
-.coupon-stub-left {
-  text-align: center;
-  padding: 0 8px;
-  border-right: 3px dashed #d8d8d8;
-}
-.coupon-stub-brand {
-  display: inline-block;
-  background: var(--c-green-line);
-  color: #fff;
-  font-weight: 900;
-  font-size: 14px;
-  padding: 5px 14px;
-  border-radius: 999px;
-  margin-bottom: 8px;
-  box-shadow: 0 3px 0 #048a3c;
-}
-.coupon-burst {
-  display: block;
-  width: 78px;
-  height: auto;
-  margin: 0 auto 6px;
-  animation: burstWobble 1.6s ease-in-out infinite alternate;
-  filter: drop-shadow(2px 3px 0 rgba(180, 0, 8, 0.3));
-}
-@keyframes burstWobble {
-  0%   { transform: rotate(-5deg) scale(1); }
-  100% { transform: rotate(5deg) scale(1.04); }
-}
-.coupon-stub-lead {
-  margin: 4px 0;
-  font-weight: 900;
-  font-size: 15px;
-  color: var(--c-red);
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-}
-.coupon-stub-cond {
-  margin: 6px 0 0;
-  font-size: 11.5px;
-  color: #4a5060;
-  line-height: 1.55;
-  font-weight: 700;
-}
-.coupon-stub-cond strong {
-  color: var(--c-red);
-  font-weight: 900;
-  background: #fff5d6;
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-size: 12.5px;
-  display: inline-block;
-}
-
-/* 右セル：割引率 */
-.coupon-stub-right {
-  position: relative;
-  text-align: center;
-  padding: 0 4px 0 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #fff5b8 0%, #ffd633 100%);
-  border-radius: 8px;
-  margin-left: 4px;
-}
-.coupon-stub-prefix {
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--c-red);
-  text-shadow: 2px 2px 0 #fff;
-}
-.coupon-stub-num-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 2px;
-  line-height: 0.85;
-}
-.coupon-stub-num {
-  font-size: 84px;
-  font-weight: 900;
-  color: var(--c-red);
-  font-family: var(--c-font-pop), "Mochiy Pop One", sans-serif;
-  letter-spacing: -0.04em;
-  -webkit-text-stroke: 2px #fff;
-  filter: drop-shadow(3px 4px 0 rgba(180, 0, 8, 0.35));
-  line-height: 0.85;
-}
-.coupon-stub-unit {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.coupon-stub-percent {
-  font-size: 30px;
-  font-weight: 900;
-  color: var(--c-red);
-  text-shadow: 2px 2px 0 #fff;
-  line-height: 1;
-}
-.coupon-stub-off {
-  font-size: 22px;
-  font-weight: 900;
-  color: var(--c-red);
-  text-shadow: 2px 2px 0 #fff;
-  line-height: 1;
-  margin-top: 2px;
-}
-.coupon-stub-exclaim {
-  font-size: 24px;
-  font-weight: 900;
-  color: var(--c-red);
-  text-shadow: 2px 2px 0 #fff;
-  line-height: 1;
-  margin-top: 2px;
-}
-.coupon-stub-mascot {
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  width: 50px;
-  height: auto;
-  filter: drop-shadow(2px 3px 0 rgba(0, 80, 30, 0.18));
-  animation: mascotJump 1.8s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes mascotJump {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-4px) rotate(4deg); }
-}
-
-/* ── 切り取り線（円形ノッチ＋破線） ── */
-.coupon-cut {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #999;
-  padding: 8px 24px;
-  background:
-    radial-gradient(circle at 0 50%, transparent 8px, transparent 9px, #fff 10px),
-    radial-gradient(circle at 100% 50%, transparent 8px, transparent 9px, #fff 10px),
-    #fff;
-}
-.coupon-cut::before,
-.coupon-cut::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  background: var(--c-yellow-deep);
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-.coupon-cut::before { left: -10px; }
-.coupon-cut::after { right: -10px; }
-.coupon-cut-line {
-  flex: 1;
-  height: 0;
-  border-top: 2px dashed #cfcfcf;
-  min-width: 30px;
-}
-
-/* ── 下半券：使い方 ── */
-.coupon-howto {
-  background: linear-gradient(180deg, #f6fbff 0%, #e8f4ff 100%);
-  border-radius: 0 0 16px 16px;
-  padding: 18px 18px 22px;
-  text-align: center;
-}
-.coupon-howto-title {
-  margin: 0 0 10px;
-  font-weight: 900;
-  font-size: 16px;
-  color: var(--c-blue-deep);
-  letter-spacing: 0.04em;
-}
-.coupon-howto-body {
-  margin: 0 0 14px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #1a1a1a;
-  line-height: 1.6;
-}
-.coupon-howto-body strong {
-  color: var(--c-red);
-  font-weight: 900;
-  background: #fff5d6;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 15px;
-}
-/* 「HPを見ました」を特大＋発光で目立たせる */
-.coupon-howto-body .coupon-hp-em {
-  display: inline-block;
-  margin: 8px 0 4px;
-  font-size: 26px;
-  line-height: 1.2;
-  color: var(--c-red);
-  background: linear-gradient(180deg, #fff7b0 0%, #ffe14d 100%);
-  padding: 6px 16px;
-  border-radius: 10px;
-  box-shadow: 0 3px 0 #e0a800;
-  animation: hpGlow 1.3s ease-in-out infinite;
-}
-@keyframes hpGlow {
-  0%, 100% { transform: scale(1); box-shadow: 0 3px 0 #e0a800, 0 0 0 rgba(255,205,0,0); }
-  50%      { transform: scale(1.05); box-shadow: 0 3px 0 #e0a800, 0 0 20px rgba(255,200,0,.9); }
-}
-.coupon-howto-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--c-green-line);
-  color: #fff;
-  font-weight: 900;
-  font-size: 17px;
-  padding: 13px 26px;
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 5px 0 #048a3c, 0 8px 18px rgba(6, 199, 85, 0.3);
-  letter-spacing: 0.03em;
-  transition: transform 0.15s ease;
-}
-.coupon-howto-cta:hover { transform: translateY(-2px); }
-.coupon-howto-cta:active { transform: translateY(1px); box-shadow: 0 2px 0 #048a3c; }
-.coupon-howto-cta span { font-size: 22px; }
-
-/* スマホ */
-@media (max-width: 640px) {
-  .coupon { padding: 28px 8px 28px; }
-  .coupon-period-tag { font-size: 12px; padding: 5px 12px; top: -12px; left: -6px; }
-  .coupon-stub { padding: 16px 12px 16px; }
-  .coupon-stub-left { padding: 0 4px; }
-  .coupon-stub-brand { font-size: 12px; padding: 4px 11px; }
-  .coupon-burst { width: 68px; }
-  .coupon-stub-lead { font-size: 13px; }
-  .coupon-stub-cond { font-size: 10.5px; }
-  .coupon-stub-cond strong { font-size: 11.5px; }
-  .coupon-stub-prefix { font-size: 15px; }
-  .coupon-stub-num { font-size: 72px; }
-  .coupon-stub-percent { font-size: 26px; }
-  .coupon-stub-off { font-size: 19px; }
-  .coupon-stub-exclaim { font-size: 20px; }
-  .coupon-stub-mascot { width: 40px; }
-  .coupon-howto { padding: 16px 14px 20px; }
-  .coupon-howto-title { font-size: 17px; }
-  .coupon-howto-body { font-size: 15px; line-height: 1.7; }
-  .coupon-howto-body strong { font-size: 16px; }
-  .coupon-howto-body .coupon-hp-em { font-size: 25px; }
-  .coupon-howto-cta { font-size: 17px; padding: 14px 24px; }
-}
-
-@media (max-width: 380px) {
-  .coupon-stub-num { font-size: 60px; }
-  .coupon-stub-percent { font-size: 22px; }
-  .coupon-stub-off { font-size: 17px; }
-}
-
-/* PC */
-@media (min-width: 700px) {
-  .coupon { padding: 48px 16px 48px; }
-  .coupon-period-tag { font-size: 18px; padding: 8px 22px; top: -22px; left: -14px; }
-  .coupon-stub { padding: 32px 32px 28px; gap: 24px; }
-  .coupon-stub-brand { font-size: 18px; padding: 7px 22px; }
-  .coupon-burst { width: 100px; }
-  .coupon-stub-lead { font-size: 22px; }
-  .coupon-stub-cond { font-size: 15px; }
-  .coupon-stub-cond strong { font-size: 16px; }
-  .coupon-stub-prefix { font-size: 26px; }
-  .coupon-stub-num { font-size: 140px; }
-  .coupon-stub-percent { font-size: 50px; }
-  .coupon-stub-off { font-size: 36px; }
-  .coupon-stub-exclaim { font-size: 36px; }
-  .coupon-stub-mascot { width: 80px; }
-  .coupon-howto-title { font-size: 22px; }
-  .coupon-howto-body { font-size: 18px; }
-  .coupon-howto-body strong { font-size: 20px; }
-  .coupon-howto-cta { font-size: 21px; padding: 16px 36px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .coupon-period-tag,
-  .coupon-burst,
-  .coupon-stub-mascot { animation: none; }
-}
-
-/* ===========================================================
    料金プラン
    =========================================================== */
 .price {
@@ -2321,9 +1951,6 @@ button { font-family: inherit; cursor: pointer; }
   .service-grid { grid-template-columns: repeat(3, 1fr); }
   .proof { grid-template-columns: repeat(3, 1fr); }
 
-  .coupon-rabbit { display: block; position: absolute; right: -8px; bottom: -4px; width: 100px; animation: rabbitMochi 1.6s ease-in-out infinite; }
-  .coupon-content { padding-right: 110px; }
-
   /* PC: 右下コンパクトフロート */
   .fixed-cta {
     left: auto;
@@ -3001,8 +2628,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 
-
-
 /* ============================================================
    FV 0円 & キラキラ：イージング＋反動の登場アニメ強化
    CODEX 既存 .hero-price / .hero-sparkle の animation をオーバーライド
@@ -3321,7 +2946,6 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ====== 1. セクション間の斜め境界（zig-zag 風）====== */
 /* 上向き三角 (前セクションの底が三角形に切れる) */
-.coupon::before,
 .price::before,
 .reason::before,
 .compare::before,
@@ -3340,8 +2964,15 @@ button { font-family: inherit; cursor: pointer; }
   clip-path: polygon(0 100%, 50% 0, 100% 100%);
   z-index: 1;
 }
-.coupon, .price, .reason, .compare, .service,
-.ihin, .voice, .flow, .area, .faq {
+.price,
+.reason,
+.compare,
+.service,
+.ihin,
+.voice,
+.flow,
+.area,
+.faq {
   position: relative;
 }
 
@@ -3477,13 +3108,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ====== 7. クーポン帯に薄いストライプ背景 ====== */
-.coupon {
-  background-image:
-    repeating-linear-gradient(135deg,
-      rgba(255, 255, 255, .35) 0 12px,
-      transparent 12px 24px),
-    linear-gradient(180deg, var(--c-green-pale) 0%, #d8f0cb 100%);
-}
+
 
 /* ====== 8. CTA電話番号に呼吸グロー ====== */
 .cv-tel-num,
@@ -3547,7 +3172,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ====== 2. セクション境界を波形（既存の三角を波に置換） ====== */
-.coupon::before,
 .price::before,
 .reason::before,
 .compare::before,
@@ -3613,11 +3237,8 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* ====== 5. 期間限定バッジ — 削除済み（画像内に焼き込まれているため） ====== */
-.coupon .coupon-ticket { position: relative; }
-.coupon .coupon-ticket::before {
-  content: none;
-  display: none;
-}
+
+
 @keyframes limitedBlink {
   0%, 100% { transform: rotate(-8deg) scale(1); }
   50%      { transform: rotate(-8deg) scale(1.06); filter: brightness(1.1); }
@@ -4231,11 +3852,6 @@ button { font-family: inherit; cursor: pointer; }
   .faq {
     padding-top: 72px;
     padding-bottom: 88px;
-  }
-
-  .coupon {
-    padding-top: 56px;
-    padding-bottom: 64px;
   }
 
   .danger {
@@ -5291,17 +4907,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* H: LINE割クーポン部 さらに極端に拡大 (Phase 6 続き) */
-.coupon-ribbon {
-  font-size: 21px !important;
-  padding: 8px 22px !important;
-  font-weight: 900 !important;
-}
-@media (min-width: 700px) {
-  .coupon-ribbon {
-    font-size: 28px !important;
-    padding: 10px 32px !important;
-  }
-}
+
 
 /* お約束カードのイラスト画像（写真ではなくイラスト） */
 .promise-card-image-illust {
@@ -5387,40 +4993,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* --- LINE割クーポン部の極端拡大 --- */
-.coupon-ribbon {
-  font-size: 17px !important;
-  padding: 6px 18px !important;
-}
-.coupon-line-top {
-  font-size: 17px !important;
-  font-weight: 900;
-}
-.coupon-line-big b {
-  font-size: 64px !important;  /* 「5」を極端に大きく */
-  line-height: 1;
-}
-.coupon-line-big i {
-  font-size: 36px !important;
-}
-.coupon-line-big strong {
-  font-size: 28px !important;
-}
-.coupon-note {
-  font-size: 15px;
-  font-weight: 700;
-}
-.coupon-note strong {
-  font-size: 16px;
-}
-@media (min-width: 700px) {
-  .coupon-ribbon { font-size: 22px !important; padding: 8px 24px !important; }
-  .coupon-line-top { font-size: 22px !important; }
-  .coupon-line-big b { font-size: 96px !important; }
-  .coupon-line-big i { font-size: 50px !important; }
-  .coupon-line-big strong { font-size: 38px !important; }
-  .coupon-note { font-size: 19px; }
-  .coupon-note strong { font-size: 21px; }
-}
 
 
 /* =============================================================
@@ -5893,126 +5465,9 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 
-/* ============================================================
-   クーポン リニューアル：プレミアム金券画像 ＋ テキストオーバーレイ
-   （旧 .coupon-stub / .coupon-banner / .coupon-cut を置換）
-   ============================================================ */
-.coupon {
-  background: linear-gradient(180deg, #fffdf6 0%, #fff1cc 100%);
-  padding: 30px 14px 34px;
-}
-.coupon::before { display: none; } /* 旧サンバースト用グローを無効化 */
-
-.coupon-wrap { max-width: 600px; margin: 0 auto; }
-
-.coupon-card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1280 / 853;
-  border-radius: 18px;
-  box-shadow: 0 10px 22px rgba(150,90,0,.20);
-}
-.coupon-ticket-img {
-  display: block;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
-}
-
-/* 期間限定タグ（左上） */
-.coupon-card .coupon-period-tag {
-  position: absolute;
-  top: -4%; left: 1%;
-  z-index: 5;
-  background: var(--c-red); color: #fff; font-weight: 900;
-  font-size: 4cqw; letter-spacing: .06em;
-  padding: 1.2cqw 3cqw; border-radius: 5px;
-  transform: rotate(-7deg);
-  box-shadow: 0 0.8cqw 1.8cqw rgba(150,0,10,.3);
-  animation: burstWobble 2.2s ease-in-out infinite alternate;
-}
-
-/* オファー：中央サンバースト円に集約 */
-.coupon-offer { position: absolute; inset: 0; z-index: 3; }
-.coupon-offer > * {
-  position: absolute; left: 50%; transform: translateX(-50%);
-  text-align: center; white-space: nowrap;
-}
-.coupon-brand {
-  top: 6%;
-  background: linear-gradient(180deg,#25d869,#06c755 60%,#02a544);
-  color: #fff; font-weight: 900; font-family: var(--c-font-pop), sans-serif;
-  font-size: 4.6cqw; letter-spacing: .02em;
-  padding: 1.3cqw 4.5cqw; border-radius: 999px;
-  box-shadow: 0 0.8cqw 0 #02862e;
-}
-.coupon-max {
-  top: 21.5%;
-  font-size: 4.4cqw; font-weight: 900; color: var(--c-red);
-  letter-spacing: .06em; text-shadow: 0 1px 0 #fff, 0 0 3px #fff;
-}
-.coupon-off {
-  top: 51%; transform: translate(-50%, -50%);
-  display: flex; flex-direction: column; align-items: center; line-height: .76;
-}
-.coupon-off-top { display: inline-flex; align-items: flex-start; }
-.coupon-off-num {
-  font-family: "Bowlby One", var(--c-font-pop), sans-serif;
-  font-size: 17.5cqw; color: var(--c-red); font-weight: 900;
-  -webkit-text-stroke: 0.7cqw #fff; paint-order: stroke fill;
-  text-shadow: 0 0.7cqw 0 #b80010, 0 1.2cqw 1cqw rgba(150,0,10,.25);
-  letter-spacing: -0.05em;
-}
-.coupon-off-pct {
-  font-family: "Bowlby One", var(--c-font-pop), sans-serif;
-  font-size: 10cqw; color: var(--c-red); font-weight: 900;
-  -webkit-text-stroke: 0.5cqw #fff; paint-order: stroke fill;
-  margin-top: 1cqw;
-}
-.coupon-off-word {
-  font-size: 8.5cqw; font-weight: 900; color: var(--c-red);
-  font-family: var(--c-font-pop), sans-serif;
-  -webkit-text-stroke: 0.45cqw #fff; paint-order: stroke fill;
-  letter-spacing: .04em; margin-top: -0.5cqw;
-}
-.coupon-limit {
-  top: 72%;
-  background: var(--c-red); color: #fff; font-weight: 900;
-  font-size: 4cqw; padding: 1cqw 3.4cqw; border-radius: 999px;
-  box-shadow: 0 0.6cqw 0 #b80010;
-}
-.coupon-limit b { color: #ffe14d; }
-
-/* うさぎ（右下） */
-.coupon-rabbit-img {
-  position: absolute; right: 0.5%; bottom: 2%;
-  width: 22%; z-index: 4;
-  filter: drop-shadow(0 0.5cqw 0.8cqw rgba(0,60,30,.25));
-  animation: mascotJump 1.8s ease-in-out infinite;
-}
-
-/* 説明＋ご利用方法 */
-.coupon-info { margin-top: 22px; text-align: center; }
-.coupon-lead {
-  margin: 0 auto 18px; max-width: 560px;
-  font-size: 15px; line-height: 1.8; font-weight: 700; color: #4a3a1a;
-}
-.coupon-lead strong {
-  color: var(--c-red); background: #fff3c4;
-  padding: 1px 8px; border-radius: 4px; font-weight: 900;
-}
-
-@media (min-width: 700px) {
-  .coupon-lead { font-size: 17px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .coupon-period-tag, .coupon-rabbit-img { animation: none; }
-}
-
-/* ハイライト語（特別価格・近畿一円）を行末で割らない。
+/* ハイライト語（近畿一円）を行末で割らない。
    本文リード/注記の text-wrap は「本文プローズ 改行・揃えの単一権威ブロック」と
    6062 の非プローズ群へ集約済み（旧 device別 text-wrap:pretty ブロック削除）。 */
-.coupon-lead strong,
 .area-lead strong {
   white-space: nowrap;
 }
@@ -6244,8 +5699,6 @@ button { font-family: inherit; cursor: pointer; }
    ============================================================ */
 .promise-lead,
 .promise-card p,
-.coupon-lead,
-.coupon-howto-body,
 .price-desc,
 .compare-note,
 .case-desc,
@@ -6266,7 +5719,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* カード見出し・サービス品目見出し（非プローズ）を中央寄せ＋熟語非分断に。
-   本文プローズ（promise-card p / coupon-howto-body / リード/注記 等）の text-align・
+   本文プローズ（promise-card p / リード/注記 等）の text-align・
    word-break は「本文プローズ 改行・揃えの単一権威ブロック」へ集約済み（旧 B/C ブロック削除）。 */
 .promise-card h3,
 .service-grid li h3 {
@@ -6444,8 +5897,6 @@ button { font-family: inherit; cursor: pointer; }
 .price-desc,
 .staff-card p,
 .area-list li,
-.coupon-lead,
-.coupon-howto-body,
 .compare-note,
 .cases-note,
 .cv-rabbit-text {
@@ -6492,8 +5943,6 @@ button { font-family: inherit; cursor: pointer; }
 .compare-note,
 .case-desc,
 .cases-note,
-.coupon-lead,
-.coupon-howto-body,
 .service-grid p,
 .voice-grid p,
 .cv-rabbit-text,
@@ -6517,8 +5966,6 @@ button { font-family: inherit; cursor: pointer; }
 .compare-note,
 .case-desc,
 .cases-note,
-.coupon-lead,
-.coupon-howto-body,
 .service-grid p {
   text-align: center;
   text-align-last: center;
@@ -6561,4 +6008,637 @@ button { font-family: inherit; cursor: pointer; }
   .area-note br {
     display: none;
   }
+}
+
+/* スクリーンリーダー/SEO用の視覚非表示テキスト（H1の地域キーワード等） */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   オープニングルーレット（プレミアム抽選モーダル＋常時カウントダウンバー）
+   ============================================================ */
+.rl-lock { overflow: hidden; }
+.rl-overlay[hidden],
+.rl-clock[hidden],
+.rl-stage-spin[hidden],
+.rl-stage-result[hidden],
+.rl-res-jack[hidden] { display: none !important; }
+
+/* ---- オーバーレイ ---- */
+.rl-overlay {
+  position: fixed; inset: 0; z-index: 10050; /* sticky header(10001)・ノイズ層(9999)より上 */
+  display: flex; align-items: center; justify-content: center;
+  padding: 14px 10px;
+  background:
+    radial-gradient(120% 90% at 50% 18%, rgba(14,52,120,.55) 0%, rgba(3,10,28,0) 60%),
+    radial-gradient(140% 120% at 50% 55%, rgba(6,17,44,.94) 0%, rgba(1,4,14,.985) 78%);
+  overflow-y: auto;
+  overscroll-behavior: contain; /* iOSで背面へのスクロール連鎖を防ぐ */
+  animation: rlOvIn .45s ease both;
+}
+@keyframes rlOvIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* 金粉 */
+.rl-dust { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.rl-dust i {
+  position: absolute; bottom: -4vh; border-radius: 50%;
+  background: radial-gradient(circle, #fff2b0 0%, #ffd75e 45%, rgba(255,215,94,0) 72%);
+  filter: blur(.6px); opacity: 0;
+  animation: rlDustUp linear infinite;
+}
+@keyframes rlDustUp {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  12%  { opacity: .85; }
+  75%  { opacity: .5; }
+  100% { transform: translateY(-108vh) translateX(var(--sway, 18px)); opacity: 0; }
+}
+
+/* ---- カード ---- */
+.rl-frame {
+  position: relative; margin: auto;
+  width: min(370px, 94vw);
+  border-radius: 30px; padding: 4px;
+  background: linear-gradient(160deg, #fff6c9 0%, #f0c045 14%, #9c6a10 32%, #f7dd8a 50%, #ffefad 60%, #8a5a00 78%, #e9bd4e 100%);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.55), 0 6px 34px rgba(255,205,80,.28), 0 26px 80px rgba(0,0,0,.72);
+  animation: rlCardIn .6s cubic-bezier(.2,1.35,.4,1) both;
+}
+@keyframes rlCardIn { from { transform: scale(.86) translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.rl-card {
+  position: relative; border-radius: 26px;
+  background:
+    radial-gradient(130% 70% at 50% 0%, rgba(40,96,199,.55) 0%, rgba(14,44,102,0) 55%),
+    radial-gradient(90% 60% at 50% 108%, rgba(230,0,18,.16) 0%, rgba(6,20,46,0) 60%),
+    linear-gradient(180deg, #0c2c62 0%, #08234c 42%, #061a3a 100%);
+  padding: 20px 16px 20px;
+}
+.rl-card::before {
+  content: ""; position: absolute; inset: 5px; border-radius: 22px;
+  border: 1px solid rgba(255,224,138,.28); pointer-events: none; z-index: 2;
+}
+.rl-close {
+  position: absolute; top: -14px; right: -12px; z-index: 30;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 2px solid #f4d067;
+  background: linear-gradient(180deg, #1a3a74, #0a2350);
+  color: #ffe9a0; font-size: 17px; font-weight: 900; line-height: 1;
+  box-shadow: 0 4px 12px rgba(0,0,0,.5);
+  cursor: pointer;
+}
+.rl-stage { position: relative; z-index: 3; }
+
+/* ---- 見出し ---- */
+.rl-head { text-align: center; }
+.rl-head p, .rl-head h2 { margin: 0; }
+.rl-badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; color: #3a2500;
+  background: linear-gradient(180deg, #fff3bd, #f5c94e 55%, #d9a530);
+  border-radius: 999px; padding: 4px 14px 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.4), inset 0 1px 0 #fffbe2;
+}
+.rl-title {
+  margin: 8px 0 0;
+  font-family: var(--c-font-pop);
+  font-size: 29px; line-height: 1.12; letter-spacing: .01em; font-weight: 400;
+  background: linear-gradient(180deg, #fffbe2 4%, #ffe483 30%, #f5b93c 48%, #a86e12 60%, #ffe79a 74%, #f7cd5a 90%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(58,32,0,.85)) drop-shadow(0 5px 14px rgba(255,196,60,.35));
+}
+.rl-sub {
+  margin: 7px 0 0; font-size: 13px; font-weight: 700; color: #dbe9ff; letter-spacing: .02em;
+  min-height: 20px;
+}
+.rl-sub b { color: #ffe483; }
+.rl-x80 {
+  font-family: "Bowlby One", var(--c-font-pop), sans-serif; font-weight: 400;
+  color: #ff2d3f; font-size: 16px; padding: 0 2px;
+  text-shadow: 0 0 12px rgba(255,45,63,.65), 0 1px 0 rgba(0,0,0,.5);
+}
+
+/* ---- ホイール ---- */
+.rl-wheel-zone { position: relative; margin: 14px auto 6px; width: min(322px, 84vw); }
+.rl-wheel-glow {
+  position: absolute; inset: -9%; border-radius: 50%; z-index: 0;
+  background: radial-gradient(circle, rgba(255,205,80,.34) 30%, rgba(255,205,80,.12) 52%, rgba(255,205,80,0) 68%);
+  animation: rlGlowPulse 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes rlGlowPulse { 0%, 100% { opacity: .7; } 50% { opacity: 1; } }
+.rl-wheel-wrap { position: relative; z-index: 1; }
+.rl-wheel-wrap svg { display: block; width: 100%; height: auto; }
+#rlSegGroup { will-change: transform; }
+#rlSegGroup.is-blurred { filter: blur(2.4px); }
+.rl-streaks {
+  position: absolute; inset: 6.5%; border-radius: 50%; pointer-events: none; z-index: 4;
+  background: repeating-conic-gradient(from 0deg,
+    rgba(255,255,255,0) 0deg 8deg,
+    rgba(255,255,255,.10) 8deg 11deg,
+    rgba(255,255,255,0) 11deg 26deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 34%, #000 52%, #000 78%, transparent 84%);
+  mask: radial-gradient(circle, transparent 0 34%, #000 52%, #000 78%, transparent 84%);
+  opacity: 0; transition: opacity .3s;
+  animation: rlStrkSpin 1.1s linear infinite;
+}
+.rl-streaks.is-on { opacity: 1; }
+@keyframes rlStrkSpin { to { transform: rotate(-360deg); } }
+.rl-pointer {
+  position: absolute; top: -13px; left: 50%; z-index: 6;
+  width: 54px; transform: translateX(-50%);
+  transform-origin: 50% 12%;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,.55));
+  pointer-events: none;
+}
+.rl-pointer svg { display: block; width: 100%; height: auto; }
+.rl-nearmiss {
+  position: absolute; top: -12%; left: 50%; transform: translateX(-50%) scale(0); z-index: 8;
+  font-family: "Bowlby One", var(--c-font-pop), sans-serif; font-size: 19px; letter-spacing: .04em;
+  color: #b30010; background: linear-gradient(180deg, #fff6c9, #ffd75e 55%, #eeb63a);
+  border: 2px solid #fff;
+  padding: 5px 16px 6px; border-radius: 999px; white-space: nowrap;
+  box-shadow: 0 0 0 3px rgba(179,0,16,.85), 0 8px 22px rgba(0,0,0,.55), 0 0 26px rgba(255,215,94,.8);
+  pointer-events: none;
+}
+.rl-nearmiss.is-on { animation: rlNearPop .3s cubic-bezier(.2,1.6,.4,1) forwards, rlNearShake .38s .3s ease-in-out infinite; }
+@keyframes rlNearPop { to { transform: translateX(-50%) scale(1); } }
+@keyframes rlNearShake {
+  0%, 100% { transform: translateX(-50%) scale(1) rotate(-2.5deg); }
+  50%      { transform: translateX(-50%) scale(1.06) rotate(2.5deg); }
+}
+.rl-winpop {
+  position: absolute; top: 18%; left: 50%; z-index: 9;
+  transform: translate(-50%,-50%) scale(0);
+  font-family: "Bowlby One", var(--c-font-pop), sans-serif; font-size: 46px; letter-spacing: .02em; white-space: nowrap;
+  background: linear-gradient(180deg, #fffbe2 8%, #ffe483 34%, #f0ad24 52%, #a86e12 62%, #ffe79a 78%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 rgba(90,30,0,.9)) drop-shadow(0 0 22px rgba(255,214,90,.95));
+  pointer-events: none;
+}
+.rl-winpop.is-on { animation: rlWinPop .55s cubic-bezier(.2,1.5,.35,1) forwards; }
+.rl-winpop.is-jack { font-size: 34px; }
+@keyframes rlWinPop {
+  0%   { transform: translate(-50%,-50%) scale(0) rotate(-8deg); }
+  60%  { transform: translate(-50%,-50%) scale(1.22) rotate(2deg); }
+  100% { transform: translate(-50%,-50%) scale(1) rotate(0); }
+}
+.rl-segflash { animation: rlSegFlash .5s ease-in-out 4; }
+@keyframes rlSegFlash { 0%, 100% { opacity: 0; } 50% { opacity: .6; } }
+.rl-led { fill: #5d4a1c; transition: fill .07s, filter .07s; }
+.rl-led.is-on { fill: url(#rlLedOn); filter: drop-shadow(0 0 7px rgba(255,228,130,1)); }
+.rl-led.is-win { animation: rlLedWin .5s ease-in-out infinite; }
+@keyframes rlLedWin {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(255,224,120,.6)); }
+  50%      { filter: drop-shadow(0 0 9px rgba(255,236,150,1)); }
+}
+.rl-spark { animation: rlTwinkle 1.6s ease-in-out infinite; }
+@keyframes rlTwinkle { 0%, 100% { opacity: .95; } 50% { opacity: .25; } }
+
+/* ---- 回すボタン ---- */
+.rl-spin-btn {
+  position: relative; display: block; width: 100%; margin-top: 12px;
+  border: none; cursor: pointer;
+  border-radius: 999px; padding: 15px 10px 16px;
+  font-family: var(--c-font-pop); font-size: 20px; letter-spacing: .06em;
+  color: #4a2c00;
+  text-shadow: 0 1px 0 rgba(255,250,220,.85);
+  background: linear-gradient(180deg, #fff4bd 0%, #ffd75e 30%, #eeb02c 52%, #c88c12 74%, #ffdf7c 100%);
+  box-shadow:
+    0 0 0 2px #7a5210,
+    0 0 0 4px rgba(255,230,150,.35),
+    inset 0 2px 1px #fffbe2,
+    inset 0 -3px 4px rgba(122,66,0,.55),
+    0 7px 0 #6e4a08,
+    0 13px 26px rgba(0,0,0,.55);
+  overflow: hidden;
+  animation: rlBtnPulse 1.7s ease-in-out infinite;
+}
+@keyframes rlBtnPulse {
+  0%, 100% { box-shadow: 0 0 0 2px #7a5210, 0 0 0 4px rgba(255,230,150,.35), inset 0 2px 1px #fffbe2, inset 0 -3px 4px rgba(122,66,0,.55), 0 7px 0 #6e4a08, 0 13px 26px rgba(0,0,0,.55), 0 0 0 rgba(255,214,90,0); }
+  50%      { box-shadow: 0 0 0 2px #7a5210, 0 0 0 4px rgba(255,230,150,.5), inset 0 2px 1px #fffbe2, inset 0 -3px 4px rgba(122,66,0,.55), 0 7px 0 #6e4a08, 0 13px 26px rgba(0,0,0,.55), 0 0 34px rgba(255,214,90,.55); }
+}
+.rl-spin-btn::after {
+  content: ""; position: absolute; top: -30%; bottom: -30%; left: -46%; width: 34%;
+  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-18deg);
+  animation: rlShine 2.3s ease-in-out infinite;
+}
+@keyframes rlShine { 0%, 55% { left: -46%; } 90%, 100% { left: 120%; } }
+.rl-spin-btn:active { transform: translateY(4px); }
+.rl-spin-btn.is-spinning {
+  pointer-events: none; animation: none;
+  filter: saturate(.55) brightness(.82);
+  transform: translateY(5px);
+  box-shadow: 0 0 0 2px #7a5210, inset 0 2px 1px #fffbe2, inset 0 -3px 4px rgba(122,66,0,.55), 0 2px 0 #6e4a08, 0 6px 14px rgba(0,0,0,.5);
+}
+.rl-spin-btn.is-spinning::after { display: none; }
+.rl-note { margin: 10px 0 0; text-align: center; font-size: 11.5px; font-weight: 700; color: #a9bee3; letter-spacing: .04em; }
+
+/* ---- ステージ遷移 ---- */
+.rl-stage-spin.is-out { transition: transform .32s ease, opacity .32s ease; transform: scale(.9); opacity: 0; }
+.rl-stage-result.is-in { animation: rlResIn .65s cubic-bezier(.2,1.35,.38,1) both; }
+@keyframes rlResIn { from { transform: scale(.55); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ---- 結果 ---- */
+.rl-stage-result { text-align: center; }
+.rl-stage-result p { margin: 0; }
+.rl-res-head { position: relative; padding-top: 4px; }
+.rl-res-rabbit {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 3px solid #f4d067; background: #fff;
+  box-shadow: 0 0 0 3px rgba(8,35,76,.9), 0 0 22px rgba(255,214,90,.75), 0 6px 16px rgba(0,0,0,.5);
+  animation: rlRabbitBob 2.2s ease-in-out infinite;
+}
+@keyframes rlRabbitBob { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-5px) rotate(3deg); } }
+.rl-res-congrats {
+  margin: 6px 0 0;
+  font-size: 15px; font-weight: 900; letter-spacing: .1em; color: #ffe9a0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.5);
+}
+.rl-res-jack {
+  margin: 8px auto 0; display: inline-block;
+  font-family: "Bowlby One", var(--c-font-pop), sans-serif; font-size: 21px; letter-spacing: .14em;
+  color: #fff; padding: 3px 20px 5px; border-radius: 999px;
+  background: linear-gradient(90deg, #c4000f, #ff2d3f 50%, #c4000f);
+  border: 2px solid #ffe483;
+  box-shadow: 0 0 18px rgba(255,45,63,.7), 0 4px 10px rgba(0,0,0,.5);
+  animation: rlJackBlink .8s ease-in-out infinite;
+}
+@keyframes rlJackBlink {
+  0%, 100% { box-shadow: 0 0 10px rgba(255,45,63,.5), 0 4px 10px rgba(0,0,0,.5); }
+  50%      { box-shadow: 0 0 30px rgba(255,45,63,1), 0 4px 10px rgba(0,0,0,.5); }
+}
+.rl-res-prize {
+  margin: 2px 0 0;
+  font-family: var(--c-font-pop);
+  font-size: 58px; line-height: 1.06; letter-spacing: .01em;
+  background: linear-gradient(180deg, #fffbe2 6%, #ffe483 32%, #f5b93c 50%, #a86e12 61%, #ffe79a 76%, #f7cd5a 92%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 3px 0 rgba(58,32,0,.9)) drop-shadow(0 0 26px rgba(255,206,70,.55));
+}
+.rl-res-prize.is-small { font-size: 44px; }
+.rl-res-won {
+  margin: 2px 0 0; font-family: var(--c-font-pop);
+  font-size: 20px; color: #fff; letter-spacing: .3em; text-indent: .3em;
+  text-shadow: 0 0 14px rgba(255,214,90,.8), 0 2px 0 rgba(0,0,0,.6);
+}
+/* チケット */
+.rl-ticket {
+  position: relative; margin: 14px 6px 0; padding: 12px 26px 13px;
+  background: linear-gradient(180deg, #fffdf4, #fdf3d2);
+  border-radius: 14px; cursor: pointer;
+  box-shadow: inset 0 0 0 1px #d9c07a, inset 0 0 0 4px #fffdf4, inset 0 0 0 5px rgba(180,125,10,.5), 0 8px 20px rgba(0,0,0,.45);
+}
+.rl-ticket::before, .rl-ticket::after {
+  content: ""; position: absolute; top: 50%; width: 20px; height: 20px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #0b2a58, #041226 72%);
+  transform: translateY(-50%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.7), 0 0 0 1px rgba(255,224,138,.15);
+}
+.rl-ticket::before { left: -11px; }
+.rl-ticket::after { right: -11px; }
+.rl-tk-label { font-size: 11px; font-weight: 800; color: #8a6a1e; letter-spacing: .28em; text-indent: .28em; }
+.rl-tk-code {
+  margin-top: 3px;
+  font-family: "Bowlby One", var(--c-font-pop), sans-serif; font-size: 27px; letter-spacing: .1em;
+  color: #08234c;
+  text-shadow: 0 1px 0 #fff;
+  -webkit-user-select: all;
+  user-select: all; /* clipboard非対応環境でも長押し選択でコピーできるように */
+}
+.rl-tk-tap { font-size: 10px; font-weight: 700; color: #a58a3c; margin-top: 1px; }
+/* カウントダウン（通常=金琥珀、残り5分=赤。バーの色言語と統一） */
+.rl-cd {
+  margin: 12px 6px 0; padding: 10px 12px 12px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(80,52,0,.5), rgba(40,24,0,.62));
+  box-shadow: inset 0 0 0 1.5px rgba(255,214,90,.45), inset 0 0 22px rgba(255,170,20,.18);
+}
+.rl-cd-label { font-size: 11.5px; font-weight: 800; color: #ffe9a0; letter-spacing: .2em; text-indent: .2em; }
+.rl-cd-time {
+  font-family: "Bowlby One", var(--c-font-pop), sans-serif; font-size: 46px; line-height: 1.05;
+  color: #ffd75e; font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 18px rgba(255,196,60,.75), 0 2px 0 rgba(0,0,0,.55);
+  animation: rlBeat 1.05s ease-in-out infinite;
+}
+@keyframes rlBeat {
+  0%, 100% { transform: scale(1); }
+  12% { transform: scale(1.075); }
+  24% { transform: scale(1); }
+  38% { transform: scale(1.045); }
+  52% { transform: scale(1); }
+}
+.rl-cd-bar { height: 6px; margin-top: 7px; border-radius: 99px; background: rgba(0,0,0,.5); overflow: hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,.7); }
+.rl-cd-bar i {
+  display: block; height: 100%; width: 100%;
+  background: linear-gradient(90deg, #ffe483, #f5b93c 60%, #d9820a);
+  box-shadow: 0 0 8px rgba(255,196,60,.8);
+  transition: width 1s linear;
+}
+.rl-cd.is-hot {
+  background: linear-gradient(180deg, rgba(90,0,10,.55), rgba(46,0,6,.65));
+  box-shadow: inset 0 0 0 1.5px rgba(255,90,100,.55), inset 0 0 22px rgba(230,0,18,.3);
+}
+.rl-cd.is-hot .rl-cd-label { color: #ffb9be; }
+.rl-cd.is-hot .rl-cd-time {
+  color: #ff3140;
+  text-shadow: 0 0 18px rgba(255,45,63,.85), 0 0 40px rgba(255,45,63,.4), 0 2px 0 rgba(0,0,0,.55);
+}
+.rl-cd.is-hot .rl-cd-bar i {
+  background: linear-gradient(90deg, #ff8c4b, #ff2d3f 60%, #c4000f);
+  box-shadow: 0 0 8px rgba(255,45,63,.8);
+}
+.rl-cd.is-expired { box-shadow: inset 0 0 0 1.5px rgba(160,160,160,.5); background: linear-gradient(180deg, rgba(60,60,60,.5), rgba(30,30,30,.6)); }
+.rl-cd.is-expired .rl-cd-label { color: #c9c9c9; }
+.rl-cd.is-expired .rl-cd-time { color: #9a9a9a; text-shadow: none; animation: none; }
+.rl-cd.is-expired .rl-cd-bar i { background: #777; box-shadow: none; }
+/* LINE CTA */
+.rl-line-btn {
+  position: relative; display: flex; align-items: center; justify-content: center; gap: 9px;
+  margin: 14px 6px 0; padding: 15px 10px;
+  border-radius: 999px; text-decoration: none;
+  background: linear-gradient(180deg, #1fd46c 0%, #06c755 45%, #05a648 100%);
+  box-shadow: 0 0 0 2px rgba(255,255,255,.22), inset 0 2px 0 rgba(255,255,255,.4), inset 0 -3px 5px rgba(0,80,30,.5), 0 6px 0 #047a36, 0 12px 26px rgba(6,199,85,.38);
+  overflow: hidden;
+  animation: rlLineGlow 1.8s ease-in-out infinite;
+}
+@keyframes rlLineGlow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.13); } }
+.rl-line-btn::after {
+  content: ""; position: absolute; top: -30%; bottom: -30%; left: -46%; width: 30%;
+  background: linear-gradient(105deg, rgba(255,255,255,0), rgba(255,255,255,.75) 50%, rgba(255,255,255,0));
+  transform: skewX(-18deg); animation: rlShine 2.6s ease-in-out infinite;
+}
+.rl-line-btn span {
+  font-family: var(--c-font-pop); font-size: 18px; color: #fff; letter-spacing: .04em;
+  text-shadow: 0 2px 3px rgba(0,80,30,.55);
+}
+.rl-line-ic { width: 26px; height: 26px; flex: 0 0 auto; filter: drop-shadow(0 2px 2px rgba(0,80,30,.4)); }
+.rl-line-btn.is-disabled { pointer-events: none; filter: grayscale(1) brightness(.7); animation: none; box-shadow: none; opacity: .55; }
+/* 期限切れ: 祝祭演出を静める（金レイ停止・当選文言をグレーに） */
+.rl-card:has(.rl-cd.is-expired) .rl-rays.is-on { animation-play-state: paused; opacity: .15; filter: grayscale(1); }
+.rl-card:has(.rl-cd.is-expired) .rl-res-prize,
+.rl-card:has(.rl-cd.is-expired) .rl-res-congrats,
+.rl-card:has(.rl-cd.is-expired) .rl-res-won { filter: grayscale(.6) brightness(.75); }
+.rl-card:has(.rl-cd.is-expired) .rl-res-rabbit { animation: none; filter: saturate(.5); }
+.rl-card:has(.rl-cd.is-expired) .rl-res-jack { animation: none; filter: grayscale(.7); }
+.rl-res-note { margin: 8px 0 0; font-size: 11.5px; font-weight: 700; color: #bcd0f2; }
+.rl-terms {
+  margin: 12px 4px 0; text-align: left;
+  font-size: 10px; line-height: 1.75; color: #8fa5cd; font-weight: 500;
+}
+
+/* ---- 演出FX ---- */
+.rl-rays {
+  position: absolute; top: 50%; left: 50%; z-index: 0;
+  width: 720px; height: 720px; margin: -360px 0 0 -360px;
+  background: repeating-conic-gradient(from 8deg,
+    rgba(255,214,90,.5) 0deg 6deg, rgba(255,214,90,0) 6deg 16deg,
+    rgba(255,240,170,.32) 16deg 19deg, rgba(255,214,90,0) 19deg 30deg);
+  -webkit-mask: radial-gradient(circle, #000 0 26%, transparent 62%);
+  mask: radial-gradient(circle, #000 0 26%, transparent 62%);
+  opacity: 0; transform: scale(.15); pointer-events: none;
+}
+.rl-rays.is-on { animation: rlRaysIn .5s ease-out forwards, rlRaysSpin 16s linear infinite; }
+@keyframes rlRaysIn { to { opacity: 1; transform: scale(1); } }
+@keyframes rlRaysSpin { to { rotate: 360deg; } }
+#rlConfetti { position: fixed; inset: 0; z-index: 10060; pointer-events: none; overflow: hidden; }
+#rlConfetti i {
+  position: absolute; top: 34%; left: 50%;
+  animation: rlCf var(--dur) cubic-bezier(.16,.62,.42,1) forwards;
+  opacity: 0;
+}
+@keyframes rlCf {
+  0%   { transform: translate(0,0) rotate(0deg); opacity: 1; }
+  10%  { transform: translate(calc(var(--dx) * .34), var(--up)) rotate(calc(var(--rot) * .3)); opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
+}
+#rlFlash { position: fixed; inset: 0; z-index: 10070; background: #fff; opacity: 0; pointer-events: none; }
+#rlFlash.is-go { animation: rlFlashAnim .55s ease-out both; }
+@keyframes rlFlashAnim { 0% { opacity: 0; } 14% { opacity: .95; } 100% { opacity: 0; } }
+.rl-copied {
+  position: fixed; left: 50%; bottom: 12vh; transform: translateX(-50%);
+  z-index: 10080; background: rgba(8,35,76,.95); color: #ffe9a0;
+  font-size: 12px; font-weight: 700; padding: 8px 18px; border-radius: 99px;
+  border: 1px solid rgba(255,224,138,.5);
+  animation: rlOvIn .25s ease both;
+}
+
+/* ---- 左下デジタル時計（『24』風 7セグLED・当選後カウントダウン） ---- */
+.rl-clock {
+  position: fixed;
+  left: calc(10px + env(safe-area-inset-left, 0px));
+  bottom: calc(var(--rl-clock-up, 10px) + env(safe-area-inset-bottom, 0px));
+  z-index: 10002; /* 固定CTA(10001)のスライドに隠れない */
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 12px 7px;
+  border: 1px solid #33343a;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 32%),
+    #0b0b0d;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 10px 26px rgba(0,0,0,.45), inset 0 0 14px rgba(0,0,0,.85);
+  cursor: pointer;
+  transition: bottom .3s ease;
+  animation: rlClockIn .45s cubic-bezier(.2,1.2,.4,1) both;
+}
+@keyframes rlClockIn { from { transform: translateX(-120%); opacity: 0; } to { transform: none; opacity: 1; } }
+.rl-clock-label {
+  font-family: var(--c-font-jp); font-size: 10px; font-weight: 800; letter-spacing: .12em;
+  color: #f7c948; white-space: nowrap;
+}
+.rl-clock-svg {
+  display: block; width: 118px; height: auto;
+  filter: drop-shadow(0 0 6px rgba(255,185,20,.5));
+}
+.rl-clock-svg .seg { fill: rgba(255,193,26,.09); } /* 消灯セグメントのゴースト */
+.rl-clock-svg .seg.on { fill: #ffc21a; }
+.rl-clock-svg .colon { fill: #ffc21a; animation: rlColonBlink 1s steps(1) infinite; }
+@keyframes rlColonBlink { 50% { opacity: .15; } }
+.rl-clock-sub {
+  font-family: var(--c-font-jp); font-size: 9px; font-weight: 700; letter-spacing: .1em;
+  color: #8d8f96; white-space: nowrap;
+}
+/* 招待状態（未抽選）: 全消灯の眠っている時計＋アンバーの誘い文句 */
+.rl-clock.is-invite .rl-clock-svg { filter: none; }
+.rl-clock.is-invite .rl-clock-svg .colon { fill: rgba(255,193,26,.12); animation: none; }
+.rl-clock.is-invite .rl-clock-sub {
+  color: #ffc21a; font-size: 10.5px; font-weight: 800;
+  text-shadow: 0 0 8px rgba(255,185,20,.45);
+}
+/* 残り5分: 赤LED化 */
+.rl-clock.is-hot { border-color: #5a1512; animation: rlClockHot 1s ease-in-out infinite; }
+.rl-clock.is-hot .rl-clock-label { color: #ff6b61; }
+.rl-clock.is-hot .rl-clock-svg { filter: drop-shadow(0 0 7px rgba(255,60,50,.6)); }
+.rl-clock.is-hot .rl-clock-svg .seg { fill: rgba(255,59,48,.1); }
+.rl-clock.is-hot .rl-clock-svg .seg.on { fill: #ff3b30; }
+.rl-clock.is-hot .rl-clock-svg .colon { fill: #ff3b30; }
+@keyframes rlClockHot {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 10px 26px rgba(0,0,0,.45), inset 0 0 14px rgba(0,0,0,.85); }
+  50%      { box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 10px 26px rgba(0,0,0,.45), 0 0 22px rgba(255,60,50,.5), inset 0 0 14px rgba(0,0,0,.85); }
+}
+/* 期限切れ */
+.rl-clock.is-expired { animation: none; opacity: .85; }
+.rl-clock.is-expired .rl-clock-label { color: #9a9ba1; }
+.rl-clock.is-expired .rl-clock-svg { filter: none; }
+.rl-clock.is-expired .rl-clock-svg .seg.on { fill: #6f7076; }
+.rl-clock.is-expired .rl-clock-svg .colon { fill: #6f7076; animation: none; }
+.rl-clock.is-expired .rl-clock-sub { display: none; }
+
+@media (max-height: 760px) {
+  .rl-title { font-size: 26px; }
+  .rl-wheel-zone { margin-top: 10px; }
+  .rl-res-prize { font-size: 50px; }
+}
+/* max-height:760px より後に置く（320px級は両方に該当するため小さい方を勝たせる） */
+@media (max-width: 360px) {
+  .rl-title { font-size: 23px; }        /* 320pxで「オープニングルーレット」を1行に */
+  .rl-line-btn span { font-size: 15px; } /* 「使う」の1文字孤立を防ぐ */
+  .rl-res-prize { font-size: 48px; }
+}
+/* PC: モーダルと時計を一段拡大 */
+@media (min-width: 768px) {
+  .rl-clock-svg { width: 132px; }
+  .rl-clock-label { font-size: 11px; }
+}
+@media (min-width: 768px) and (min-height: 800px) {
+  .rl-frame { width: 416px; }
+  .rl-title { font-size: 33px; }
+  .rl-wheel-zone { width: 356px; }
+}
+
+/* ============================================================
+   FV 80%OFF：サイズと座標は維持し、光量・輪郭・閃光だけを強化
+   - 通常: 白熱した縁取り + 金赤の電圧パルス + 斜めの一閃
+   - reduced-motion: 強い静的グローのみ
+   ============================================================ */
+.hero .hero-discount {
+  display: block;
+  line-height: 0;
+  isolation: isolate;
+  overflow: visible;
+  transform: rotate(14deg);
+  animation: none !important;
+  filter: drop-shadow(5px 8px 0 rgba(0, 58, 132, .24));
+}
+
+.hero .hero-discount::before,
+.hero .hero-discount::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero .hero-discount::before {
+  inset: 4%;
+  z-index: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255,255,255,.94) 0 31%, rgba(255,239,117,.72) 42%, rgba(255,54,39,.42) 58%, transparent 72%),
+    repeating-conic-gradient(from 0deg, rgba(255,255,255,.9) 0 3deg, rgba(255,211,35,.15) 3deg 11deg, rgba(255,39,30,.62) 11deg 15deg, transparent 15deg 24deg);
+  filter: blur(5px) saturate(1.45);
+  opacity: .86;
+  animation:
+    heroDiscountArc 5.4s linear infinite,
+    heroDiscountPulse 2.35s cubic-bezier(.45,.02,.35,1) infinite;
+  animation-play-state: paused;
+}
+
+.hero .hero-discount::after {
+  inset: 10%;
+  z-index: 3;
+  border-radius: 50%;
+  clip-path: circle(48% at 50% 50%);
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.12) 40%, rgba(255,255,255,.98) 49%, rgba(255,242,132,.34) 57%, transparent 68%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-115%) skewX(-16deg);
+  animation: heroDiscountSlash 3.2s cubic-bezier(.22,.72,.24,1) infinite;
+  animation-play-state: paused;
+}
+
+.hero-discount-art {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: auto;
+  filter:
+    contrast(1.12)
+    saturate(1.28)
+    drop-shadow(0 0 2px rgba(255,255,255,.98))
+    drop-shadow(0 0 10px rgba(255,226,68,.92))
+    drop-shadow(0 0 22px rgba(255,35,28,.68));
+}
+
+.hero.is-discount-motion-active .hero-discount::before,
+.hero.is-discount-motion-active .hero-discount::after {
+  animation-play-state: running;
+}
+
+@keyframes heroDiscountArc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes heroDiscountPulse {
+  0%, 58%, 100% { opacity: .72; }
+  64% { opacity: 1; }
+  70% { opacity: .78; }
+  76% { opacity: 1; }
+  82% { opacity: .82; }
+}
+
+@keyframes heroDiscountSlash {
+  0%, 60% { opacity: 0; transform: translateX(-115%) skewX(-16deg); }
+  66% { opacity: .95; }
+  80% { opacity: .72; }
+  92%, 100% { opacity: 0; transform: translateX(115%) skewX(-16deg); }
+}
+
+@media (max-width: 640px) {
+  .hero .hero-discount {
+    transform: rotate(8deg);
+    filter: drop-shadow(3px 5px 0 rgba(0, 58, 132, .22));
+  }
+
+  .hero .hero-discount::before {
+    filter: blur(4px) saturate(1.55);
+    opacity: .94;
+  }
+}
+
+/* ---- reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-discount::before,
+  .hero .hero-discount::after,
+  .hero .hero-discount-art {
+    animation: none !important;
+  }
+  .hero .hero-discount::before { opacity: .78; transform: none; }
+  .hero .hero-discount::after { display: none; }
+  .rl-overlay, .rl-frame { animation-duration: .01s; }
+  .rl-dust i,
+  .rl-wheel-glow,
+  .rl-spin-btn,
+  .rl-spin-btn::after,
+  .rl-line-btn,
+  .rl-line-btn::after,
+  .rl-cd-time,
+  .rl-res-rabbit,
+  .rl-res-jack,
+  .rl-clock,
+  .rl-clock.is-hot,
+  .rl-clock-svg .colon,
+  .rl-streaks,
+  .rl-led.is-win,
+  .rl-spark { animation: none; }
+  .rl-rays.is-on { animation: rlRaysIn .3s ease-out forwards; }
 }
