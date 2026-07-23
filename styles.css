@@ -6519,8 +6519,116 @@ button { font-family: inherit; cursor: pointer; }
   .rl-wheel-zone { width: 356px; }
 }
 
+/* ============================================================
+   FV 80%OFF：サイズと座標は維持し、光量・輪郭・閃光だけを強化
+   - 通常: 白熱した縁取り + 金赤の電圧パルス + 斜めの一閃
+   - reduced-motion: 強い静的グローのみ
+   ============================================================ */
+.hero .hero-discount {
+  display: block;
+  line-height: 0;
+  isolation: isolate;
+  overflow: visible;
+  transform: rotate(14deg);
+  animation: none !important;
+  filter: drop-shadow(5px 8px 0 rgba(0, 58, 132, .24));
+}
+
+.hero .hero-discount::before,
+.hero .hero-discount::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero .hero-discount::before {
+  inset: 4%;
+  z-index: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255,255,255,.94) 0 31%, rgba(255,239,117,.72) 42%, rgba(255,54,39,.42) 58%, transparent 72%),
+    repeating-conic-gradient(from 0deg, rgba(255,255,255,.9) 0 3deg, rgba(255,211,35,.15) 3deg 11deg, rgba(255,39,30,.62) 11deg 15deg, transparent 15deg 24deg);
+  filter: blur(5px) saturate(1.45);
+  opacity: .86;
+  animation:
+    heroDiscountArc 5.4s linear infinite,
+    heroDiscountPulse 2.35s cubic-bezier(.45,.02,.35,1) infinite;
+  animation-play-state: paused;
+}
+
+.hero .hero-discount::after {
+  inset: 10%;
+  z-index: 3;
+  border-radius: 50%;
+  clip-path: circle(48% at 50% 50%);
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.12) 40%, rgba(255,255,255,.98) 49%, rgba(255,242,132,.34) 57%, transparent 68%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-115%) skewX(-16deg);
+  animation: heroDiscountSlash 3.2s cubic-bezier(.22,.72,.24,1) infinite;
+  animation-play-state: paused;
+}
+
+.hero-discount-art {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: auto;
+  filter:
+    contrast(1.12)
+    saturate(1.28)
+    drop-shadow(0 0 2px rgba(255,255,255,.98))
+    drop-shadow(0 0 10px rgba(255,226,68,.92))
+    drop-shadow(0 0 22px rgba(255,35,28,.68));
+}
+
+.hero.is-discount-motion-active .hero-discount::before,
+.hero.is-discount-motion-active .hero-discount::after {
+  animation-play-state: running;
+}
+
+@keyframes heroDiscountArc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes heroDiscountPulse {
+  0%, 58%, 100% { opacity: .72; }
+  64% { opacity: 1; }
+  70% { opacity: .78; }
+  76% { opacity: 1; }
+  82% { opacity: .82; }
+}
+
+@keyframes heroDiscountSlash {
+  0%, 60% { opacity: 0; transform: translateX(-115%) skewX(-16deg); }
+  66% { opacity: .95; }
+  80% { opacity: .72; }
+  92%, 100% { opacity: 0; transform: translateX(115%) skewX(-16deg); }
+}
+
+@media (max-width: 640px) {
+  .hero .hero-discount {
+    transform: rotate(8deg);
+    filter: drop-shadow(3px 5px 0 rgba(0, 58, 132, .22));
+  }
+
+  .hero .hero-discount::before {
+    filter: blur(4px) saturate(1.55);
+    opacity: .94;
+  }
+}
+
 /* ---- reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
+  .hero .hero-discount::before,
+  .hero .hero-discount::after,
+  .hero .hero-discount-art {
+    animation: none !important;
+  }
+  .hero .hero-discount::before { opacity: .78; transform: none; }
+  .hero .hero-discount::after { display: none; }
   .rl-overlay, .rl-frame { animation-duration: .01s; }
   .rl-dust i,
   .rl-wheel-glow,

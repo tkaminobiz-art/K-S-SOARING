@@ -31,13 +31,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&family=Mochiy+Pop+One&family=Bowlby+One&family=Reggae+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260702-clock24">
-  <!-- Google Ads: site-wide base tag. No customer data is passed from this page. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18262130937"></script>
+  <!-- Google Ads: 本番ドメインだけ外部タグを読み込む。preview / localhost はdataLayer検証のみ。 -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-18262130937');
+    (function () {
+      var host = location.hostname.toLowerCase();
+      var isProduction = host === 'www.sokujitu-kaishu.com' || host === 'sokujitu-kaishu.com';
+      var isLocalDebug = /^(localhost|127\.|192\.168\.)/.test(host) && /[?&]adsdebug=1/.test(location.search);
+      window.__ksAdsTransportEnabled = isProduction || isLocalDebug;
+      if (!window.__ksAdsTransportEnabled) return;
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18262130937';
+      document.head.appendChild(script);
+      gtag('js', new Date());
+      gtag('config', 'AW-18262130937');
+    })();
   </script>
   <!-- 構造化データ：LocalBusiness / Organization / WebSite / FAQ -->
   <script type="application/ld+json">
@@ -196,7 +206,9 @@
         <img class="hero-truck" src="assets/c-pattern/parts/company/truck-white-ks.webp" srcset="assets/c-pattern/parts/company/truck-white-ks.webp 1x, assets/c-pattern/parts/company/truck-white-ks@2x.webp 2x, assets/c-pattern/parts/company/truck-white-ks@3x.webp 3x" alt="">
       </div>
       <img class="hero-rabbit-small" src="assets/b-pattern/generated/parts/rabbit-small.webp" alt="">
-      <img class="hero-discount" src="assets/b-pattern/generated/parts/hero-discount-rapid.svg?v=20260702-gold80b" alt="LINE見積り限定 最大80%OFF ※ルーレット抽選の最大割引率・条件あり">
+      <div class="hero-discount">
+        <img class="hero-discount-art" src="assets/b-pattern/generated/parts/hero-discount-rapid.svg?v=20260702-gold80b" alt="LINE見積り限定 最大80%OFF ※ルーレット抽選の最大割引率・条件あり">
+      </div>
       <img class="hero-sparkle" src="assets/b-pattern/generated/parts/hero-sparkle-rapid.png" srcset="assets/b-pattern/generated/parts/hero-sparkle-rapid.png 1x, assets/b-pattern/generated/parts/hero-sparkle-rapid@2x.png 2x, assets/b-pattern/generated/parts/hero-sparkle-rapid@3x.png 3x" alt="">
       <img class="hero-price" src="assets/b-pattern/generated/parts/hero-zero-rapid-v2.png" srcset="assets/b-pattern/generated/parts/hero-zero-rapid-v2.png 1x, assets/b-pattern/generated/parts/hero-zero-rapid-v2@2x.png 2x, assets/b-pattern/generated/parts/hero-zero-rapid-v2@3x.png 3x" alt="0円">
       <div class="hero-includes" aria-label="無料項目">
@@ -998,7 +1010,7 @@
               </div>
             </div>
             <button class="rl-spin-btn" id="rlSpinBtn" type="button"><span id="rlSpinLabel">ルーレットを回す！</span></button>
-            <p class="rl-note">※お一人様1回・ハズレなし／当選確率は賞ごとに異なります<br>特典は当選から30分有効・他割引併用不可・お見積り金額からの割引です</p>
+            <p class="rl-note">※お一人様1回・ハズレなし／当選確率は賞ごとに異なります<br>特典は当選から10分有効・他割引併用不可・お見積り金額からの割引です</p>
           </div>
 
           <!-- ▼ 結果ステージ -->
@@ -1017,7 +1029,7 @@
             </div>
             <div class="rl-cd" id="rlCd">
               <div class="rl-cd-label" id="rlCdLabel">有効期限まで残り</div>
-              <div class="rl-cd-time" id="rlCdTime">30:00</div>
+              <div class="rl-cd-time" id="rlCdTime">10:00</div>
               <div class="rl-cd-bar"><i id="rlCdBar"></i></div>
             </div>
             <a class="rl-line-btn" id="rlLineBtn" href="https://lin.ee/Uze6YTx" target="_blank" rel="noopener">
@@ -1040,7 +1052,12 @@
   <script>
     // === Google Ads コンバージョン ===
     // LINEへの遷移を妨げず、クリックした時点でコンバージョンを送信する。
+    var lastLineConversionAt = 0;
     function gtag_report_conversion() {
+      var now = Date.now();
+      // ダブルタップなど、同一操作による短時間の重複送信だけを抑止する。
+      if (now - lastLineConversionAt < 1500) return true;
+      lastLineConversionAt = now;
       gtag('event', 'conversion', {
         'send_to': 'AW-18262130937/NYplCJLBxc8cEPmBiIRE'
       });
@@ -1106,6 +1123,25 @@
       };
       update();
       setInterval(update, 30000);
+    })();
+
+    // === FV 80%OFF：表示中だけ発光演出を動かす ===
+    (function () {
+      var hero = document.querySelector(".hero");
+      var discount = document.querySelector(".hero-discount");
+      if (!hero || !discount) return;
+      var intersecting = true;
+      var sync = function () {
+        hero.classList.toggle("is-discount-motion-active", intersecting && !document.hidden);
+      };
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          intersecting = entries[0].isIntersecting;
+          sync();
+        }, { threshold: 0.05 }).observe(hero);
+      }
+      document.addEventListener("visibilitychange", sync);
+      sync();
     })();
 
     // === 固定CTAの表示制御 ===
@@ -1188,7 +1224,7 @@
       }
 
       var KEY = "ksRoulette_v2";
-      var TTL = 30 * 60 * 1000; // 有効期限: 当選から30分
+      var TTL = 10 * 60 * 1000; // 有効期限: 当選から10分
       var HOT_AT = 5 * 60 * 1000; // 残り5分でバー緊急表示
       var REDUCE = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -1450,6 +1486,9 @@
         targetKey = pickPrize(force);
         targetIdx = -1;
         SEGS.forEach(function (s, i) { if (s.key === targetKey) targetIdx = i; });
+        // 抽選結果はクリック時点で確定・保存する。回転中にリロードされても再抽選させない。
+        rec = { k: targetKey, code: makeCode(targetKey), t: Date.now() };
+        saveRec(rec);
         stepsK = ((J80 - targetIdx) % 8 + 8) % 8;
         $("rlSpinBtn").classList.add("is-spinning");
         $("rlSpinLabel").textContent = "抽選中…";
@@ -1637,8 +1676,6 @@
         setPhase("burst");
         ledMode = "win";
         var jack = (targetKey === "80");
-        rec = { k: targetKey, code: makeCode(targetKey), t: Date.now() };
-        saveRec(rec);
         var flash = $("rlFlash");
         flash.classList.remove("is-go"); void flash.offsetWidth; flash.classList.add("is-go");
         $("rlRays").classList.add("is-on");
@@ -1683,7 +1720,7 @@
         $("rlCpnCode").textContent = rec.code;
         var d = new Date(rec.t + TTL);
         $("rlTerms").textContent =
-          "有効期限：当選から30分間（" + d.getHours() + "時" + String(d.getMinutes()).padStart(2, "0") +
+          "有効期限：当選から10分間（" + d.getHours() + "時" + String(d.getMinutes()).padStart(2, "0") +
           "分まで）／お一人様1回限り／他割引との併用不可／お見積り金額からの割引です。" +
           "「80%OFF」は対象品目・条件を満たした場合の最大割引率で、実際の割引率は品目・数量により異なります。詳細はLINEにてご案内します。";
         startTick();
@@ -1869,7 +1906,7 @@
           showResult(true);
         }
         if (phase === "spin" || phase === "hold" || phase === "steps" || phase === "rest") {
-          // 抽選途中で閉じた場合は未当選のままリセット（次回また回せる）
+          // 抽選結果はクリック時に保存済み。閉じても次回は同じ結果を表示する。
           nearmissEl.classList.remove("is-on");
           $("rlSpinBtn").classList.remove("is-spinning");
           $("rlSpinLabel").textContent = "ルーレットを回す！";
@@ -1931,10 +1968,22 @@
       }
 
       /* ---- 起動制御 ----
-         通常: 未抽選なら800ms後に自動オープン／当選済み・期限内ならバーのみ表示
-         ?roulette=1 で強制表示、?roulette=reset で履歴クリア、?rlforce=80 等で当選強制（検証用） */
-      if (/[?&]roulette=reset/.test(location.search)) {
+         通常: 未抽選なら800ms後に自動オープン／当選済み・期限内なら時計のみ表示
+         ?roulette=1 で強制表示。履歴クリアと当選強制はローカルの明示的なデバッグ時のみ有効。 */
+      var isLocal = /^(localhost|127\.|192\.168\.)/.test(location.hostname);
+      var debugMode = isLocal && /[?&]rldebug=1/.test(location.search);
+      var reviewMode = (isLocal || /\.vercel\.app$/i.test(location.hostname)) && /[?&]rlreview=1/.test(location.search);
+      if (reviewMode || (debugMode && /[?&]roulette=reset/.test(location.search))) {
         try { localStorage.removeItem(KEY); } catch (e) {}
+      }
+      // 検証用（localhost限定）: ?rlseed=<残り秒>[&rlprize=20] で指定残り時間のクーポンを即発行し
+      // 左下デジタル時計の挙動（点灯／残5分の赤化／失効）を待たずに確認できる。本番ドメインでは無効。
+      var seedMatch = /[?&]rlseed=(\d+)/.exec(location.search);
+      if (debugMode && seedMatch) {
+        var seedSec = Math.min(Math.floor(TTL / 1000), parseInt(seedMatch[1], 10) || 0);
+        var seedPrize = (/[?&]rlprize=([0-9a-z]+)/.exec(location.search) || [])[1];
+        if (!PRIZE_NAME.hasOwnProperty(seedPrize)) seedPrize = "20";
+        saveRec({ k: seedPrize, code: makeCode(seedPrize), t: Date.now() - (TTL - seedSec * 1000) });
       }
       rec = readRec();
       var forceOpen = /[?&]roulette=1/.test(location.search);
