@@ -6313,7 +6313,13 @@ button { font-family: inherit; cursor: pointer; }
   -webkit-user-select: all;
   user-select: all; /* clipboard非対応環境でも長押し選択でコピーできるように */
 }
-.rl-tk-tap { font-size: 10px; font-weight: 700; color: #a58a3c; margin-top: 1px; }
+.rl-tk-tap {
+  margin-top: 5px;
+  font-size: clamp(13px, 3.6vw, 14px);
+  line-height: 1.4;
+  font-weight: 800;
+  color: #8a6814;
+}
 /* カウントダウン（通常=金琥珀、残り5分=赤。バーの色言語と統一） */
 .rl-cd {
   margin: 12px 6px 0; padding: 10px 12px 12px;
@@ -6388,7 +6394,15 @@ button { font-family: inherit; cursor: pointer; }
 .rl-card:has(.rl-cd.is-expired) .rl-res-won { filter: grayscale(.6) brightness(.75); }
 .rl-card:has(.rl-cd.is-expired) .rl-res-rabbit { animation: none; filter: saturate(.5); }
 .rl-card:has(.rl-cd.is-expired) .rl-res-jack { animation: none; filter: grayscale(.7); }
-.rl-res-note { margin: 8px 0 0; font-size: 11.5px; font-weight: 700; color: #bcd0f2; }
+.rl-res-note {
+  margin: 10px 0 0;
+  font-size: clamp(13px, 3.6vw, 14px);
+  line-height: 1.45;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: #e7f1ff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
 .rl-terms {
   margin: 12px 4px 0; text-align: left;
   font-size: 10px; line-height: 1.75; color: #8fa5cd; font-weight: 500;
@@ -6502,6 +6516,8 @@ button { font-family: inherit; cursor: pointer; }
   .rl-title { font-size: 23px; }        /* 320pxで「オープニングルーレット」を1行に */
   .rl-line-btn span { font-size: 15px; } /* 「使う」の1文字孤立を防ぐ */
   .rl-res-prize { font-size: 48px; }
+  .rl-tk-tap { font-size: 13px; }
+  .rl-res-note { font-size: 12.5px; letter-spacing: -.04em; }
 }
 /* PC: モーダルと時計を一段拡大 */
 @media (min-width: 768px) {
