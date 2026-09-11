@@ -6,6 +6,7 @@
   <title>不用品回収・遺品整理 大阪・東大阪｜即日回収ラピッド【即日対応・基本料0円】</title>
   <meta name="description" content="大阪・東大阪を拠点に近畿一円対応の不用品回収・遺品整理「即日回収ラピッド」。LINEで写真を送るだけの無料見積り、基本料金・出張費・お見積り0円。粗大ごみ・ゴミ屋敷・生前整理・残置物撤去まで古物商が丁寧に対応します。">
   <link rel="canonical" href="https://www.sokujitu-kaishu.com/">
+  <meta name="google-site-verification" content="fetXRY-Xm2SzuIuBA_wg2Lk99z9oAWdMIMZaMFEO4bQ">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#e60012">
   <meta name="format-detection" content="telephone=yes">
@@ -47,6 +48,26 @@
       document.head.appendChild(script);
       gtag('js', new Date());
       gtag('config', 'AW-18262130937');
+      // GA4 uses the same loader; local Ads debugging must never send GA4 data.
+      if (isProduction) {
+        var analyticsUrl = new URL(location.href);
+        analyticsUrl.hash = '';
+        var attributionKeys = /^(utm_(source|medium|campaign|id|term|content)|gclid|gbraid|wbraid|roulette)$/;
+        Array.from(analyticsUrl.searchParams.keys()).forEach(function (key) {
+          if (!attributionKeys.test(key)) analyticsUrl.searchParams.delete(key);
+        });
+        var analyticsReferrer = '';
+        try {
+          var referrerUrl = new URL(document.referrer);
+          analyticsReferrer = referrerUrl.origin + referrerUrl.pathname;
+        } catch (e) {}
+        gtag('config', 'G-J6PMQ8DRYX', {
+          page_location: analyticsUrl.href,
+          page_referrer: analyticsReferrer,
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false
+        });
+      }
     })();
   </script>
   <!-- 構造化データ：LocalBusiness / Organization / WebSite / FAQ -->
