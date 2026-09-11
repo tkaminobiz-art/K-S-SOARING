@@ -1079,13 +1079,25 @@
       var visibleSince = document.visibilityState === 'visible' ? Date.now() : null;
       var visibleMs = 0;
       var fired = false;
+      var pageActive = true;
+      var timer = null;
 
       try { fired = sessionStorage.getItem(storageKey) === '1'; } catch (e) {}
 
+      function stopTimer() {
+        if (timer === null) return;
+        clearInterval(timer);
+        timer = null;
+      }
+
       function sendIfEligible() {
         if (fired || visibleMs < requiredMs) return;
+        // Another same-tab document may have sent while this page was cached.
+        try { fired = sessionStorage.getItem(storageKey) === '1'; } catch (e) {}
+        if (fired) { stopTimer(); return; }
         fired = true;
         try { sessionStorage.setItem(storageKey, '1'); } catch (e) {}
+        stopTimer();
         gtag('event', 'conversion', { 'send_to': conversionId });
       }
 
@@ -1096,18 +1108,31 @@
         sendIfEligible();
       }
 
-      var timer = setInterval(updateVisibleTime, 1000);
+      function resumeTimer() {
+        if (fired || !pageActive || document.visibilityState !== 'visible') return;
+        if (visibleSince === null) visibleSince = Date.now();
+        if (timer === null) timer = setInterval(updateVisibleTime, 1000);
+      }
+
+      resumeTimer();
       document.addEventListener('visibilitychange', function () {
         if (document.visibilityState === 'hidden') {
           updateVisibleTime();
           visibleSince = null;
+          stopTimer();
         } else {
-          visibleSince = Date.now();
+          resumeTimer();
         }
       });
       window.addEventListener('pagehide', function () {
         updateVisibleTime();
-        clearInterval(timer);
+        visibleSince = null;
+        pageActive = false;
+        stopTimer();
+      });
+      window.addEventListener('pageshow', function () {
+        pageActive = true;
+        resumeTimer();
       });
     })();
 
